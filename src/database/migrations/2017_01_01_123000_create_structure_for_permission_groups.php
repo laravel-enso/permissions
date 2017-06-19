@@ -16,7 +16,7 @@ class CreateStructureForPermissionGroups extends StructureMigration
         ['name' => 'system.permissionGroups.update', 'description' => 'Update Permission Group', 'type' => 1, 'default' => false],
         ['name' => 'system.permissionGroups.destroy', 'description' => 'Delete Permission Group', 'type' => 1, 'default' => false],
         ['name' => 'system.permissionGroups.getTableData', 'description' => 'Get table data for Permission Groups', 'type' => 0, 'default' => false],
-        ['name' => 'system.permissionGroups.initTable', 'description' => 'Init table data for Permission Groups', 'type' => 0, 'default' => false]
+        ['name' => 'system.permissionGroups.initTable', 'description' => 'Init table data for Permission Groups', 'type' => 0, 'default' => false],
     ];
 
     protected $menu = [

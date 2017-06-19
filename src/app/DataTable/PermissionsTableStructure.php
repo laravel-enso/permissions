@@ -19,11 +19,11 @@ class PermissionsTableStructure extends TableStructure
             'bodyAlign'     => 'center',
             'tableClass'    => 'table display compact',
             'dom'           => 'lfrtip',
-            'enumMappings' => [
-                'type' => PermissionTypes::class,
-                'default' => IsActiveEnum::class
+            'enumMappings'  => [
+                'type'    => PermissionTypes::class,
+                'default' => IsActiveEnum::class,
             ],
-            'render' => [2, 4],
+            'render'          => [2, 4],
             'columns'         => [
                 0 => [
                     'label' => __('Name'),

@@ -20,10 +20,10 @@ class ValidatePermissionRequest extends FormRequest
 
         return [
             'permission_group_id' => 'required',
-            'name' => ['required', $nameUnique],
-            'description' => 'required',
-            'type' => 'required',
-            'default' => 'required',
+            'name'                => ['required', $nameUnique],
+            'description'         => 'required',
+            'type'                => 'required',
+            'default'             => 'required',
         ];
     }
 }
