@@ -9,11 +9,11 @@ use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 
 class ResourceService
 {
-	private const AdminRoleId = 1;
+    private const AdminRoleId = 1;
 
-	private $request;
+    private $request;
 
-	public function __construct(Request $request)
+    public function __construct(Request $request)
     {
         $this->request = $request;
     }
@@ -56,7 +56,7 @@ class ResourceService
         $resource = (new ResourcePermissions());
         $permissions = $resource->getValueByKey('resource');
 
-    	if ($this->request->hasDataTables) {
+        if ($this->request->hasDataTables) {
             $permissions = array_merge($permissions, $resource->getValueByKey('dataTables'));
         }
 

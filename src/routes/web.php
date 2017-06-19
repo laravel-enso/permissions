@@ -1,8 +1,8 @@
 <?php
 
 Route::group([
-    'namespace' => 'LaravelEnso\PermissionManager\app\Http\Controllers',
-    'middleware' => ['web', 'auth', 'core']
+    'namespace'  => 'LaravelEnso\PermissionManager\app\Http\Controllers',
+    'middleware' => ['web', 'auth', 'core'],
 ], function () {
     Route::group(['prefix' => 'system', 'as' => 'system.'], function () {
         Route::group(['prefix' => 'permissionGroups', 'as' => 'permissionGroups.'], function () {

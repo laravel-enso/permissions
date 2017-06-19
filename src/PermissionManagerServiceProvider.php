@@ -20,9 +20,9 @@ class PermissionManagerServiceProvider extends ServiceProvider
 
     private function loadDependencies()
     {
-        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'laravel-enso/permissionmanager');
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel-enso/permissionmanager');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
     }
 
     public function register()

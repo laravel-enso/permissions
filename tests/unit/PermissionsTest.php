@@ -60,7 +60,7 @@ class PermissionTest extends TestCase
         $this->assertTrue($this->permissionWasUpdated());
     }
 
-     /** @test */
+    /** @test */
     public function destroy()
     {
         $postParams = $this->postParams();
@@ -73,11 +73,11 @@ class PermissionTest extends TestCase
     private function postParams()
     {
         return [
-            'permissions_grou_id' => 1,
+            'permissions_grou_id'  => 1,
             'name'                 => 'testPermission',
             'description'          => 'testDescription',
             'type'                 => 0,
-            '_method' => 'POST'
+            '_method'              => 'POST',
         ];
     }
 
@@ -94,5 +94,4 @@ class PermissionTest extends TestCase
 
         return $permission->description === 'edited';
     }
-
 }

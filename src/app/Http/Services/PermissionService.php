@@ -10,9 +10,9 @@ use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 
 class PermissionService
 {
-	private const AdminRoleId = 1;
+    private const AdminRoleId = 1;
 
-	private $request;
+    private $request;
 
     public function __construct(Request $request)
     {
@@ -50,7 +50,7 @@ class PermissionService
             flash()->success(__('Permission created'));
         });
 
-        return redirect('system/permissions/' . $permission->id . '/edit');
+        return redirect('system/permissions/'.$permission->id.'/edit');
     }
 
     public function edit(Permission $permission)
@@ -62,8 +62,8 @@ class PermissionService
         $permission->roles_list;
 
         return view(
-        	'laravel-enso/permissionmanager::permissions.edit',
-        	compact('permission', 'permissionTypes', 'permissionGroups', 'roles')
+            'laravel-enso/permissionmanager::permissions.edit',
+            compact('permission', 'permissionTypes', 'permissionGroups', 'roles')
         );
     }
 

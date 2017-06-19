@@ -55,11 +55,11 @@ class PermissionGroupController extends Controller
     public function destroy(PermissionGroup $permissionGroup)
     {
         if ($permissionGroup->permissions->count()) {
-            throw new \EnsoException(__("The permission group cannot be deleted because it has child permissions"), 'warning');
+            throw new \EnsoException(__('The permission group cannot be deleted because it has child permissions'), 'warning');
         }
 
         $permissionGroup->delete();
 
-        return [ 'message' => __('Operation was successfull') ];
+        return ['message' => __('Operation was successfull')];
     }
 }
