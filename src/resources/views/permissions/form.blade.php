@@ -34,3 +34,12 @@
         {!! Form::select('permission_group_id', $permissionGroups, null, ['class' => 'form-control select']) !!}
     </div>
 </div>
+<div class="col-sm-6">
+    <div class="form-group{{ $errors->has('default') ? ' has-error' : '' }}">
+        {!! Form::label('default', __("Default Access")) !!}
+        <small class="text-danger" style="float:right;">
+            {{ $errors->first('default') }}
+        </small>
+        {!! Form::select('default', ['0' => __("No"), '1' => __("Yes")], '0', ['class' => 'form-control select']) !!}
+    </div>
+</div>

@@ -2,7 +2,9 @@
 
 namespace LaravelEnso\PermissionManager\app\DataTable;
 
+use LaravelEnso\Core\app\Enums\IsActiveEnum;
 use LaravelEnso\DataTable\app\Classes\TableStructure;
+use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
 
 class PermissionsTableStructure extends TableStructure
 {
@@ -12,12 +14,16 @@ class PermissionsTableStructure extends TableStructure
 
             'crtNo'         => __('#'),
             'actionButtons' => __('Actions'),
-            'render'        => [4, 5],
+            'render'        => [5, 6],
             'headerAlign'   => 'center',
             'bodyAlign'     => 'center',
             'tableClass'    => 'table display compact',
             'dom'           => 'lfrtip',
-
+            'enumMappings' => [
+                'type' => PermissionTypes::class,
+                'default' => IsActiveEnum::class
+            ],
+            'render' => [2, 4],
             'columns'         => [
                 0 => [
                     'label' => __('Name'),
@@ -40,11 +46,16 @@ class PermissionsTableStructure extends TableStructure
                     'name'  => 'permission_groups.name',
                 ],
                 4 => [
+                    'label' => __('Default Access'),
+                    'data'  => 'default',
+                    'name'  => 'permissions.default',
+                ],
+                5 => [
                     'label' => __('Created At'),
                     'data'  => 'created_at',
                     'name'  => 'permissions.created_at',
                 ],
-                5 => [
+                6 => [
                     'label' => __('Updated At'),
                     'data'  => 'updated_at',
                     'name'  => 'permissions.updated_at',

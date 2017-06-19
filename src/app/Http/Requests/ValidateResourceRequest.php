@@ -14,7 +14,7 @@ class ValidateResourceRequest extends FormRequest
     public function rules()
     {
         return [
-            'prefix'              => 'required',
+            'prefix' => 'required',
             'permission_group_id' => 'required|exists:permission_groups,id',
         ];
     }

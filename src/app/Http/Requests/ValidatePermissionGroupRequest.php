@@ -19,7 +19,7 @@ class ValidatePermissionGroupRequest extends FormRequest
         $nameUnique = $this->_method == 'PATCH' ? $nameUnique->ignore($permissionGroup->id) : $nameUnique;
 
         return [
-            'name'        => ['required', $nameUnique],
+            'name' => ['required', $nameUnique],
             'description' => 'required',
         ];
     }

@@ -41,6 +41,12 @@
                         case 'created_at':
                         case 'updated_at':
                             return moment(data).format("DD-MM-YYYY");
+                        case 'type':
+                            return data == 'read' || data == 'citire' ? '<span class="label bg-green">' + data + '</span>'
+                                : '<span class="label bg-orange">' + data + '</span>';
+                        case 'default':
+                            return data == 'Yes' || data == 'Da' ? '<span class="label bg-green">' + data + '</span>'
+                                : '<span class="label bg-orange">' + data + '</span>';
                         default:
                             toastr.warning('render for column ' + column + ' is not defined.' );
                             return data;

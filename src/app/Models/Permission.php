@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-    protected $fillable = ['permission_group_id', 'name', 'description', 'type'];
+    protected $fillable = ['permission_group_id', 'name', 'description', 'type', 'default'];
+    protected $attributes = ['default' => 0];
 
     public function permissions_group()
     {

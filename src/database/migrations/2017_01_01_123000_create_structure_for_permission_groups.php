@@ -9,14 +9,14 @@ class CreateStructureForPermissionGroups extends StructureMigration
     ];
 
     protected $permissions = [
-        ['name' => 'system.permissionGroups.index', 'description' => 'Permissions Groups Index', 'type' => 0],
-        ['name' => 'system.permissionGroups.create', 'description' => 'Create Permissions Group', 'type' => 1],
-        ['name' => 'system.permissionGroups.edit', 'description' => 'Edit Existing Permissions Group', 'type' => 1],
-        ['name' => 'system.permissionGroups.store', 'description' => 'Save Permissions Group', 'type' => 1],
-        ['name' => 'system.permissionGroups.update', 'description' => 'Update Permissions Group', 'type' => 1],
-        ['name' => 'system.permissionGroups.destroy', 'description' => 'Delete Permissions Group', 'type' => 1],
-        ['name' => 'system.permissionGroups.getTableData', 'description' => 'Get table data for permissionsgroups', 'type' => 0],
-        ['name' => 'system.permissionGroups.initTable', 'description' => 'Init table data for permissiongroups', 'type' => 0],
+        ['name' => 'system.permissionGroups.index', 'description' => 'Permission Groups Index', 'type' => 0, 'default' => false],
+        ['name' => 'system.permissionGroups.create', 'description' => 'Create Permission Group', 'type' => 1, 'default' => false],
+        ['name' => 'system.permissionGroups.edit', 'description' => 'Edit Existing Permission Group', 'type' => 1, 'default' => false],
+        ['name' => 'system.permissionGroups.store', 'description' => 'Save Permission Group', 'type' => 1, 'default' => false],
+        ['name' => 'system.permissionGroups.update', 'description' => 'Update Permission Group', 'type' => 1, 'default' => false],
+        ['name' => 'system.permissionGroups.destroy', 'description' => 'Delete Permission Group', 'type' => 1, 'default' => false],
+        ['name' => 'system.permissionGroups.getTableData', 'description' => 'Get table data for Permission Groups', 'type' => 0, 'default' => false],
+        ['name' => 'system.permissionGroups.initTable', 'description' => 'Init table data for Permission Groups', 'type' => 0, 'default' => false]
     ];
 
     protected $menu = [

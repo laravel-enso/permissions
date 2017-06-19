@@ -15,11 +15,11 @@ class PermissionTest extends TestCase
     {
         parent::setUp();
         $this->user = User::first();
-        $this->be($this->user);
+        $this->actingAs($this->user);
     }
 
     /** @test */
-    public function get_index()
+    public function index()
     {
         $response = $this->get('/system/permissions');
         $response->assertStatus(200);
