@@ -14,7 +14,7 @@
         <a class="btn btn-primary" href="/system/permissionGroups/create">
             {{ __("Create Group") }}
         </a>
-        @include('laravel-enso/core::partials.breadcrumbs')
+        @include('laravel-enso/menumanager::breadcrumbs')
     </section>
     <section class="content">
         <div class="row" v-cloak>
