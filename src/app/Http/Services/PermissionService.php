@@ -3,10 +3,10 @@
 namespace LaravelEnso\PermissionManager\app\Http\Services;
 
 use Illuminate\Http\Request;
-use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
+use LaravelEnso\RoleManager\app\Models\Role;
 
 class PermissionService
 {
