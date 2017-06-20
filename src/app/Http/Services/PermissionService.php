@@ -21,12 +21,10 @@ class PermissionService
 
     public function getTableQuery()
     {
-        $query = Permission::select(\DB::raw('permissions.id as DT_RowId, permissions.name,
+        return Permission::select(\DB::raw('permissions.id as DT_RowId, permissions.name,
             permissions.description, permissions.type, permission_groups.name as grup,
             permissions.default, permissions.created_at, permissions.updated_at')
         )->join('permission_groups', 'permissions.permission_group_id', '=', 'permission_groups.id');
-
-        return $query;
     }
 
     public function index()

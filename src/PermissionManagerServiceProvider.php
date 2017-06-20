@@ -9,13 +9,8 @@ class PermissionManagerServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->registerMiddleware();
         $this->loadDependencies();
-    }
-
-    private function registerMiddleware()
-    {
-        $this->app['router']->aliasMiddleware('verify-route-access', VerifyRouteAccess::class);
+        $this->registerMiddleware();
     }
 
     private function loadDependencies()
@@ -23,6 +18,11 @@ class PermissionManagerServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel-enso/permissionmanager');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+    }
+
+    private function registerMiddleware()
+    {
+        $this->app['router']->aliasMiddleware('verify-route-access', VerifyRouteAccess::class);
     }
 
     public function register()

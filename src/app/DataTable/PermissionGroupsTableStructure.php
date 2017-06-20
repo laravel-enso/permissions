@@ -16,7 +16,6 @@ class PermissionGroupsTableStructure extends TableStructure
             'bodyAlign'     => 'center',
             'tableClass'    => 'table display compact',
             'dom'           => 'lfrtip',
-
             'columns'         => [
                 0 => [
                     'label' => __('Name'),
