@@ -16,7 +16,7 @@ class Permission extends Model
 
     public function roles()
     {
-        return $this->belongsToMany('LaravelEnso\Core\app\Models\Role')->withTimestamps();
+        return $this->belongsToMany('LaravelEnso\RoleManager\app\Models\Role')->withTimestamps();
     }
 
     public function getRolesListAttribute()
@@ -27,5 +27,10 @@ class Permission extends Model
     public function tutorials()
     {
         return $this->hasMany('LaravelEnso\TutorialManager\app\Models\Tutorial');
+    }
+
+    public function scopeImplicit($query)
+    {
+        return $query->whereDefault(true);
     }
 }
