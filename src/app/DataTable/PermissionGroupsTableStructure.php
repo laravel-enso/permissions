@@ -9,13 +9,13 @@ class PermissionGroupsTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
-            'crtNo'         => __('#'),
-            'actionButtons' => __('Actions'),
-            'render'        => [2, 3],
-            'headerAlign'   => 'center',
-            'bodyAlign'     => 'center',
-            'tableClass'    => 'table display compact',
-            'dom'           => 'lfrtip',
+            'crtNo'           => __('#'),
+            'actionButtons'   => __('Actions'),
+            'render'          => [2, 3],
+            'headerAlign'     => 'center',
+            'bodyAlign'       => 'center',
+            'tableClass'      => 'table display compact',
+            'dom'             => 'lfrtip',
             'columns'         => [
                 0 => [
                     'label' => __('Name'),
