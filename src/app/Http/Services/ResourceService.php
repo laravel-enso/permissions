@@ -44,8 +44,8 @@ class ResourceService
         $permissions = $this->buildPermissionsList();
 
         foreach ($permissions as &$permission) {
-            $permission['name'] = $this->request->prefix.'.'.$permission['name'];
-            $permission['permission_group_id'] = $this->request->permission_group_id;
+            $permission['name'] = $this->request->get('prefix').'.'.$permission['name'];
+            $permission['permission_group_id'] = $this->request->get('permission_group_id');
         }
 
         return collect($permissions);
@@ -56,11 +56,11 @@ class ResourceService
         $resource = (new ResourcePermissions());
         $permissions = $resource->getValueByKey('resource');
 
-        if ($this->request->hasDataTables) {
+        if ($this->request->has('dataTables') && $this->request->get('dataTables') === 'on') {
             $permissions = array_merge($permissions, $resource->getValueByKey('dataTables'));
         }
 
-        if ($this->request->hasVueSelect) {
+        if ($this->request->has('vueSelect') && $this->request->get('vueSelect') === 'on') {
             $permissions = array_merge($permissions, $resource->getValueByKey('vueSelect'));
         }
 

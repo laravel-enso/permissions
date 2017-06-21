@@ -17,20 +17,20 @@
     </div>
 </div>
 <div class="col-sm-3">
-    <div class="form-group{{ $errors->has('hasDataTables') ? ' has-error' : '' }}">
-        {!! Form::label('hasDataTables', __("Data Tables")) !!}
+    <div class="form-group{{ $errors->has('dataTables') ? ' has-error' : '' }}">
+        {!! Form::label('dataTables', __("Data Tables")) !!}
         <small class="text-danger" style="float:right;">
-            {{ $errors->first('hasDataTables') }}
+            {{ $errors->first('dataTables') }}
         </small>
-        <input type="checkbox" name="hasDataTables">
+        <input type="checkbox" name="dataTables">
     </div>
 </div>
 <div class="col-sm-3">
-    <div class="form-group{{ $errors->has('hasVueSelect') ? ' has-error' : '' }}">
-        {!! Form::label('hasVueSelect', __("Vue Select")) !!}
+    <div class="form-group{{ $errors->has('vueSelect') ? ' has-error' : '' }}">
+        {!! Form::label('vueSelect', __("Vue Select")) !!}
         <small class="text-danger" style="float:right;">
-            {{ $errors->first('hasVueSelect') }}
+            {{ $errors->first('vueSelect') }}
         </small>
-        <input type="checkbox" name="hasVueSelect">
+        <input type="checkbox" name="vueSelect">
     </div>
 </div>

@@ -69,7 +69,7 @@ class PermissionService
     {
         \DB::transaction(function () use ($permission) {
             $permission->update($this->request->all());
-            $roles = $this->request->roles_list ? $this->request->roles_list : [];
+            $roles = $this->request->has('roles_list') ? $this->request->get('roles_list') : [];
             $permission->roles()->sync($roles);
             flash()->success(__('The Changes have been saved!'));
         });
@@ -79,6 +79,10 @@ class PermissionService
 
     public function destroy(Permission $permission)
     {
+        if ($permission->roles->count()) {
+            throw new \EnsoException(__('Operation failed because the permission is allocated to existing role(s)'));
+        }
+
         $permission->delete();
 
         return ['message' => __('Operation was successfull')];
