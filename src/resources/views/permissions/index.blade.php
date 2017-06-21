@@ -38,9 +38,6 @@
             methods: {
                 customRender: function(column, data, type, row, meta) {
                     switch(column) {
-                        case 'created_at':
-                        case 'updated_at':
-                            return moment(data).format("DD-MM-YYYY");
                         case 'type':
                             return data == 'read' || data == 'citire' ? '<span class="label bg-green">' + data + '</span>'
                                 : '<span class="label bg-orange">' + data + '</span>';

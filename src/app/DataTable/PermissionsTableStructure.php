@@ -13,7 +13,7 @@ class PermissionsTableStructure extends TableStructure
         $this->data = [
             'crtNo'         => __('#'),
             'actionButtons' => __('Actions'),
-            'render'        => [5, 6],
+            'render'        => [3, 5],
             'headerAlign'   => 'center',
             'bodyAlign'     => 'center',
             'tableClass'    => 'table display compact',

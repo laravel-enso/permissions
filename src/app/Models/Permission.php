@@ -3,9 +3,12 @@
 namespace LaravelEnso\PermissionManager\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\Helpers\Traits\DMYTimestamps;
 
 class Permission extends Model
 {
+    use DMYTimestamps;
+
     protected $fillable = ['permission_group_id', 'name', 'description', 'type', 'default'];
     protected $attributes = ['default' => 0];
 
