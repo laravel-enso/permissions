@@ -7,7 +7,7 @@ use LaravelEnso\Helpers\Traits\DMYTimestamps;
 
 class PermissionGroup extends Model
 {
-	use DMYTimestamps;
+    use DMYTimestamps;
 
     protected $fillable = ['name', 'description'];
 
