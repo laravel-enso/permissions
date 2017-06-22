@@ -45,7 +45,7 @@ class GroupPermissionStructure
             $labels->push($groupLabels->first());
         });
 
-        return $labels->unique()->values();
+        return $labels->unique()->sort()->values();
     }
 
     private function getChildGroups($label, $groups)

@@ -16,8 +16,6 @@ class PermissionsTableStructure extends TableStructure
             'render'        => [3, 5],
             'headerAlign'   => 'center',
             'bodyAlign'     => 'center',
-            'tableClass'    => 'table display compact',
-            'dom'           => 'lfrtip',
             'enumMappings'  => [
                 'type'    => PermissionTypes::class,
                 'default' => IsActiveEnum::class,

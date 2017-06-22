@@ -13,8 +13,6 @@ class PermissionGroupsTableStructure extends TableStructure
             'actionButtons'   => __('Actions'),
             'headerAlign'     => 'center',
             'bodyAlign'       => 'center',
-            'tableClass'      => 'table display compact',
-            'dom'             => 'lfrtip',
             'columns'         => [
                 0 => [
                     'label' => __('Name'),
