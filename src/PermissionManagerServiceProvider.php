@@ -3,6 +3,7 @@
 namespace LaravelEnso\PermissionManager;
 
 use Illuminate\Support\ServiceProvider;
+use LaravelEnso\PermissionManager\PermissionAuthServiceProvider;
 use LaravelEnso\PermissionManager\app\Http\Middleware\VerifyRouteAccess;
 
 class PermissionManagerServiceProvider extends ServiceProvider
@@ -27,6 +28,6 @@ class PermissionManagerServiceProvider extends ServiceProvider
 
     public function register()
     {
-        //
+        $this->app->register(PermissionAuthServiceProvider::class);
     }
 }
