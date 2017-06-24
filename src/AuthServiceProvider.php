@@ -4,7 +4,7 @@ namespace LaravelEnso\PermissionManager;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
-class PermissionAuthServiceProvider extends ServiceProvider
+class AuthServiceProvider extends ServiceProvider
 {
     public function boot()
     {
