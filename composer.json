@@ -1,18 +1,18 @@
 {
     "name": "laravel-enso/permissionmanager",
-    "description": "Permission Manager depedency for Laravel Enso.",
-    "type": "depedency",
+    "description": "Permission Manager dependency for Laravel Enso",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "mishu",
+            "name": "Mishu",
             "email": "mishu@xtelecom.ro"
         }
     ],
     "require": {
-        "php": ">=5.6.4",
+        "php": ">=7.1.0",
         "laravel/framework": "5.4.*",
-        "laravel-enso/trackwho": "1.1.*"
+        "laravel-enso/core": "1.1.*"
     },
     "autoload": {
         "psr-4": {

@@ -6,9 +6,9 @@
 
 Permission Manager dependency for [Laravel Enso](https://github.com/laravel-enso/Enso)
 
-### Note
+### Notes
 
-Comes included in the [Laravel Enso Core](https://github.com/laravel-enso/Core) package
+The [Laravel Enso Core](https://github.com/laravel-enso/Core) package comes with this package included.
 
 ### Contributions
 
