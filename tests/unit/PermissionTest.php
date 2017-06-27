@@ -108,12 +108,12 @@ class PermissionTest extends TestCase
     private function postParams()
     {
         return [
-            'permission_group_id'  => 1,
-            'name'                 => 'testPermission',
-            'description'          => 'testDescription',
-            'type'                 => 0,
+            'permission_group_id'   => 1,
+            'name'                  => 'testPermission',
+            'description'           => 'testDescription',
+            'type'                  => 0,
             'default'               => 0,
-            '_method'              => 'POST',
+            '_method'               => 'POST',
         ];
     }
 
@@ -130,6 +130,7 @@ class PermissionTest extends TestCase
 
         return $permission->description === 'edited';
     }
+
     private function hasSessionConfirmation($response)
     {
         return $response->assertSessionHas('flash_notification');
