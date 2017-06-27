@@ -4,12 +4,12 @@
 [![Total Downloads](https://poser.pugx.org/laravel-enso/permissionmanager/downloads)](https://packagist.org/packages/laravel-enso/permissionmanager)
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/permissionmanager/version)](https://packagist.org/packages/laravel-enso/permissionmanager)
 
-Permission Manager depedency for Laravel Enso.
+Permission Manager dependency for [Laravel Enso](https://github.com/laravel-enso/Enso)
 
-## Note
+### Note
 
-Included in Laravel Enso Core / Coreplus packages
+Comes included in the [Laravel Enso Core](https://github.com/laravel-enso/Core) package
 
 ### Contributions
 
-...are welcome
+are welcome
