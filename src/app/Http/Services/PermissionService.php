@@ -53,7 +53,6 @@ class PermissionService
 
     public function edit(Permission $permission)
     {
-        $permission->load('permissions_group');
         $permissionTypes = (new PermissionTypes())->getData();
         $permissionGroups = PermissionGroup::pluck('name', 'id');
         $roles = Role::pluck('name', 'id');
