@@ -117,13 +117,6 @@ class PermissionTest extends TestCase
         ];
     }
 
-    private function wasCreated()
-    {
-        $permission = Permission::whereName('testPermission')->first(['name']);
-
-        return $permission->name === 'testPermission';
-    }
-
     private function wasUpdated()
     {
         $permission = Permission::first(['description']);
