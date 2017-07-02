@@ -44,7 +44,7 @@ class PermissionService
     {
         \DB::transaction(function () use (&$permission) {
             $permission = $permission->create($this->request->all());
-            $permission->roles()->attach(self::AdminRoleId);
+            $this->attachRoles($permission);
             flash()->success(__('Permission created'));
         });
 
@@ -85,5 +85,12 @@ class PermissionService
         $permission->delete();
 
         return ['message' => __('Operation was successfull')];
+    }
+
+    private function attachRoles(Permission $permission)
+    {
+        return $permission->default
+            ? $permission->roles()->attach(Role::pluck('id'))
+            : $permission->roles()->attach(self::AdminRoleId);
     }
 }
