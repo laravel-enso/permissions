@@ -32,13 +32,15 @@ class ResourceTest extends TestCase
     /** @test */
     public function store()
     {
-        $response = $this->post('/system/resourcePermissions/store', $this->postParams());
+        $group = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
+        $params = $this->postParams($group);
+        $response = $this->post('/system/resourcePermissions/store', $params);
 
-        $permissionsCount = Permission::wherePermissionGroupId(1)->count();
+        $permissionsCount = Permission::wherePermissionGroupId($group->id)->count();
 
         $response->assertRedirect('/system/permissions');
         $this->hasSessionConfirmation($response);
-        $this->assertTrue(10, $permissionsCount);
+        $this->assertEquals(10, $permissionsCount);
     }
 
     private function hasSessionConfirmation($response)
@@ -46,11 +48,11 @@ class ResourceTest extends TestCase
         return $response->assertSessionHas('flash_notification');
     }
 
-    private function postParams()
+    private function postParams(PermissionGroup $group)
     {
         return [
              'prefix'              => 'testPrefix',
-             'permission_group_id' => PermissionGroup::first(['id'])->id,
+             'permission_group_id' => $group->id,
              'dataTables'          => 'on',
              'vueSelect'           => 'on',
         ];
