@@ -48,10 +48,10 @@ class ResourceTest extends TestCase
     private function postParams()
     {
         return [
-             'prefix' => 'testPrefix',
+             'prefix'              => 'testPrefix',
              'permission_group_id' => PermissionGroup::first(['id'])->id,
-             'dataTables' => 'on',
-             'vueSelect' => 'on',
+             'dataTables'          => 'on',
+             'vueSelect'           => 'on',
         ];
     }
 }
