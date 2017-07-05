@@ -2,6 +2,7 @@
 
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use LaravelEnso\PermissionManager\app\Enums\ResourcePermissions;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use Tests\TestCase;
@@ -34,13 +35,35 @@ class ResourceTest extends TestCase
     {
         $group = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
         $params = $this->postParams($group);
-        $response = $this->post('/system/resourcePermissions/store', $params);
+        $response = $this->post('/system/resourcePermissions', $params);
 
-        $permissionsCount = Permission::wherePermissionGroupId($group->id)->count();
+        $resourcePermissionCount = $this->getResourcePermissionCount();
+        $permissions = Permission::wherePermissionGroupId($group->id)->get(['name']);
 
         $response->assertRedirect('/system/permissions');
         $this->hasSessionConfirmation($response);
-        $this->assertEquals(10, $permissionsCount);
+        $this->assertEquals($resourcePermissionCount, $permissions->count());
+        $this->assertTrue($this->hasRightPreffix($permissions, $group->name));
+    }
+
+    private function getResourcePermissionCount()
+    {
+        $resourcePermissions = (new ResourcePermissions())->getData();
+        $count = 0;
+
+        foreach ($resourcePermissions as $group) {
+            $count += count($group);
+        }
+
+        return $count;
+
+    }
+
+    private function hasRightPreffix($permissions, $preffix)
+    {
+        return $permissions->filter(function($permission) use ($preffix) {
+            return strpos($permission->name, $preffix) !== 0;
+        })->count() === 0;
     }
 
     private function hasSessionConfirmation($response)

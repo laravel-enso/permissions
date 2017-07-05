@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        {!! Form::open(['method' => 'POST', 'url' => '/system/resourcePermissions/store']) !!}
+                        {!! Form::open(['method' => 'POST', 'url' => '/system/resourcePermissions']) !!}
                         <div class="row">
                             @include('laravel-enso/permissionmanager::permissions.resourceForm')
                         </div>

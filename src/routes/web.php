@@ -21,7 +21,7 @@ Route::group([
 
         Route::group(['prefix' => 'resourcePermissions', 'as' => 'resourcePermissions.'], function () {
             Route::get('create', 'ResourceController@create')->name('create');
-            Route::post('store', 'ResourceController@store')->name('store');
+            Route::post('', 'ResourceController@store')->name('store');
         });
     });
 });

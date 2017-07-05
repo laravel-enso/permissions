@@ -11,10 +11,10 @@ class ResourcePermissions extends AbstractEnum
         $this->data = [
             'resource'   => [
                 ['name' => 'index', 'type' => 0, 'permission_group_id' => null],
-                ['name' => 'create', 'type' => 1, 'permission_group_id' => null],
+                ['name' => 'create', 'type' => 0, 'permission_group_id' => null],
                 ['name' => 'store', 'type' => 1, 'permission_group_id' => null],
-                ['name' => 'show', 'type' => 1, 'permission_group_id' => null],
-                ['name' => 'edit', 'type' => 1, 'permission_group_id' => null],
+                ['name' => 'show', 'type' => 0, 'permission_group_id' => null],
+                ['name' => 'edit', 'type' => 0, 'permission_group_id' => null],
                 ['name' => 'update', 'type' => 1, 'permission_group_id' => null],
                 ['name' => 'destroy', 'type' => 1, 'permission_group_id' => null],
             ],
