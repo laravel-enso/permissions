@@ -34,10 +34,11 @@ class ResourceTest extends TestCase
     {
         $response = $this->post('/system/resourcePermissions/store', $this->postParams());
 
-        $permissions = Permission::orderBy('id', 'desc')->take(10)->get();
+        $permissionsCount = Permission::wherePermissionGroupId(1)->count();
 
         $response->assertRedirect('/system/permissions');
         $this->hasSessionConfirmation($response);
+        $this->assertTrue(10, $permissionsCount);
     }
 
     private function hasSessionConfirmation($response)
