@@ -56,12 +56,11 @@ class ResourceTest extends TestCase
         }
 
         return $count;
-
     }
 
     private function hasRightPreffix($permissions, $preffix)
     {
-        return $permissions->filter(function($permission) use ($preffix) {
+        return $permissions->filter(function ($permission) use ($preffix) {
             return strpos($permission->name, $preffix) !== 0;
         })->count() === 0;
     }
