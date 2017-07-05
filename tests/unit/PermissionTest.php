@@ -4,6 +4,7 @@ use App\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\RoleManager\app\Models\Role;
 use Tests\TestCase;
 
@@ -42,9 +43,10 @@ class PermissionTest extends TestCase
     /** @test */
     public function store()
     {
-        $response = $this->post('/system/permissions', $this->postParams());
+        $postParams = $this->postParams();
+        $response = $this->post('/system/permissions', $postParams);
 
-        $permission = Permission::whereName('testPermission')->first();
+        $permission = Permission::whereName($postParams['name'])->first();
 
         $response->assertRedirect('/system/permissions/'.$permission->id.'/edit');
         $this->hasSessionConfirmation($response);
@@ -87,6 +89,7 @@ class PermissionTest extends TestCase
         $response = $this->delete('/system/permissions/'.$permission->id);
 
         $this->hasJsonConfirmation($response);
+        $this->wasDeleted($permission);
         $response->assertStatus(200);
     }
 
@@ -103,18 +106,7 @@ class PermissionTest extends TestCase
 
         $response->assertStatus(302);
         $this->assertTrue($this->hasSessionErrorMessage());
-    }
-
-    private function postParams()
-    {
-        return [
-            'permission_group_id'   => 1,
-            'name'                  => 'testPermission',
-            'description'           => 'testDescription',
-            'type'                  => 0,
-            'default'               => 0,
-            '_method'               => 'POST',
-        ];
+        $this->wasNotDeleted($permission);
     }
 
     private function wasUpdated()
@@ -122,6 +114,16 @@ class PermissionTest extends TestCase
         $permission = Permission::first(['description']);
 
         return $permission->description === 'edited';
+    }
+
+    private function wasDeleted($permission)
+    {
+        return $this->assertNull(Permission::whereName($permission->name)->first());
+    }
+
+    private function wasNotDeleted($permission)
+    {
+        return $this->assertNotNull(Permission::whereName($permission->name)->first());
     }
 
     private function hasSessionConfirmation($response)
@@ -137,5 +139,17 @@ class PermissionTest extends TestCase
     private function hasSessionErrorMessage()
     {
         return session('flash_notification')[0]->level === 'danger';
+    }
+
+    private function postParams()
+    {
+        return [
+            'permission_group_id'   => PermissionGroup::first(['id'])->id,
+            'name'                  => $this->faker->word,
+            'description'           => $this->faker->sentence,
+            'type'                  => 0,
+            'default'               => 0,
+            '_method'               => 'POST',
+        ];
     }
 }
