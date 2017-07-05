@@ -1,11 +1,9 @@
 <?php
 
 use App\User;
-use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
-use LaravelEnso\RoleManager\app\Models\Role;
 use Tests\TestCase;
 
 class ResourceTest extends TestCase
@@ -20,7 +18,6 @@ class ResourceTest extends TestCase
 
         // $this->disableExceptionHandling();
         $this->user = User::first();
-        $this->faker = Factory::create();
         $this->actingAs($this->user);
     }
 
@@ -35,11 +32,9 @@ class ResourceTest extends TestCase
     /** @test */
     public function store()
     {
-        $postParams = $this->postParams();
-        $response = $this->post('/system/resourcePermissions/store', $postParams);
+        $response = $this->post('/system/resourcePermissions/store', $this->postParams());
 
         $permissions = Permission::orderBy('id', 'desc')->take(10)->get();
-        \Log::info($permissions);
 
         $response->assertRedirect('/system/permissions');
         $this->hasSessionConfirmation($response);
@@ -48,16 +43,6 @@ class ResourceTest extends TestCase
     private function hasSessionConfirmation($response)
     {
         return $response->assertSessionHas('flash_notification');
-    }
-
-    private function hasJsonConfirmation($response)
-    {
-        return $response->assertJsonFragment(['message']);
-    }
-
-    private function hasSessionErrorMessage()
-    {
-        return session('flash_notification')[0]->level === 'danger';
     }
 
     private function postParams()
