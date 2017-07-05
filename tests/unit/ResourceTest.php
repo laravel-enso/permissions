@@ -37,12 +37,12 @@ class ResourceTest extends TestCase
         $params = $this->postParams($group);
         $response = $this->post('/system/resourcePermissions', $params);
 
-        $resourcePermissionCount = $this->getResourcePermissionCount();
+        $permissionCount = $this->getResourcePermissionCount();
         $permissions = Permission::wherePermissionGroupId($group->id)->get(['name']);
 
         $response->assertRedirect('/system/permissions');
         $this->hasSessionConfirmation($response);
-        $this->assertEquals($resourcePermissionCount, $permissions->count());
+        $this->assertEquals($permissionCount, $permissions->count());
         $this->assertTrue($this->hasRightPreffix($permissions, $group->name));
     }
 
