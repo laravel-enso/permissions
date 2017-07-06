@@ -45,6 +45,7 @@ class ResourceService
 
         foreach ($permissions as &$permission) {
             $permission['name'] = $this->request->get('prefix').'.'.$permission['name'];
+            $permission['description'] = $permission['description'].ucfirst($this->request->get('prefix'));
             $permission['permission_group_id'] = $this->request->get('permission_group_id');
         }
 
