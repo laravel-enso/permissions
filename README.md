@@ -36,7 +36,6 @@ Permission Manager dependency for [Laravel Enso](https://github.com/laravel-enso
 - when naming them, the same name convention is used as in the case of permissions  e.g. `group1.group2`
 - permission groups are not linked directly to any other entity - with the obvious exception of permissions - nor are they used directly
 
-
 ### Notes
 
 The [Laravel Enso Core](https://github.com/laravel-enso/Core) package comes with this package included.
