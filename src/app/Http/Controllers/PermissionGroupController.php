@@ -58,6 +58,6 @@ class PermissionGroupController extends Controller
 
         $permissionGroup->delete();
 
-        return ['message' => __('Operation was successfull')];
+        return ['message' => __('Operation was successful')];
     }
 }

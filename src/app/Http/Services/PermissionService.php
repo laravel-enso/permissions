@@ -84,7 +84,7 @@ class PermissionService
 
         $permission->delete();
 
-        return ['message' => __('Operation was successfull')];
+        return ['message' => __('Operation was successful')];
     }
 
     private function attachRoles(Permission $permission)

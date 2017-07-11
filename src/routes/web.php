@@ -15,6 +15,7 @@ Route::group([
         Route::group(['prefix' => 'permissions', 'as' => 'permissions.'], function () {
             Route::get('initTable', 'PermissionController@initTable')->name('initTable');
             Route::get('getTableData', 'PermissionController@getTableData')->name('getTableData');
+            Route::get('exportExcel', 'PermissionController@exportExcel')->name('exportExcel');
         });
 
         Route::resource('permissions', 'PermissionController');

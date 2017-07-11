@@ -34,7 +34,7 @@ class ResourceService
             });
         });
 
-        flash()->success(__('The Operation was successfull'));
+        flash()->success(__('The Operation was successful'));
 
         return redirect()->route('system.permissions.index');
     }
