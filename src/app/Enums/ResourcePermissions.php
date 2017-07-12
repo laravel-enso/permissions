@@ -21,6 +21,7 @@ class ResourcePermissions extends AbstractEnum
             'dataTables' => [
                 ['name' => 'initTable', 'type' => 0, 'permission_group_id' => null, 'description' => 'Init table for '],
                 ['name' => 'getTableData', 'type' => 0, 'permission_group_id' => null, 'description' => 'Get table data for '],
+                ['name' => 'exportExcel', 'type' => 0, 'permission_group_id' => null, 'description' => 'Export excel for  '],
             ],
             'vueSelect'  => [
                 ['name' => 'getOptionsList', 'type' => 0, 'permission_group_id' => null, 'description' => 'Get vue-select options for  '],

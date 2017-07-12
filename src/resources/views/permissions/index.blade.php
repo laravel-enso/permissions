@@ -21,7 +21,6 @@
             <div class="col-md-12">
                 <data-table source="/system/permissions"
                     id="permission-table">
-                    <span slot="data-table-title">{{ __("Permissions") }}</span>
                     @include('laravel-enso/core::partials.modal')
                 </data-table>
             </div>
@@ -41,7 +40,7 @@
                 customRender: function(column, data, type, row, meta) {
                     switch(column) {
                         case 'type':
-                            return data == 'read' || data == 'citire' ? '<span class="label bg-green">' + data + '</span>'
+                            return data == 'Read' || data == 'Citire' ? '<span class="label bg-green">' + data + '</span>'
                                 : '<span class="label bg-orange">' + data + '</span>';
                         case 'default':
                             return data == 'Yes' || data == 'Da' ? '<span class="label bg-green">' + data + '</span>'

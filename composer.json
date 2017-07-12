@@ -1,12 +1,20 @@
 {
     "name": "laravel-enso/permissionmanager",
     "description": "Permission Manager dependency for Laravel Enso",
+    "keywords": [
+        "laravel-enso",
+        "permission-manager",
+        "laravel-permissions"
+    ],
+    "homepage": "https://github.com/laravel-enso/PermissionManager",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Mishu",
-            "email": "mishu@xtelecom.ro"
+            "name": "Adrian Ocneanu",
+            "email": "aocneanu@gmail.com",
+            "homepage": "https://laravel-enso.com",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -17,6 +25,14 @@
     "autoload": {
         "psr-4": {
             "LaravelEnso\\PermissionManager\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LaravelEnso\\PermissionsServiceProvider"
+            ],
+            "aliases": {}
         }
     }
 }

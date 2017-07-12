@@ -16,6 +16,7 @@ class CreateStructureForPermissionGroups extends StructureMigration
         ['name' => 'system.permissionGroups.update', 'description' => 'Update permission group', 'type' => 1, 'default' => false],
         ['name' => 'system.permissionGroups.destroy', 'description' => 'Delete permission group', 'type' => 1, 'default' => false],
         ['name' => 'system.permissionGroups.getTableData', 'description' => 'Get table data for permission groups', 'type' => 0, 'default' => false],
+        ['name' => 'system.permissionGroups.exportExcel', 'description' => 'Export excel for permission groups', 'type' => 0, 'default' => false],
         ['name' => 'system.permissionGroups.initTable', 'description' => 'Init table data for permission groups', 'type' => 0, 'default' => false],
     ];
 
