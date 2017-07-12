@@ -11,7 +11,7 @@ class PermissionsTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
-            'tableName' => __('Permissions'),
+            'tableName'     => __('Permissions'),
             'crtNo'         => __('#'),
             'actionButtons' => __('Actions'),
             'render'        => [3, 5],
