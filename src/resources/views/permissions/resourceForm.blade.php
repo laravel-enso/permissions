@@ -16,21 +16,20 @@
         {!! Form::select('permission_group_id', $permissionGroups, null, ['class' => 'form-control select']) !!}
     </div>
 </div>
-<div class="col-sm-3">
-    <div class="form-group{{ $errors->has('dataTables') ? ' has-error' : '' }}">
-        {!! Form::label('dataTables', __("Data Tables")) !!}
-        <small class="text-danger" style="float:right;">
-            {{ $errors->first('dataTables') }}
-        </small>
-        <input type="checkbox" name="dataTables">
-    </div>
-</div>
-<div class="col-sm-3">
-    <div class="form-group{{ $errors->has('vueSelect') ? ' has-error' : '' }}">
-        {!! Form::label('vueSelect', __("Vue Select")) !!}
-        <small class="text-danger" style="float:right;">
-            {{ $errors->first('vueSelect') }}
-        </small>
-        <input type="checkbox" name="vueSelect">
-    </div>
+<div class="col-sm-12">
+    <br>
+    @foreach($resources as $resource => $permissions)
+        <label><b>{{ __(ucfirst($resource)) }}</b></label>
+        <div class="row">
+            @foreach($permissions as $permission)
+                <div class="col-xs-6 col-sm-3">
+                    <div class="form-group">
+                        <input type="checkbox" name="{{ $permission['name'] }}" checked>
+                        <label>{{ $permission['name'] }}</label>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <hr>
+    @endforeach
 </div>

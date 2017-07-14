@@ -21,8 +21,9 @@ class ResourceService
     public function create()
     {
         $permissionGroups = PermissionGroup::pluck('name', 'id');
+        $resources = (new ResourcePermissions())->getData();
 
-        return view('laravel-enso/permissionmanager::permissions.createResource', compact('permissionGroups'));
+        return view('laravel-enso/permissionmanager::permissions.createResource', compact('permissionGroups', 'resources'));
     }
 
     public function store()
@@ -41,29 +42,28 @@ class ResourceService
 
     private function getPermissionCollection()
     {
-        $permissions = $this->buildPermissionsList();
+        $permissions = collect();
 
-        foreach ($permissions as &$permission) {
+        foreach ($this->getPermissionsList() as $permission) {
+            if (!$this->request->has($permission['name'])) {
+                continue;
+            }
+
             $permission['name'] = $this->request->get('prefix').'.'.$permission['name'];
             $permission['description'] = $permission['description'].ucfirst($this->request->get('prefix'));
             $permission['permission_group_id'] = $this->request->get('permission_group_id');
+            $permissions->push($permission);
         }
 
-        return collect($permissions);
+        return $permissions;
     }
 
-    private function buildPermissionsList()
+    private function getPermissionsList()
     {
         $resource = (new ResourcePermissions());
         $permissions = $resource->getValueByKey('resource');
-
-        if ($this->request->has('dataTables') && $this->request->get('dataTables') === 'on') {
-            $permissions = array_merge($permissions, $resource->getValueByKey('dataTables'));
-        }
-
-        if ($this->request->has('vueSelect') && $this->request->get('vueSelect') === 'on') {
-            $permissions = array_merge($permissions, $resource->getValueByKey('vueSelect'));
-        }
+        $permissions = array_merge($permissions, $resource->getValueByKey('dataTables'));
+        $permissions = array_merge($permissions, $resource->getValueByKey('vueSelect'));
 
         return $permissions;
     }
