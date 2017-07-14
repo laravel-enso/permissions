@@ -14,7 +14,7 @@ class CreatePermissionsTable extends Migration
             $table->string('name')->unique()->index();
             $table->string('description')->nullable();
             $table->tinyInteger('type');
-            $table->boolean('default')->default(false);
+            $table->boolean('default');
             $table->timestamps();
         });
     }

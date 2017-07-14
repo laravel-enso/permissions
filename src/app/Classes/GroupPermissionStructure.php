@@ -65,8 +65,8 @@ class GroupPermissionStructure
     private function trimGroupName($group)
     {
         $labels = collect(explode('.', $group->name));
-        $labels->shift();
-        $group->name = $labels->implode('.');
+        $shifted = $labels->shift();
+        $group->name = $labels->implode('.') ?: $shifted;
 
         return $group;
     }
