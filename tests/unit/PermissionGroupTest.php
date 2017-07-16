@@ -11,16 +11,15 @@ class PermissionGroupTest extends TestCase
 {
     use DatabaseMigrations;
 
-    private $user;
+    private $faker;
 
     protected function setUp()
     {
         parent::setUp();
 
         // $this->disableExceptionHandling();
-        $this->user = User::first();
         $this->faker = Factory::create();
-        $this->actingAs($this->user);
+        $this->actingAs(User::first());
     }
 
     /** @test */
@@ -48,13 +47,13 @@ class PermissionGroupTest extends TestCase
         $permissionGroup = PermissionGroup::whereName($postParams['name'])->first();
 
         $response->assertRedirect('/system/permissionGroups/'.$permissionGroup->id.'/edit');
-        $this->hasSessionConfirmation($response);
+        $response->assertSessionHas('flash_notification');
     }
 
     /** @test */
     public function edit()
     {
-        $permissionGroup = PermissionGroup::first();
+        $permissionGroup = PermissionGroup::create($this->postParams());
 
         $response = $this->get('/system/permissionGroups/'.$permissionGroup->id.'/edit');
 
@@ -65,77 +64,40 @@ class PermissionGroupTest extends TestCase
     /** @test */
     public function update()
     {
-        $permissionGroup = PermissionGroup::first();
+        $permissionGroup = PermissionGroup::create($this->postParams());
         $permissionGroup->description = 'edited';
-        $data = $permissionGroup->toArray();
-        $data['_method'] = 'PATCH';
+        $permissionGroup->_method = 'PATCH';
 
-        $response = $this->patch('/system/permissionGroups/'.$permissionGroup->id, $data);
+        $response = $this->patch('/system/permissionGroups/'.$permissionGroup->id, $permissionGroup->toArray());
 
         $response->assertStatus(302);
-        $this->hasSessionConfirmation($response);
-        $this->assertTrue($this->wasUpdated());
+        $response->assertSessionHas('flash_notification');
+        $this->assertTrue($permissionGroup->fresh()->description === 'edited');
     }
 
     /** @test */
     public function destroy()
     {
-        $postParams = $this->postParams();
-        PermissionGroup::create($postParams);
-        $permissionGroup = PermissionGroup::whereName($postParams['name'])->first();
+        $permissionGroup = PermissionGroup::create($this->postParams());
 
         $response = $this->delete('/system/permissionGroups/'.$permissionGroup->id);
 
-        $this->hasJsonConfirmation($response);
-        $this->wasDeleted($permissionGroup);
+        $response->assertJsonFragment(['message']);
+        $this->assertNull($permissionGroup->fresh());
         $response->assertStatus(200);
     }
 
     /** @test */
-    public function cantDestroyIfHasPermission()
+    public function cant_destroy_if_has_permission()
     {
-        $postParams = $this->postParams();
-        PermissionGroup::create($postParams);
-        $permissionGroup = PermissionGroup::whereName($postParams['name'])->first();
+        $permissionGroup = PermissionGroup::create($pthis->postParams());
         $this->addPermission($permissionGroup);
 
         $response = $this->delete('/system/permissionGroups/'.$permissionGroup->id);
 
         $response->assertStatus(302);
-        $this->assertTrue($this->hasSessionWarningMessage());
-        $this->wasNotDeleted($permissionGroup);
-    }
-
-    private function wasUpdated()
-    {
-        $permissionGroup = PermissionGroup::first(['description']);
-
-        return $permissionGroup->description === 'edited';
-    }
-
-    private function wasDeleted($permissionGroup)
-    {
-        return $this->assertNull(PermissionGroup::whereName($permissionGroup->name)->first());
-    }
-
-    private function wasNotDeleted($permissionGroup)
-    {
-        return $this->assertNotNull(PermissionGroup::whereName($permissionGroup->name)->first());
-    }
-
-    private function hasSessionConfirmation($response)
-    {
-        return $response->assertSessionHas('flash_notification');
-    }
-
-    private function hasJsonConfirmation($response)
-    {
-        return $response->assertJsonFragment(['message']);
-    }
-
-    private function hasSessionWarningMessage()
-    {
-        return session('flash_notification')[0]->level === 'warning';
+        $this->assertTrue(session('flash_notification')[0]->level === 'warning');
+        $this->assertNotNull($permissionGroup->fresh());
     }
 
     private function addPermission($permissionGroup)
@@ -153,7 +115,6 @@ class PermissionGroupTest extends TestCase
     private function postParams()
     {
         return [
-            'permission_group_id'   => PermissionGroup::first(['id'])->id,
             'name'                  => $this->faker->word,
             'description'           => $this->faker->sentence,
             '_method'               => 'POST',

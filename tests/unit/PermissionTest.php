@@ -12,16 +12,15 @@ class PermissionTest extends TestCase
 {
     use DatabaseMigrations;
 
-    private $user;
+    private $faker;
 
     protected function setUp()
     {
         parent::setUp();
 
         // $this->disableExceptionHandling();
-        $this->user = User::first();
         $this->faker = Factory::create();
-        $this->actingAs($this->user);
+        $this->actingAs(User::first());
     }
 
     /** @test */
@@ -49,14 +48,15 @@ class PermissionTest extends TestCase
         $permission = Permission::whereName($postParams['name'])->first();
 
         $response->assertRedirect('/system/permissions/'.$permission->id.'/edit');
-        $this->hasSessionConfirmation($response);
+        $response->assertSessionHas('flash_notification');
     }
 
     /** @test */
     public function edit()
     {
-        $permission = Permission::first();
+        $permission = Permission::create($this->postParams());
         $permission->roles_list;
+        $permission->wasRecentlyCreated = false;
 
         $response = $this->get('/system/permissions/'.$permission->id.'/edit');
 
@@ -67,78 +67,41 @@ class PermissionTest extends TestCase
     /** @test */
     public function update()
     {
-        $permission = Permission::first();
+        $permission = Permission::create($this->postParams());
         $permission->description = 'edited';
-        $data = $permission->toArray();
-        $data['_method'] = 'PATCH';
+        $permission->_method = 'PATCH';
 
-        $response = $this->patch('/system/permissions/'.$permission->id, $data);
+        $response = $this->patch('/system/permissions/'.$permission->id, $permission->toArray());
 
         $response->assertStatus(302);
-        $this->hasSessionConfirmation($response);
-        $this->assertTrue($this->wasUpdated());
+        $response->assertSessionHas('flash_notification');
+        $this->assertTrue($permission->fresh()->description === 'edited');
     }
 
     /** @test */
     public function destroy()
     {
-        $postParams = $this->postParams();
-        Permission::create($postParams);
-        $permission = Permission::whereName($postParams['name'])->first();
+        $permission = Permission::create($this->postParams());
 
         $response = $this->delete('/system/permissions/'.$permission->id);
 
-        $this->hasJsonConfirmation($response);
-        $this->wasDeleted($permission);
+        $response->assertJsonFragment(['message']);
+        $this->assertNull($permission->fresh());
         $response->assertStatus(200);
     }
 
     /** @test */
-    public function cantDestroyIfHasRoles()
+    public function cant_destroy_if_has_roles()
     {
-        $postParams = $this->postParams();
-        Permission::create($postParams);
+        $permission = Permission::create($this->postParams());
         $role = Role::first(['id']);
-        $permission = Permission::whereName($postParams['name'])->first();
         $permission->roles()->attach($role->id);
 
         $response = $this->delete('/system/permissions/'.$permission->id);
 
         $response->assertStatus(302);
-        $this->assertTrue($this->hasSessionErrorMessage());
-        $this->wasNotDeleted($permission);
-    }
-
-    private function wasUpdated()
-    {
-        $permission = Permission::first(['description']);
-
-        return $permission->description === 'edited';
-    }
-
-    private function wasDeleted($permission)
-    {
-        return $this->assertNull(Permission::whereName($permission->name)->first());
-    }
-
-    private function wasNotDeleted($permission)
-    {
-        return $this->assertNotNull(Permission::whereName($permission->name)->first());
-    }
-
-    private function hasSessionConfirmation($response)
-    {
-        return $response->assertSessionHas('flash_notification');
-    }
-
-    private function hasJsonConfirmation($response)
-    {
-        return $response->assertJsonFragment(['message']);
-    }
-
-    private function hasSessionErrorMessage()
-    {
-        return session('flash_notification')[0]->level === 'danger';
+        $this->assertTrue(session('flash_notification')[0]->level === 'danger');
+        $this->assertNotNull($permission->fresh());
     }
 
     private function postParams()
