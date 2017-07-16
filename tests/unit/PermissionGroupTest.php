@@ -90,7 +90,7 @@ class PermissionGroupTest extends TestCase
     /** @test */
     public function cant_destroy_if_has_permission()
     {
-        $permissionGroup = PermissionGroup::create($pthis->postParams());
+        $permissionGroup = PermissionGroup::create($this->postParams());
         $this->addPermission($permissionGroup);
 
         $response = $this->delete('/system/permissionGroups/'.$permissionGroup->id);
