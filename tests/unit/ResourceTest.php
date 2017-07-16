@@ -17,7 +17,7 @@ class ResourceTest extends TestCase
     {
         parent::setUp();
 
-        // $this->disableExceptionHandling();
+        $this->disableExceptionHandling();
         $this->user = User::first();
         $this->actingAs($this->user);
     }
@@ -35,6 +35,7 @@ class ResourceTest extends TestCase
     {
         $group = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
         $params = $this->postParams($group);
+
         $response = $this->post('/system/resourcePermissions', $params);
 
         $permissionCount = $this->getResourcePermissionCount();
@@ -54,7 +55,7 @@ class ResourceTest extends TestCase
         foreach ($resourcePermissions as $group) {
             $count += count($group);
         }
-
+        \Log::info($count);
         return $count;
     }
 
@@ -75,8 +76,17 @@ class ResourceTest extends TestCase
         return [
              'prefix'              => 'testPrefix',
              'permission_group_id' => $group->id,
-             'dataTables'          => 'on',
-             'vueSelect'           => 'on',
+             'index' => 'on',
+             'create' => 'on',
+             'store' => 'on',
+             'show' => 'on',
+             'edit' => 'on',
+             'update' => 'on',
+             'destroy' => 'on',
+             'initTable' => 'on',
+             'getTableData' => 'on',
+             'exportExcel' => 'on',
+             'getOptionsList' => 'on',
         ];
     }
 }
