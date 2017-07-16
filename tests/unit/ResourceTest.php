@@ -11,15 +11,12 @@ class ResourceTest extends TestCase
 {
     use DatabaseMigrations;
 
-    private $user;
-
     protected function setUp()
     {
         parent::setUp();
 
-        $this->disableExceptionHandling();
-        $this->user = User::first();
-        $this->actingAs($this->user);
+        // $this->disableExceptionHandling();
+        $this->actingAs(User::first());
     }
 
     /** @test */
@@ -55,7 +52,7 @@ class ResourceTest extends TestCase
         foreach ($resourcePermissions as $group) {
             $count += count($group);
         }
-        \Log::info($count);
+
         return $count;
     }
 
@@ -76,17 +73,17 @@ class ResourceTest extends TestCase
         return [
              'prefix'              => 'testPrefix',
              'permission_group_id' => $group->id,
-             'index' => 'on',
-             'create' => 'on',
-             'store' => 'on',
-             'show' => 'on',
-             'edit' => 'on',
-             'update' => 'on',
-             'destroy' => 'on',
-             'initTable' => 'on',
-             'getTableData' => 'on',
-             'exportExcel' => 'on',
-             'getOptionsList' => 'on',
+             'index'                         => 'on',
+             'create'                       => 'on',
+             'store'                         => 'on',
+             'show'                         => 'on',
+             'edit'                           => 'on',
+             'update'                      => 'on',
+             'destroy'                     => 'on',
+             'initTable'                   => 'on',
+             'getTableData'           => 'on',
+             'exportExcel'              => 'on',
+             'getOptionsList'          => 'on',
         ];
     }
 }
