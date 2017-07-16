@@ -71,19 +71,19 @@ class ResourceTest extends TestCase
     private function postParams(PermissionGroup $group)
     {
         return [
-             'prefix'              => 'testPrefix',
-             'permission_group_id' => $group->id,
-             'index'                         => 'on',
-             'create'                       => 'on',
-             'store'                         => 'on',
-             'show'                         => 'on',
+             'prefix'                         => 'testPrefix',
+             'permission_group_id'            => $group->id,
+             'index'                          => 'on',
+             'create'                         => 'on',
+             'store'                          => 'on',
+             'show'                           => 'on',
              'edit'                           => 'on',
-             'update'                      => 'on',
-             'destroy'                     => 'on',
-             'initTable'                   => 'on',
-             'getTableData'           => 'on',
-             'exportExcel'              => 'on',
-             'getOptionsList'          => 'on',
+             'update'                         => 'on',
+             'destroy'                        => 'on',
+             'initTable'                      => 'on',
+             'getTableData'                   => 'on',
+             'exportExcel'                    => 'on',
+             'getOptionsList'                 => 'on',
         ];
     }
 }
