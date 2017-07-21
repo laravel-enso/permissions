@@ -55,8 +55,8 @@ class PermissionTest extends TestCase
     public function edit()
     {
         $permission = Permission::create($this->postParams());
+        $permission = $permission->fresh();
         $permission->roles_list;
-        $permission->wasRecentlyCreated = false;
 
         $response = $this->get('/system/permissions/'.$permission->id.'/edit');
 
