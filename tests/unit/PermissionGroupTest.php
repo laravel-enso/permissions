@@ -54,6 +54,7 @@ class PermissionGroupTest extends TestCase
     public function edit()
     {
         $permissionGroup = PermissionGroup::create($this->postParams());
+        $permissionGroup->wasRecentlyCreated = false;
 
         $response = $this->get('/system/permissionGroups/'.$permissionGroup->id.'/edit');
 
