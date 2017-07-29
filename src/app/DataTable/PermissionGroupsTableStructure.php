@@ -10,7 +10,7 @@ class PermissionGroupsTableStructure extends TableStructure
     {
         $this->data = [
             'crtNo'         => __('#'),
-            'tableName'     => __("Permissions Groups"),
+            'tableName'     => __('Permissions Groups'),
             'actionButtons' => __('Actions'),
             'headerAlign'   => 'center',
             'bodyAlign'     => 'center',
