@@ -9,11 +9,12 @@ class PermissionGroupsTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
-            'crtNo'           => __('#'),
-            'actionButtons'   => __('Actions'),
-            'headerAlign'     => 'center',
-            'bodyAlign'       => 'center',
-            'columns'         => [
+            'crtNo'         => __('#'),
+            'tableName'     => __("Permissions Groups"),
+            'actionButtons' => __('Actions'),
+            'headerAlign'   => 'center',
+            'bodyAlign'     => 'center',
+            'columns'       => [
                 0 => [
                     'label' => __('Name'),
                     'data'  => 'name',

@@ -21,7 +21,6 @@
             <div class="col-md-12">
                 <data-table source="/system/permissions"
                     id="permission-table">
-                    @include('laravel-enso/core::partials.modal')
                 </data-table>
             </div>
         </div>

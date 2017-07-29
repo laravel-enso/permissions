@@ -21,8 +21,6 @@
             <div class="col-md-12">
                 <data-table source="/system/permissionGroups"
                     id="permission-groups-table">
-                    <span slot="data-table-title">{{ __("Permissions Groups") }}</span>
-                    @include('laravel-enso/core::partials.modal')
                 </data-table>
             </div>
         </div>
