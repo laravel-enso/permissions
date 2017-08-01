@@ -35,7 +35,7 @@ class ResourceService
             });
         });
 
-        flash()->success(__('The Operation was successful'));
+        flash()->success(__(config('labels.successfulOperation')));
 
         return redirect()->route('system.permissions.index');
     }
@@ -44,7 +44,7 @@ class ResourceService
     {
         $permissions = collect();
 
-        foreach ($this->getPermissionsList() as $permission) {
+        foreach ($this->getPermissionList() as $permission) {
             if (!$this->request->has($permission['name'])) {
                 continue;
             }
@@ -58,7 +58,7 @@ class ResourceService
         return $permissions;
     }
 
-    private function getPermissionsList()
+    private function getPermissionList()
     {
         $resource = (new ResourcePermissions());
         $permissions = $resource->getValueByKey('resource');

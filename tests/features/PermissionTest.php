@@ -56,7 +56,7 @@ class PermissionTest extends TestCase
     {
         $permission = Permission::create($this->postParams());
         $permission = $permission->fresh();
-        $permission->roles_list;
+        $permission->roleList;
 
         $response = $this->get('/system/permissions/'.$permission->id.'/edit');
 

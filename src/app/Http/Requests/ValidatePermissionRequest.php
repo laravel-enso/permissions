@@ -16,7 +16,9 @@ class ValidatePermissionRequest extends FormRequest
     {
         $permission = $this->route('permission');
         $nameUnique = Rule::unique('permissions', 'name');
-        $nameUnique = $this->_method == 'PATCH' ? $nameUnique->ignore($permission->id) : $nameUnique;
+        $nameUnique = request()->getMethod() == 'PATCH'
+            ? $nameUnique->ignore($permission->id)
+            : $nameUnique;
 
         return [
             'permission_group_id' => 'required',

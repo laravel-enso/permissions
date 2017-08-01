@@ -4,19 +4,13 @@ namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use LaravelEnso\DataTable\app\Traits\DataTable;
-use LaravelEnso\PermissionManager\app\DataTable\PermissionsTableStructure;
 use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionRequest;
 use LaravelEnso\PermissionManager\app\Http\Services\PermissionService;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 
 class PermissionController extends Controller
 {
-    use DataTable;
-
     private $permissions;
-
-    protected $tableStructureClass = PermissionsTableStructure::class;
 
     public function __construct(Request $request)
     {

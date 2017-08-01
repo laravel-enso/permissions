@@ -19,14 +19,6 @@ class PermissionService
         $this->request = $request;
     }
 
-    public function getTableQuery()
-    {
-        return Permission::select(\DB::raw('permissions.id as DT_RowId, permissions.name,
-            permissions.description, permissions.type, permission_groups.name as grup,
-            permissions.default, permissions.created_at, permissions.updated_at')
-        )->join('permission_groups', 'permissions.permission_group_id', '=', 'permission_groups.id');
-    }
-
     public function index()
     {
         return view('laravel-enso/permissionmanager::permissions.index');
@@ -56,7 +48,7 @@ class PermissionService
         $permissionTypes = (new PermissionTypes())->getData();
         $permissionGroups = PermissionGroup::pluck('name', 'id');
         $roles = Role::pluck('name', 'id');
-        $permission->roles_list;
+        $permission->roleList;
 
         return view(
             'laravel-enso/permissionmanager::permissions.edit',
@@ -68,9 +60,9 @@ class PermissionService
     {
         \DB::transaction(function () use ($permission) {
             $permission->update($this->request->all());
-            $roles = $this->request->has('roles_list') ? $this->request->get('roles_list') : [];
+            $roles = $this->request->has('roleList') ? $this->request->get('roleList') : [];
             $permission->roles()->sync($roles);
-            flash()->success(__('The Changes have been saved!'));
+            flash()->success(__(config('labels.savedChanges')));
         });
 
         return back();
@@ -84,7 +76,7 @@ class PermissionService
 
         $permission->delete();
 
-        return ['message' => __('Operation was successful')];
+        return ['message' => __(config('labels.successfulOperation'))];
     }
 
     private function attachRoles(Permission $permission)
