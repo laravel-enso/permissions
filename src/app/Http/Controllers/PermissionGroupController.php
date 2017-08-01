@@ -23,7 +23,7 @@ class PermissionGroupController extends Controller
         $group = $permissionGroup->create($request->all());
         flash()->success(__('Permission created'));
 
-        return redirect('system/permissionGroups/' . $group->id . '/edit');
+        return redirect('system/permissionGroups/'.$group->id.'/edit');
     }
 
     public function edit(PermissionGroup $permissionGroup)

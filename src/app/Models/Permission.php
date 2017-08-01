@@ -5,7 +5,6 @@ namespace LaravelEnso\PermissionManager\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
 use LaravelEnso\Helpers\Traits\FormattedTimestamps;
-use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\TutorialManager\app\Models\Tutorial;
 
