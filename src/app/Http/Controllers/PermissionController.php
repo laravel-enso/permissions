@@ -24,7 +24,7 @@ class PermissionController extends Controller
 
     public function index()
     {
-        return $this->permissions->index();
+        return view('laravel-enso/permissionmanager::permissions.index');
     }
 
     public function create()

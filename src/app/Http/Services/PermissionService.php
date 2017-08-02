@@ -19,11 +19,6 @@ class PermissionService
         $this->request = $request;
     }
 
-    public function index()
-    {
-        return view('laravel-enso/permissionmanager::permissions.index');
-    }
-
     public function create()
     {
         $permissionTypes = (new PermissionTypes())->getData();
