@@ -51,7 +51,7 @@ class PermissionTest extends TestCase
             ->assertJsonFragment([
             'message' => 'The permission was created!',
             'redirect'=> '/system/permissions/'.$permission->id.'/edit',
-        ]);
+            ]);
     }
 
     /** @test */
@@ -74,7 +74,7 @@ class PermissionTest extends TestCase
         $permission->description = 'edited';
         $permission->_method = 'PATCH';
 
-        $response = $this->patch('/system/permissions/'.$permission->id, $permission->toArray())
+        $this->patch('/system/permissions/'.$permission->id, $permission->toArray())
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 

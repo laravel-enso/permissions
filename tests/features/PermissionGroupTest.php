@@ -50,7 +50,7 @@ class PermissionGroupTest extends TestCase
             ->assertJsonFragment([
             'message' => 'The permission group was created!',
             'redirect'=> '/system/permissionGroups/'.$permissionGroup->id.'/edit',
-        ]);
+            ]);
     }
 
     /** @test */
@@ -72,7 +72,7 @@ class PermissionGroupTest extends TestCase
         $permissionGroup->description = 'edited';
         $permissionGroup->_method = 'PATCH';
 
-        $response = $this->patch('/system/permissionGroups/'.$permissionGroup->id, $permissionGroup->toArray())
+        $this->patch('/system/permissionGroups/'.$permissionGroup->id, $permissionGroup->toArray())
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
