@@ -47,8 +47,11 @@ class PermissionTest extends TestCase
 
         $permission = Permission::whereName($postParams['name'])->first();
 
-        $response->assertRedirect('/system/permissions/'.$permission->id.'/edit');
-        $response->assertSessionHas('flash_notification');
+        $response->assertStatus(200)
+            ->assertJsonFragment([
+            'message' => 'The permission was created!',
+            'redirect'=>'/system/permissions/'.$permission->id.'/edit'
+        ]);
     }
 
     /** @test */
@@ -61,7 +64,7 @@ class PermissionTest extends TestCase
         $response = $this->get('/system/permissions/'.$permission->id.'/edit');
 
         $response->assertStatus(200);
-        $response->assertViewHas('permission', $permission);
+        $response->assertViewHas('form');
     }
 
     /** @test */
@@ -71,10 +74,10 @@ class PermissionTest extends TestCase
         $permission->description = 'edited';
         $permission->_method = 'PATCH';
 
-        $response = $this->patch('/system/permissions/'.$permission->id, $permission->toArray());
+        $response = $this->patch('/system/permissions/'.$permission->id, $permission->toArray())
+            ->assertStatus(200)
+            ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
-        $response->assertStatus(302);
-        $response->assertSessionHas('flash_notification');
         $this->assertTrue($permission->fresh()->description === 'edited');
     }
 

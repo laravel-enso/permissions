@@ -4,27 +4,24 @@
 
 @section('content')
 
-    <section class="content-header">
-        <a class="btn btn-primary" href="/system/permissions/create">
+    <page v-cloak>
+        <span slot="header">
+            <a class="btn btn-primary" href="/system/permissions/create">
             {{ __("Create Permission") }}
-        </a>
-        <a class="btn btn-primary" href="/system/resourcePermissions/create">
-            {{ __("Create Resource") }}
-        </a>
-        <a class="btn btn-primary" href="/system/permissionGroups/create">
-            {{ __("Create Group") }}
-        </a>
-        @include('laravel-enso/menumanager::breadcrumbs')
-    </section>
-    <section class="content">
-        <div class="row" v-cloak>
-            <div class="col-md-12">
-                <data-table source="/system/permissionGroups"
-                    id="permission-groups-table">
-                </data-table>
-            </div>
+            </a>
+            <a class="btn btn-primary" href="/system/resourcePermissions/create">
+                {{ __("Create Resource") }}
+            </a>
+            <a class="btn btn-primary" href="/system/permissionGroups/create">
+                {{ __("Create Group") }}
+            </a>
+        </span>
+        <div class="col-md-12">
+            <data-table source="/system/permissionGroups"
+                id="permission-groups-table">
+            </data-table>
         </div>
-    </section>
+    </page>
 
 @endsection
 

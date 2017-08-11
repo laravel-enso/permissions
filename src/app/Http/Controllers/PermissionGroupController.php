@@ -3,11 +3,20 @@
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionGroupRequest;
+use LaravelEnso\PermissionManager\app\Http\Services\PermissionGroupService;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 
 class PermissionGroupController extends Controller
 {
+    private $groups;
+
+    public function __construct(Request $request)
+    {
+        $this->groups = new PermissionGroupService($request);
+    }
+
     public function index()
     {
         return view('laravel-enso/permissionmanager::permissionGroups.index');
@@ -15,38 +24,26 @@ class PermissionGroupController extends Controller
 
     public function create()
     {
-        return view('laravel-enso/permissionmanager::permissionGroups.create');
+        return $this->groups->create();
     }
 
     public function store(ValidatePermissionGroupRequest $request, PermissionGroup $permissionGroup)
     {
-        $group = $permissionGroup->create($request->all());
-        flash()->success(__('Permission created'));
-
-        return redirect('system/permissionGroups/'.$group->id.'/edit');
+        return $this->groups->store($permissionGroup);
     }
 
     public function edit(PermissionGroup $permissionGroup)
     {
-        return view('laravel-enso/permissionmanager::permissionGroups.edit', compact('permissionGroup'));
+        return $this->groups->edit($permissionGroup);
     }
 
     public function update(ValidatePermissionGroupRequest $request, PermissionGroup $permissionGroup)
     {
-        $permissionGroup->update($request->all());
-        flash()->success(__(config('labels.savedChanges')));
-
-        return back();
+        return $this->groups->update($permissionGroup);
     }
 
     public function destroy(PermissionGroup $permissionGroup)
     {
-        if ($permissionGroup->permissions->count()) {
-            throw new \EnsoException(__('The permission group cannot be deleted because it has child permissions'), 'warning');
-        }
-
-        $permissionGroup->delete();
-
-        return ['message' => __(config('labels.successfulOperation'))];
+        return $this->groups->destroy($permissionGroup);
     }
 }

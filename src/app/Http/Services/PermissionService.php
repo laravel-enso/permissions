@@ -3,6 +3,7 @@
 namespace LaravelEnso\PermissionManager\app\Http\Services;
 
 use Illuminate\Http\Request;
+use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
@@ -10,8 +11,6 @@ use LaravelEnso\RoleManager\app\Models\Role;
 
 class PermissionService
 {
-    private const AdminRoleId = 1;
-
     private $request;
 
     public function __construct(Request $request)
@@ -21,10 +20,16 @@ class PermissionService
 
     public function create()
     {
-        $permissionTypes = (new PermissionTypes())->getData();
-        $permissionGroups = PermissionGroup::pluck('name', 'id');
+        $form = (new FormBuilder(__DIR__.'/../../Forms/permission.json'))
+            ->setAction('POST')
+            ->setTitle('Create Permission')
+            ->setUrl('/system/permissions')
+            ->setSelectOptions('type', (new PermissionTypes())->getData())
+            ->setSelectOptions('permission_group_id', PermissionGroup::pluck('name', 'id'))
+            ->setSelectOptions('roleList', Role::pluck('name', 'id'))
+            ->getData();
 
-        return view('laravel-enso/permissionmanager::permissions.create', compact('permissionTypes', 'permissionGroups'));
+        return view('laravel-enso/permissionmanager::permissions.create', compact('form'));
     }
 
     public function store(Permission $permission)
@@ -32,23 +37,28 @@ class PermissionService
         \DB::transaction(function () use (&$permission) {
             $permission = $permission->create($this->request->all());
             $this->attachRoles($permission);
-            flash()->success(__('Permission created'));
         });
 
-        return redirect('system/permissions/'.$permission->id.'/edit');
+        return [
+            'message'  => __('The permission was created!'),
+            'redirect' => '/system/permissions/' . $permission->id . '/edit',
+        ];
     }
 
     public function edit(Permission $permission)
     {
-        $permissionTypes = (new PermissionTypes())->getData();
-        $permissionGroups = PermissionGroup::pluck('name', 'id');
-        $roles = Role::pluck('name', 'id');
-        $permission->roleList;
+        $permission->append(['roleList']);
 
-        return view(
-            'laravel-enso/permissionmanager::permissions.edit',
-            compact('permission', 'permissionTypes', 'permissionGroups', 'roles')
-        );
+        $form = (new FormBuilder(__DIR__.'/../../Forms/permission.json', $permission))
+            ->setAction('PATCH')
+            ->setTitle('Edit Permission')
+            ->setUrl('/system/permissions/' . $permission->id)
+            ->setSelectOptions('type', (new PermissionTypes())->getData())
+            ->setSelectOptions('permission_group_id', PermissionGroup::pluck('name', 'id'))
+            ->setSelectOptions('roleList', Role::pluck('name', 'id'))
+            ->getData();
+
+        return view('laravel-enso/permissionmanager::permissions.edit', compact('form'));
     }
 
     public function update(Permission $permission)
@@ -57,10 +67,11 @@ class PermissionService
             $permission->update($this->request->all());
             $roles = $this->request->has('roleList') ? $this->request->get('roleList') : [];
             $permission->roles()->sync($roles);
-            flash()->success(__(config('labels.savedChanges')));
         });
 
-        return back();
+        return [
+            'message' => __(config('labels.savedChanges')),
+        ];
     }
 
     public function destroy(Permission $permission)
@@ -78,6 +89,10 @@ class PermissionService
     {
         return $permission->default
             ? $permission->roles()->attach(Role::pluck('id'))
-            : $permission->roles()->attach(self::AdminRoleId);
+            : $permission->roles()->attach(
+                $this->request->has('roleList')
+                    ? $this->request->get('roleList')
+                    : []
+            );
     }
 }

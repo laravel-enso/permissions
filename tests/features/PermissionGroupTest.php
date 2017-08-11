@@ -46,8 +46,11 @@ class PermissionGroupTest extends TestCase
 
         $permissionGroup = PermissionGroup::whereName($postParams['name'])->first();
 
-        $response->assertRedirect('/system/permissionGroups/'.$permissionGroup->id.'/edit');
-        $response->assertSessionHas('flash_notification');
+        $response->assertStatus(200)
+            ->assertJsonFragment([
+            'message' => 'The permission group was created!',
+            'redirect'=>'/system/permissionGroups/'.$permissionGroup->id.'/edit'
+        ]);
     }
 
     /** @test */
@@ -59,7 +62,7 @@ class PermissionGroupTest extends TestCase
         $response = $this->get('/system/permissionGroups/'.$permissionGroup->id.'/edit');
 
         $response->assertStatus(200);
-        $response->assertViewHas('permissionGroup', $permissionGroup);
+        $response->assertViewHas('form');
     }
 
     /** @test */
@@ -69,10 +72,10 @@ class PermissionGroupTest extends TestCase
         $permissionGroup->description = 'edited';
         $permissionGroup->_method = 'PATCH';
 
-        $response = $this->patch('/system/permissionGroups/'.$permissionGroup->id, $permissionGroup->toArray());
+        $response = $this->patch('/system/permissionGroups/'.$permissionGroup->id, $permissionGroup->toArray())
+            ->assertStatus(200)
+            ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
-        $response->assertStatus(302);
-        $response->assertSessionHas('flash_notification');
         $this->assertTrue($permissionGroup->fresh()->description === 'edited');
     }
 
