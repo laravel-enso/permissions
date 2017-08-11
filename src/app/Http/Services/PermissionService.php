@@ -41,7 +41,7 @@ class PermissionService
 
         return [
             'message'  => __('The permission was created!'),
-            'redirect' => '/system/permissions/' . $permission->id . '/edit',
+            'redirect' => '/system/permissions/'.$permission->id.'/edit',
         ];
     }
 
@@ -52,7 +52,7 @@ class PermissionService
         $form = (new FormBuilder(__DIR__.'/../../Forms/permission.json', $permission))
             ->setAction('PATCH')
             ->setTitle('Edit Permission')
-            ->setUrl('/system/permissions/' . $permission->id)
+            ->setUrl('/system/permissions/'.$permission->id)
             ->setSelectOptions('type', (new PermissionTypes())->getData())
             ->setSelectOptions('permission_group_id', PermissionGroup::pluck('name', 'id'))
             ->setSelectOptions('roleList', Role::pluck('name', 'id'))

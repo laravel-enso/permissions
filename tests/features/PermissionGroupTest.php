@@ -49,7 +49,7 @@ class PermissionGroupTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment([
             'message' => 'The permission group was created!',
-            'redirect'=>'/system/permissionGroups/'.$permissionGroup->id.'/edit'
+            'redirect'=> '/system/permissionGroups/'.$permissionGroup->id.'/edit',
         ]);
     }
 

@@ -17,7 +17,7 @@ class PermissionGroupService
 
     public function create()
     {
-        $form = (new FormBuilder(__DIR__ . '/../../Forms/group.json'))
+        $form = (new FormBuilder(__DIR__.'/../../Forms/group.json'))
             ->setAction('POST')
             ->setTitle('Create Permission Group')
             ->setUrl('/system/permissionGroups')
@@ -32,16 +32,16 @@ class PermissionGroupService
 
         return [
             'message'  => __('The permission group was created!'),
-            'redirect' => '/system/permissionGroups/' . $group->id . '/edit',
+            'redirect' => '/system/permissionGroups/'.$group->id.'/edit',
         ];
     }
 
     public function edit(PermissionGroup $permissionGroup)
     {
-        $form = (new FormBuilder(__DIR__ . '/../../Forms/group.json', $permissionGroup))
+        $form = (new FormBuilder(__DIR__.'/../../Forms/group.json', $permissionGroup))
             ->setAction('PATCH')
             ->setTitle('Edit Permission Group')
-            ->setUrl('/system/permissionGroups/' . $permissionGroup->id)
+            ->setUrl('/system/permissionGroups/'.$permissionGroup->id)
             ->getData();
 
         return view('laravel-enso/permissionmanager::permissionGroups.edit', compact('form'));
