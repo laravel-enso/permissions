@@ -43,14 +43,14 @@ class PermissionGroupTest extends TestHelper
     public function store()
     {
         $postParams = $this->postParams();
-        $response   = $this->post('/system/permissionGroups', $postParams);
+        $response = $this->post('/system/permissionGroups', $postParams);
 
         $group = PermissionGroup::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'message'  => 'The permission group was created!',
-                'redirect' => '/system/permissionGroups/' . $group->id . '/edit',
+                'redirect' => '/system/permissionGroups/'.$group->id.'/edit',
             ]);
     }
 
@@ -59,7 +59,7 @@ class PermissionGroupTest extends TestHelper
     {
         $group = PermissionGroup::create($this->postParams());
 
-        $this->get('/system/permissionGroups/' . $group->id . '/edit')
+        $this->get('/system/permissionGroups/'.$group->id.'/edit')
             ->assertStatus(200)
             ->assertViewIs('laravel-enso/permissionmanager::permissionGroups.edit')
             ->assertViewHas('form');
@@ -71,7 +71,7 @@ class PermissionGroupTest extends TestHelper
         $group = PermissionGroup::create($this->postParams());
         $group->description = 'edited';
 
-        $this->patch('/system/permissionGroups/' . $group->id, $group->toArray())
+        $this->patch('/system/permissionGroups/'.$group->id, $group->toArray())
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
@@ -83,7 +83,7 @@ class PermissionGroupTest extends TestHelper
     {
         $group = PermissionGroup::create($this->postParams());
 
-        $this->delete('/system/permissionGroups/' . $group->id)
+        $this->delete('/system/permissionGroups/'.$group->id)
             ->assertStatus(200)
             ->assertJsonFragment(['message']);
 
@@ -96,7 +96,7 @@ class PermissionGroupTest extends TestHelper
         $group = PermissionGroup::create($this->postParams());
         $this->addPermission($group);
 
-        $this->delete('/system/permissionGroups/' . $group->id)
+        $this->delete('/system/permissionGroups/'.$group->id)
             ->assertStatus(302)
             ->assertSessionHas('flash_notification');
 

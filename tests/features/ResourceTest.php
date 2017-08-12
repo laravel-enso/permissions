@@ -30,14 +30,14 @@ class ResourceTest extends TestHelper
     /** @test */
     public function store()
     {
-        $group  = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
+        $group = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
         $params = $this->postParams($group);
 
         $response = $this->post('/system/resourcePermissions', $params)
             ->assertRedirect('/system/permissions')
             ->assertSessionHas('flash_notification');
 
-        $permissions     = Permission::wherePermissionGroupId($group->id)->get(['name']);
+        $permissions = Permission::wherePermissionGroupId($group->id)->get(['name']);
 
         $this->assertEquals($this->getPermissionCount(), $permissions->count());
         $this->assertTrue($this->hasRightPrefix($permissions, $group->name));

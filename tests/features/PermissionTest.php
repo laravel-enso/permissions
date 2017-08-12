@@ -43,14 +43,14 @@ class PermissionTest extends TestHelper
     public function store()
     {
         $postParams = $this->postParams();
-        $response   = $this->post('/system/permissions', $postParams);
+        $response = $this->post('/system/permissions', $postParams);
 
         $permission = Permission::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'message'  => 'The permission was created!',
-                'redirect' => '/system/permissions/' . $permission->id . '/edit',
+                'redirect' => '/system/permissions/'.$permission->id.'/edit',
             ]);
     }
 
@@ -59,7 +59,7 @@ class PermissionTest extends TestHelper
     {
         $permission = Permission::create($this->postParams());
 
-        $this->get('/system/permissions/' . $permission->id . '/edit')
+        $this->get('/system/permissions/'.$permission->id.'/edit')
             ->assertStatus(200)
             ->assertViewIs('laravel-enso/permissionmanager::permissions.edit')
             ->assertViewHas('form');
@@ -68,10 +68,10 @@ class PermissionTest extends TestHelper
     /** @test */
     public function update()
     {
-        $permission              = Permission::create($this->postParams());
+        $permission = Permission::create($this->postParams());
         $permission->description = 'edited';
 
-        $this->patch('/system/permissions/' . $permission->id, $permission->toArray())
+        $this->patch('/system/permissions/'.$permission->id, $permission->toArray())
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
@@ -83,7 +83,7 @@ class PermissionTest extends TestHelper
     {
         $permission = Permission::create($this->postParams());
 
-        $this->delete('/system/permissions/' . $permission->id)
+        $this->delete('/system/permissions/'.$permission->id)
             ->assertStatus(200)
             ->assertJsonFragment(['message']);
 
@@ -94,10 +94,10 @@ class PermissionTest extends TestHelper
     public function cant_destroy_if_has_roles()
     {
         $permission = Permission::create($this->postParams());
-        $role       = Role::first(['id']);
+        $role = Role::first(['id']);
         $permission->roles()->attach($role->id);
 
-        $this->delete('/system/permissions/' . $permission->id)
+        $this->delete('/system/permissions/'.$permission->id)
             ->assertStatus(302)
             ->assertSessionHas('flash_notification');
 
