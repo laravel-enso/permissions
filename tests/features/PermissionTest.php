@@ -6,9 +6,9 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\RoleManager\app\Models\Role;
-use Tests\TestCase;
+use LaravelEnso\TestHelper\app\Classes\TestHelper;
 
-class PermissionTest extends TestCase
+class PermissionTest extends TestHelper
 {
     use DatabaseMigrations;
 
@@ -20,37 +20,37 @@ class PermissionTest extends TestCase
 
         // $this->disableExceptionHandling();
         $this->faker = Factory::create();
-        $this->actingAs(User::first());
+        $this->signIn(User::first());
     }
 
     /** @test */
     public function index()
     {
-        $response = $this->get('/system/permissions');
-
-        $response->assertStatus(200);
+        $this->get('/system/permissions')
+            ->assertStatus(200)
+            ->assertViewIs('laravel-enso/permissionmanager::permissions.index');
     }
 
     /** @test */
     public function create()
     {
-        $response = $this->get('/system/permissions/create');
-
-        $response->assertStatus(200);
+        $this->get('/system/permissions/create')
+            ->assertStatus(200)
+            ->assertViewIs('laravel-enso/permissionmanager::permissions.create');
     }
 
     /** @test */
     public function store()
     {
         $postParams = $this->postParams();
-        $response = $this->post('/system/permissions', $postParams);
+        $response   = $this->post('/system/permissions', $postParams);
 
         $permission = Permission::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-            'message' => 'The permission was created!',
-            'redirect'=> '/system/permissions/'.$permission->id.'/edit',
+                'message'  => 'The permission was created!',
+                'redirect' => '/system/permissions/' . $permission->id . '/edit',
             ]);
     }
 
@@ -58,27 +58,24 @@ class PermissionTest extends TestCase
     public function edit()
     {
         $permission = Permission::create($this->postParams());
-        $permission = $permission->fresh();
-        $permission->roleList;
 
-        $response = $this->get('/system/permissions/'.$permission->id.'/edit');
-
-        $response->assertStatus(200);
-        $response->assertViewHas('form');
+        $this->get('/system/permissions/' . $permission->id . '/edit')
+            ->assertStatus(200)
+            ->assertViewIs('laravel-enso/permissionmanager::permissions.edit')
+            ->assertViewHas('form');
     }
 
     /** @test */
     public function update()
     {
-        $permission = Permission::create($this->postParams());
+        $permission              = Permission::create($this->postParams());
         $permission->description = 'edited';
-        $permission->_method = 'PATCH';
 
-        $this->patch('/system/permissions/'.$permission->id, $permission->toArray())
+        $this->patch('/system/permissions/' . $permission->id, $permission->toArray())
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
-        $this->assertTrue($permission->fresh()->description === 'edited');
+        $this->assertEquals('edited', $permission->fresh()->description);
     }
 
     /** @test */
@@ -86,36 +83,36 @@ class PermissionTest extends TestCase
     {
         $permission = Permission::create($this->postParams());
 
-        $response = $this->delete('/system/permissions/'.$permission->id);
+        $this->delete('/system/permissions/' . $permission->id)
+            ->assertStatus(200)
+            ->assertJsonFragment(['message']);
 
-        $response->assertJsonFragment(['message']);
         $this->assertNull($permission->fresh());
-        $response->assertStatus(200);
     }
 
     /** @test */
     public function cant_destroy_if_has_roles()
     {
         $permission = Permission::create($this->postParams());
-        $role = Role::first(['id']);
+        $role       = Role::first(['id']);
         $permission->roles()->attach($role->id);
 
-        $response = $this->delete('/system/permissions/'.$permission->id);
+        $this->delete('/system/permissions/' . $permission->id)
+            ->assertStatus(302)
+            ->assertSessionHas('flash_notification');
 
-        $response->assertStatus(302);
-        $this->assertTrue(session('flash_notification')[0]->level === 'danger');
         $this->assertNotNull($permission->fresh());
     }
 
     private function postParams()
     {
         return [
-            'permission_group_id'   => PermissionGroup::first(['id'])->id,
-            'name'                  => $this->faker->word,
-            'description'           => $this->faker->sentence,
-            'type'                  => 0,
-            'default'               => 0,
-            '_method'               => 'POST',
+            'permission_group_id' => PermissionGroup::first(['id'])->id,
+            'name'                => $this->faker->word,
+            'description'         => $this->faker->sentence,
+            'type'                => 0,
+            'default'             => 0,
+            '_method'             => 'POST',
         ];
     }
 }

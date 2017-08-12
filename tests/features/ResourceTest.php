@@ -5,9 +5,9 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\PermissionManager\app\Enums\ResourcePermissions;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
-use Tests\TestCase;
+use LaravelEnso\TestHelper\app\Classes\TestHelper;
 
-class ResourceTest extends TestCase
+class ResourceTest extends TestHelper
 {
     use DatabaseMigrations;
 
@@ -16,37 +16,37 @@ class ResourceTest extends TestCase
         parent::setUp();
 
         // $this->disableExceptionHandling();
-        $this->actingAs(User::first());
+        $this->signIn(User::first());
     }
 
     /** @test */
     public function create()
     {
-        $response = $this->get('/system/resourcePermissions/create');
-
-        $response->assertStatus(200);
+        $this->get('/system/resourcePermissions/create')
+            ->assertStatus(200)
+            ->assertViewIs('laravel-enso/permissionmanager::permissions.createResource');
     }
 
     /** @test */
     public function store()
     {
-        $group = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
+        $group  = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
         $params = $this->postParams($group);
 
-        $response = $this->post('/system/resourcePermissions', $params);
+        $response = $this->post('/system/resourcePermissions', $params)
+            ->assertRedirect('/system/permissions')
+            ->assertSessionHas('flash_notification');
 
-        $permissionCount = $this->getResourcePermissionCount();
-        $permissions = Permission::wherePermissionGroupId($group->id)->get(['name']);
+        $permissions     = Permission::wherePermissionGroupId($group->id)->get(['name']);
 
-        $response->assertRedirect('/system/permissions');
-        $this->hasSessionConfirmation($response);
-        $this->assertEquals($permissionCount, $permissions->count());
-        $this->assertTrue($this->hasRightPreffix($permissions, $group->name));
+        $this->assertEquals($this->getPermissionCount(), $permissions->count());
+        $this->assertTrue($this->hasRightPrefix($permissions, $group->name));
     }
 
-    private function getResourcePermissionCount()
+    private function getPermissionCount()
     {
         $resourcePermissions = (new ResourcePermissions())->getData();
+
         $count = 0;
 
         foreach ($resourcePermissions as $group) {
@@ -56,34 +56,29 @@ class ResourceTest extends TestCase
         return $count;
     }
 
-    private function hasRightPreffix($permissions, $preffix)
+    private function hasRightPrefix($permissions, $preffix)
     {
         return $permissions->filter(function ($permission) use ($preffix) {
             return strpos($permission->name, $preffix) !== 0;
         })->count() === 0;
     }
 
-    private function hasSessionConfirmation($response)
-    {
-        return $response->assertSessionHas('flash_notification');
-    }
-
     private function postParams(PermissionGroup $group)
     {
         return [
-             'prefix'                         => 'testPrefix',
-             'permission_group_id'            => $group->id,
-             'index'                          => 'on',
-             'create'                         => 'on',
-             'store'                          => 'on',
-             'show'                           => 'on',
-             'edit'                           => 'on',
-             'update'                         => 'on',
-             'destroy'                        => 'on',
-             'initTable'                      => 'on',
-             'getTableData'                   => 'on',
-             'exportExcel'                    => 'on',
-             'getOptionsList'                 => 'on',
+            'prefix'              => 'testPrefix',
+            'permission_group_id' => $group->id,
+            'index'               => 'on',
+            'create'              => 'on',
+            'store'               => 'on',
+            'show'                => 'on',
+            'edit'                => 'on',
+            'update'              => 'on',
+            'destroy'             => 'on',
+            'initTable'           => 'on',
+            'getTableData'        => 'on',
+            'exportExcel'         => 'on',
+            'getOptionsList'      => 'on',
         ];
     }
 }

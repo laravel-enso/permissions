@@ -5,9 +5,9 @@ use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
-use Tests\TestCase;
+use LaravelEnso\TestHelper\app\Classes\TestHelper;
 
-class PermissionGroupTest extends TestCase
+class PermissionGroupTest extends TestHelper
 {
     use DatabaseMigrations;
 
@@ -19,109 +19,107 @@ class PermissionGroupTest extends TestCase
 
         // $this->disableExceptionHandling();
         $this->faker = Factory::create();
-        $this->actingAs(User::first());
+        $this->signIn(User::first());
     }
 
     /** @test */
     public function index()
     {
-        $response = $this->get('/system/permissionGroups');
-
-        $response->assertStatus(200);
+        $this->get('/system/permissionGroups')
+            ->assertStatus(200)
+            ->assertViewIs('laravel-enso/permissionmanager::permissionGroups.index');
     }
 
     /** @test */
     public function create()
     {
-        $response = $this->get('/system/permissionGroups/create');
-
-        $response->assertStatus(200);
+        $this->get('/system/permissionGroups/create')
+            ->assertStatus(200)
+            ->assertViewIs('laravel-enso/permissionmanager::permissionGroups.create')
+            ->assertViewHas('form');
     }
 
     /** @test */
     public function store()
     {
         $postParams = $this->postParams();
-        $response = $this->post('/system/permissionGroups', $postParams);
+        $response   = $this->post('/system/permissionGroups', $postParams);
 
-        $permissionGroup = PermissionGroup::whereName($postParams['name'])->first();
+        $group = PermissionGroup::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-            'message' => 'The permission group was created!',
-            'redirect'=> '/system/permissionGroups/'.$permissionGroup->id.'/edit',
+                'message'  => 'The permission group was created!',
+                'redirect' => '/system/permissionGroups/' . $group->id . '/edit',
             ]);
     }
 
     /** @test */
     public function edit()
     {
-        $permissionGroup = PermissionGroup::create($this->postParams());
-        $permissionGroup = $permissionGroup->fresh();
+        $group = PermissionGroup::create($this->postParams());
 
-        $response = $this->get('/system/permissionGroups/'.$permissionGroup->id.'/edit');
-
-        $response->assertStatus(200);
-        $response->assertViewHas('form');
+        $this->get('/system/permissionGroups/' . $group->id . '/edit')
+            ->assertStatus(200)
+            ->assertViewIs('laravel-enso/permissionmanager::permissionGroups.edit')
+            ->assertViewHas('form');
     }
 
     /** @test */
     public function update()
     {
-        $permissionGroup = PermissionGroup::create($this->postParams());
-        $permissionGroup->description = 'edited';
-        $permissionGroup->_method = 'PATCH';
+        $group = PermissionGroup::create($this->postParams());
+        $group->description = 'edited';
 
-        $this->patch('/system/permissionGroups/'.$permissionGroup->id, $permissionGroup->toArray())
+        $this->patch('/system/permissionGroups/' . $group->id, $group->toArray())
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
-        $this->assertTrue($permissionGroup->fresh()->description === 'edited');
+        $this->assertEquals('edited', $group->fresh()->description);
     }
 
     /** @test */
     public function destroy()
     {
-        $permissionGroup = PermissionGroup::create($this->postParams());
+        $group = PermissionGroup::create($this->postParams());
 
-        $response = $this->delete('/system/permissionGroups/'.$permissionGroup->id);
+        $this->delete('/system/permissionGroups/' . $group->id)
+            ->assertStatus(200)
+            ->assertJsonFragment(['message']);
 
-        $response->assertJsonFragment(['message']);
-        $this->assertNull($permissionGroup->fresh());
-        $response->assertStatus(200);
+        $this->assertNull($group->fresh());
     }
 
     /** @test */
     public function cant_destroy_if_has_permission()
     {
-        $permissionGroup = PermissionGroup::create($this->postParams());
-        $this->addPermission($permissionGroup);
+        $group = PermissionGroup::create($this->postParams());
+        $this->addPermission($group);
 
-        $response = $this->delete('/system/permissionGroups/'.$permissionGroup->id);
+        $this->delete('/system/permissionGroups/' . $group->id)
+            ->assertStatus(302)
+            ->assertSessionHas('flash_notification');
 
-        $response->assertStatus(302);
-        $this->assertTrue(session('flash_notification')[0]->level === 'warning');
-        $this->assertNotNull($permissionGroup->fresh());
+        $this->assertNotNull($group->fresh());
     }
 
-    private function addPermission($permissionGroup)
+    private function addPermission($group)
     {
-        $permission = new Permission([
-            'permission_group_id'   => $permissionGroup->id,
-            'name'                  => $this->faker->word,
-            'description'           => $this->faker->sentence,
-            'type'                  => 0,
-            'default'               => 0,
+        Permission::create([
+            'permission_group_id' => $group->id,
+            'name'                => $this->faker->word,
+            'description'         => $this->faker->sentence,
+            'type'                => 0,
+            'default'             => 0,
         ]);
-        $permission->save();
     }
 
     private function postParams()
     {
         return [
-            'name'                  => $this->faker->word,
-            'description'           => $this->faker->sentence,
-            '_method'               => 'POST',
+            'name'        => $this->faker->word,
+            'description' => $this->faker->sentence,
+            '_method'     => 'POST',
         ];
     }
 }
