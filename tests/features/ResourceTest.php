@@ -33,7 +33,7 @@ class ResourceTest extends TestHelper
         $group = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
         $params = $this->postParams($group);
 
-        $response = $this->post('/system/resourcePermissions', $params)
+        $this->post('/system/resourcePermissions', $params)
             ->assertRedirect('/system/permissions')
             ->assertSessionHas('flash_notification');
 
