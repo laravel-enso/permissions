@@ -24,8 +24,13 @@
             @foreach($permissions as $permission)
                 <div class="col-xs-6 col-sm-3">
                     <div class="form-group">
-                        <input type="checkbox" name="{{ $permission['name'] }}" checked>
                         <label>{{ $permission['name'] }}</label>
+                        <input id="{{ $permission['name'] }}"
+                            class="toggle form-control"
+                            checked
+                            name="{{ $permission['name'] }}"
+                            type="checkbox">
+                        <label for="{{ $permission['name'] }}"><i></i></label>
                     </div>
                 </div>
             @endforeach
