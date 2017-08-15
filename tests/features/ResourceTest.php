@@ -30,7 +30,7 @@ class ResourceTest extends TestHelper
     /** @test */
     public function store()
     {
-        $group  = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
+        $group = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
         $params = $this->postParams($group);
 
         $this->post('/system/resourcePermissions', $params)
