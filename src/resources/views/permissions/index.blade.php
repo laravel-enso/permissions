@@ -34,13 +34,10 @@
             el: '#app',
 
             methods: {
-                customRender: function(column, data, type, row, meta) {
+                customRender(column, data, type, row, meta) {
                     switch(column) {
                         case 'type':
                             return data == 'Read' || data == 'Citire' ? '<span class="label bg-green">' + data + '</span>'
-                                : '<span class="label bg-orange">' + data + '</span>';
-                        case 'default':
-                            return data == 'Yes' || data == 'Da' ? '<span class="label bg-green">' + data + '</span>'
                                 : '<span class="label bg-orange">' + data + '</span>';
                         default:
                             toastr.warning('render for column ' + column + ' is not defined.' );
