@@ -16,6 +16,8 @@ class Permission extends Model
 
     protected $attributes = ['default' => false];
 
+    protected $casts = ['type' => 'string', 'default' => 'boolean'];
+
     public function permissions_group()
     {
         return $this->belongsTo(PermissionGroup::class);

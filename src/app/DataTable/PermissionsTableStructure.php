@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\PermissionManager\app\DataTable;
 
-use LaravelEnso\Core\app\Enums\IsActiveEnum;
 use LaravelEnso\DataTable\app\Classes\TableStructure;
 use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
 
@@ -14,15 +13,14 @@ class PermissionsTableStructure extends TableStructure
             'tableName'     => __('Permissions'),
             'crtNo'         => __('#'),
             'actionButtons' => __('Actions'),
-            'render'        => [3, 5],
             'headerAlign'   => 'center',
             'bodyAlign'     => 'center',
+            'render'        => [2],
+            'boolean'       => [4],
             'enumMappings'  => [
-                'type'    => PermissionTypes::class,
-                'default' => IsActiveEnum::class,
+                'type' => PermissionTypes::class,
             ],
-            'render'          => [2, 4],
-            'columns'         => [
+            'columns'       => [
                 0 => [
                     'label' => __('Name'),
                     'data'  => 'name',

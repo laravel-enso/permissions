@@ -24,7 +24,7 @@ class PermissionService
             ->setAction('POST')
             ->setTitle('Create Permission')
             ->setUrl('/system/permissions')
-            ->setSelectOptions('type', (new PermissionTypes())->getData())
+            ->setSelectOptions('type', (object) (new PermissionTypes())->getData())
             ->setSelectOptions('permission_group_id', PermissionGroup::pluck('name', 'id'))
             ->setSelectOptions('roleList', Role::pluck('name', 'id'))
             ->getData();
@@ -53,7 +53,7 @@ class PermissionService
             ->setAction('PATCH')
             ->setTitle('Edit Permission')
             ->setUrl('/system/permissions/'.$permission->id)
-            ->setSelectOptions('type', (new PermissionTypes())->getData())
+            ->setSelectOptions('type', (object) (new PermissionTypes())->getData())
             ->setSelectOptions('permission_group_id', PermissionGroup::pluck('name', 'id'))
             ->setSelectOptions('roleList', Role::pluck('name', 'id'))
             ->getData();
