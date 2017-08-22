@@ -32,7 +32,8 @@
         "config": {
             "type": "select",
             "multiple": false,
-            "options": null
+            "options": null,
+            "keyMap": "string"
         }
     }, {
         "label": "Permission Group",

@@ -82,7 +82,10 @@ class PermissionService
 
         $permission->delete();
 
-        return ['message' => __(config('labels.successfulOperation'))];
+        return [
+            'message'  => __(config('labels.successfulOperation')),
+            'redirect' => '/system/permissions',
+        ];
     }
 
     private function attachRoles(Permission $permission)

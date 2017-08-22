@@ -65,7 +65,8 @@ class PermissionGroupService
         $permissionGroup->delete();
 
         return [
-            'message' => __(config('labels.successfulOperation')),
+            'message'  => __(config('labels.successfulOperation')),
+            'redirect' => '/system/permissionGroups',
         ];
     }
 }

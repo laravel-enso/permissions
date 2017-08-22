@@ -4,8 +4,7 @@
 
 @section('content')
 
-    <page :custom-render="customRender"
-        v-cloak>
+    <page v-cloak>
         <span slot="header">
             <a class="btn btn-primary" href="/system/permissions/create">
                 {{ __("Create Permission") }}
@@ -19,6 +18,7 @@
         </span>
         <div class="col-md-12">
             <data-table source="/system/permissions"
+                :custom-render="customRender"
                 id="permission-table">
             </data-table>
         </div>
