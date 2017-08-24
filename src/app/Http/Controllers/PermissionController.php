@@ -17,11 +17,6 @@ class PermissionController extends Controller
         $this->permissions = new PermissionService($request);
     }
 
-    public function getTableQuery()
-    {
-        return $this->permissions->getTableQuery();
-    }
-
     public function index()
     {
         return view('laravel-enso/permissionmanager::permissions.index');
