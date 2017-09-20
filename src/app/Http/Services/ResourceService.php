@@ -45,7 +45,7 @@ class ResourceService
         $permissions = collect();
 
         foreach ($this->getPermissionList() as $permission) {
-            if (!$this->request->has($permission['name'])) {
+            if (!$this->request->filled($permission['name'])) {
                 continue;
             }
 

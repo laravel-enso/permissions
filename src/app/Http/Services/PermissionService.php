@@ -65,7 +65,7 @@ class PermissionService
     {
         \DB::transaction(function () use ($permission) {
             $permission->update($this->request->all());
-            $roles = $this->request->has('roleList') ? $this->request->get('roleList') : [];
+            $roles = $this->request->filled('roleList') ? $this->request->get('roleList') : [];
             $permission->roles()->sync($roles);
         });
 
@@ -93,7 +93,7 @@ class PermissionService
         return $permission->default
             ? $permission->roles()->attach(Role::pluck('id'))
             : $permission->roles()->attach(
-                $this->request->has('roleList')
+                $this->request->filled('roleList')
                     ? $this->request->get('roleList')
                     : []
             );
