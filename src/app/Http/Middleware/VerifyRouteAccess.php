@@ -13,9 +13,7 @@ class VerifyRouteAccess
                 'The user having id [ '.$request->user()->id.' ] is not allowed on route [ '.$request->route()->getName().' ] '
                 );
 
-            throw new \EnsoException(
-                __(config('labels.notAuthorized')), 'error', [], 403
-            );
+            throw new \EnsoException(__(config('enso.labels.notAuthorized')), 403);
         }
 
         return $next($request);

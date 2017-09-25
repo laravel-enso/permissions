@@ -6,49 +6,35 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Classes\Traits\TestCreateForm;
+use LaravelEnso\TestHelper\app\Classes\Traits\TestDataTable;
 
 class PermissionGroupTest extends TestHelper
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, TestDataTable, TestCreateForm;
 
     private $faker;
+    private $prefix = 'system.permissionGroups';
 
     protected function setUp()
     {
         parent::setUp();
 
-        // $this->disableExceptionHandling();
+        $this->disableExceptionHandling();
         $this->faker = Factory::create();
         $this->signIn(User::first());
-    }
-
-    /** @test */
-    public function index()
-    {
-        $this->get('/system/permissionGroups')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/permissionmanager::permissionGroups.index');
-    }
-
-    /** @test */
-    public function create()
-    {
-        $this->get('/system/permissionGroups/create')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/permissionmanager::permissionGroups.create')
-            ->assertViewHas('form');
     }
 
     /** @test */
     public function store()
     {
         $postParams = $this->postParams();
-        $response = $this->post('/system/permissionGroups', $postParams);
+        $response = $this->post(route('system.permissionGroups.store', [], false), $postParams);
 
         $group = PermissionGroup::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
-            ->assertJsonFragment([
+            ->assertJson([
                 'message'  => 'The permission group was created!',
                 'redirect' => '/system/permissionGroups/'.$group->id.'/edit',
             ]);
@@ -59,10 +45,9 @@ class PermissionGroupTest extends TestHelper
     {
         $group = PermissionGroup::create($this->postParams());
 
-        $this->get('/system/permissionGroups/'.$group->id.'/edit')
+        $this->get(route('system.permissionGroups.edit', $group->id, false))
             ->assertStatus(200)
-            ->assertViewIs('laravel-enso/permissionmanager::permissionGroups.edit')
-            ->assertViewHas('form');
+            ->assertJsonStructure(['form']);
     }
 
     /** @test */
@@ -71,9 +56,9 @@ class PermissionGroupTest extends TestHelper
         $group = PermissionGroup::create($this->postParams());
         $group->description = 'edited';
 
-        $this->patch('/system/permissionGroups/'.$group->id, $group->toArray())
+        $this->patch(route('system.permissionGroups.update', $group->id, false), $group->toArray())
             ->assertStatus(200)
-            ->assertJson(['message' => __(config('labels.savedChanges'))]);
+            ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
 
         $this->assertEquals('edited', $group->fresh()->description);
     }
@@ -83,9 +68,9 @@ class PermissionGroupTest extends TestHelper
     {
         $group = PermissionGroup::create($this->postParams());
 
-        $this->delete('/system/permissionGroups/'.$group->id)
+        $this->delete(route('system.permissionGroups.destroy', $group->id, false))
             ->assertStatus(200)
-            ->assertJsonFragment(['message']);
+            ->assertJsonStructure(['message', 'redirect']);
 
         $this->assertNull($group->fresh());
     }
@@ -96,9 +81,10 @@ class PermissionGroupTest extends TestHelper
         $group = PermissionGroup::create($this->postParams());
         $this->addPermission($group);
 
-        $this->delete('/system/permissionGroups/'.$group->id)
-            ->assertStatus(302)
-            ->assertSessionHas('flash_notification');
+        $this->expectException(EnsoException::class);
+
+        $this->delete(route('system.permissionGroups.destroy', $group->id, false))
+            ->assertStatus(302);
 
         $this->assertNotNull($group->fresh());
     }

@@ -10,40 +10,35 @@ use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 
 class PermissionGroupController extends Controller
 {
-    private $groups;
+    private $service;
 
-    public function __construct(Request $request)
+    public function __construct(PermissionGroupService $service)
     {
-        $this->groups = new PermissionGroupService($request);
-    }
-
-    public function index()
-    {
-        return view('laravel-enso/permissionmanager::permissionGroups.index');
+        $this->service = $service;
     }
 
     public function create()
     {
-        return $this->groups->create();
+        return $this->service->create();
     }
 
     public function store(ValidatePermissionGroupRequest $request, PermissionGroup $permissionGroup)
     {
-        return $this->groups->store($permissionGroup);
+        return $this->service->store($request, $permissionGroup);
     }
 
     public function edit(PermissionGroup $permissionGroup)
     {
-        return $this->groups->edit($permissionGroup);
+        return $this->service->edit($permissionGroup);
     }
 
     public function update(ValidatePermissionGroupRequest $request, PermissionGroup $permissionGroup)
     {
-        return $this->groups->update($permissionGroup);
+        return $this->service->update($request, $permissionGroup);
     }
 
     public function destroy(PermissionGroup $permissionGroup)
     {
-        return $this->groups->destroy($permissionGroup);
+        return $this->service->destroy($permissionGroup);
     }
 }

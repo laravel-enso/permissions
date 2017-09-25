@@ -7,43 +7,30 @@ use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Classes\Traits\TestCreateForm;
+use LaravelEnso\TestHelper\app\Classes\Traits\TestDataTable;
 
 class PermissionTest extends TestHelper
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, TestDataTable, TestCreateForm;
 
     private $faker;
+    private $prefix = 'system.permissions';
 
     protected function setUp()
     {
         parent::setUp();
 
-        // $this->disableExceptionHandling();
+        $this->disableExceptionHandling();
         $this->faker = Factory::create();
         $this->signIn(User::first());
-    }
-
-    /** @test */
-    public function index()
-    {
-        $this->get('/system/permissions')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/permissionmanager::permissions.index');
-    }
-
-    /** @test */
-    public function create()
-    {
-        $this->get('/system/permissions/create')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/permissionmanager::permissions.create');
     }
 
     /** @test */
     public function store()
     {
         $postParams = $this->postParams();
-        $response = $this->post('/system/permissions', $postParams);
+        $response = $this->post(route('system.permissions.store', [], false), $postParams);
 
         $permission = Permission::whereName($postParams['name'])->first();
 
@@ -59,10 +46,9 @@ class PermissionTest extends TestHelper
     {
         $permission = Permission::create($this->postParams());
 
-        $this->get('/system/permissions/'.$permission->id.'/edit')
+        $this->get(route('system.permissions.edit', $permission->id, false))
             ->assertStatus(200)
-            ->assertViewIs('laravel-enso/permissionmanager::permissions.edit')
-            ->assertViewHas('form');
+            ->assertJsonStructure(['form']);
     }
 
     /** @test */
@@ -71,9 +57,9 @@ class PermissionTest extends TestHelper
         $permission = Permission::create($this->postParams());
         $permission->description = 'edited';
 
-        $this->patch('/system/permissions/'.$permission->id, $permission->toArray())
+        $this->patch(route('system.permissions.update', $permission->id, false), $permission->toArray())
             ->assertStatus(200)
-            ->assertJson(['message' => __(config('labels.savedChanges'))]);
+            ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
 
         $this->assertEquals('edited', $permission->fresh()->description);
     }
@@ -83,9 +69,9 @@ class PermissionTest extends TestHelper
     {
         $permission = Permission::create($this->postParams());
 
-        $this->delete('/system/permissions/'.$permission->id)
+        $this->delete(route('system.permissions.destroy', $permission->id, false))
             ->assertStatus(200)
-            ->assertJsonFragment(['message']);
+            ->assertJsonStructure(['message']);
 
         $this->assertNull($permission->fresh());
     }
@@ -97,9 +83,11 @@ class PermissionTest extends TestHelper
         $role = Role::first(['id']);
         $permission->roles()->attach($role->id);
 
-        $this->delete('/system/permissions/'.$permission->id)
+        $this->expectException(EnsoException::class);
+
+        $this->delete(route('system.permissions.destroy', $permission->id, false))
             ->assertStatus(302)
-            ->assertSessionHas('flash_notification');
+            ->assertJsonStructure(['message']);
 
         $this->assertNotNull($permission->fresh());
     }

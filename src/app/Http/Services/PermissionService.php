@@ -11,37 +11,31 @@ use LaravelEnso\RoleManager\app\Models\Role;
 
 class PermissionService
 {
-    private $request;
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
+    private const FormPath = __DIR__.'/../../Forms/permission.json';
 
     public function create()
     {
-        $form = (new FormBuilder(__DIR__.'/../../Forms/permission.json'))
-            ->setAction('POST')
+        $form = (new FormBuilder(self::FormPath))
+            ->setMethod('POST')
             ->setTitle('Create Permission')
-            ->setUrl('/system/permissions')
             ->setSelectOptions('type', (object) (new PermissionTypes())->getData())
             ->setSelectOptions('permission_group_id', PermissionGroup::pluck('name', 'id'))
             ->setSelectOptions('roleList', Role::pluck('name', 'id'))
             ->getData();
 
-        return view('laravel-enso/permissionmanager::permissions.create', compact('form'));
+        return compact('form');
     }
 
-    public function store(Permission $permission)
+    public function store(Request $request, Permission $permission)
     {
-        \DB::transaction(function () use (&$permission) {
-            $permission = $permission->create($this->request->all());
-            $this->attachRoles($permission);
+        \DB::transaction(function () use ($request, &$permission) {
+            $permission = $permission->create($request->all());
+            $this->attachRoles($request, $permission);
         });
 
         return [
             'message'  => __('The permission was created!'),
-            'redirect' => '/system/permissions/'.$permission->id.'/edit',
+            'redirect' => route('system.permissions.edit', $permission->id, false),
         ];
     }
 
@@ -49,28 +43,26 @@ class PermissionService
     {
         $permission->append(['roleList']);
 
-        $form = (new FormBuilder(__DIR__.'/../../Forms/permission.json', $permission))
-            ->setAction('PATCH')
+        $form = (new FormBuilder(self::FormPath, $permission))
+            ->setMethod('PATCH')
             ->setTitle('Edit Permission')
-            ->setUrl('/system/permissions/'.$permission->id)
             ->setSelectOptions('type', (object) (new PermissionTypes())->getData())
             ->setSelectOptions('permission_group_id', PermissionGroup::pluck('name', 'id'))
             ->setSelectOptions('roleList', Role::pluck('name', 'id'))
             ->getData();
 
-        return view('laravel-enso/permissionmanager::permissions.edit', compact('form'));
+        return compact('form');
     }
 
-    public function update(Permission $permission)
+    public function update(Request $request, Permission $permission)
     {
-        \DB::transaction(function () use ($permission) {
-            $permission->update($this->request->all());
-            $roles = $this->request->has('roleList') ? $this->request->get('roleList') : [];
-            $permission->roles()->sync($roles);
+        \DB::transaction(function () use ($request, $permission) {
+            $permission->update($request->all());
+            $permission->roles()->sync($request->get('roleList'));
         });
 
         return [
-            'message' => __(config('labels.savedChanges')),
+            'message' => __(config('enso.labels.savedChanges')),
         ];
     }
 
@@ -83,19 +75,15 @@ class PermissionService
         $permission->delete();
 
         return [
-            'message'  => __(config('labels.successfulOperation')),
-            'redirect' => '/system/permissions',
+            'message'  => __(config('enso.labels.successfulOperation')),
+            'redirect' => route('system.permissions.index', [], false),
         ];
     }
 
-    private function attachRoles(Permission $permission)
+    private function attachRoles(Request $request, Permission $permission)
     {
-        return $permission->default
+        $permission->default
             ? $permission->roles()->attach(Role::pluck('id'))
-            : $permission->roles()->attach(
-                $this->request->has('roleList')
-                    ? $this->request->get('roleList')
-                    : []
-            );
+            : $permission->roles()->attach($request->get('roleList'));
     }
 }

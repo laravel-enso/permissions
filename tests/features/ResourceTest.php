@@ -6,10 +6,13 @@ use LaravelEnso\PermissionManager\app\Enums\ResourcePermissions;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Classes\Traits\TestCreateForm;
 
 class ResourceTest extends TestHelper
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, TestCreateForm;
+
+    private $prefix = 'system.resourcePermissions';
 
     protected function setUp()
     {
@@ -20,22 +23,13 @@ class ResourceTest extends TestHelper
     }
 
     /** @test */
-    public function create()
-    {
-        $this->get('/system/resourcePermissions/create')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/permissionmanager::permissions.createResource');
-    }
-
-    /** @test */
     public function store()
     {
         $group = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
         $params = $this->postParams($group);
 
-        $this->post('/system/resourcePermissions', $params)
-            ->assertRedirect('/system/permissions')
-            ->assertSessionHas('flash_notification');
+        $this->post(route('system.resourcePermissions.store', [], false), $params)
+            ->assertJson(['redirect' => route('system.permissions.index', [], false)]);
 
         $permissions = Permission::wherePermissionGroupId($group->id)->get(['name']);
 
@@ -68,17 +62,17 @@ class ResourceTest extends TestHelper
         return [
             'prefix'              => 'testPrefix',
             'permission_group_id' => $group->id,
-            'index'               => 'on',
-            'create'              => 'on',
-            'store'               => 'on',
-            'show'                => 'on',
-            'edit'                => 'on',
-            'update'              => 'on',
-            'destroy'             => 'on',
-            'initTable'           => 'on',
-            'getTableData'        => 'on',
-            'exportExcel'         => 'on',
-            'getOptionList'       => 'on',
+            'index'               => true,
+            'create'              => true,
+            'store'               => true,
+            'show'                => true,
+            'edit'                => true,
+            'update'              => true,
+            'destroy'             => true,
+            'initTable'           => true,
+            'getTableData'        => true,
+            'exportExcel'         => true,
+            'getOptionList'       => true,
         ];
     }
 }

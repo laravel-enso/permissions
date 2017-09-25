@@ -9,9 +9,12 @@ class PermissionGroupsTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
-            'tableName'     => __('Permissions Groups'),
+            'name'          => __('Permissions Groups'),
+            'icon'          => 'fa fa-object-group',
             'crtNo'         => __('#'),
-            'actionButtons' => __('Actions'),
+            'actions'       => __('Actions'),
+            'actionButtons' => ['edit', 'destroy'],
+            'headerButtons' => ['create', 'exportExcel'],
             'headerAlign'   => 'center',
             'bodyAlign'     => 'center',
             'columns'       => [

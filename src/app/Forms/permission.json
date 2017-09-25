@@ -1,19 +1,14 @@
 {
     "title": null,
-    "action": null,
-    "url": null,
+    "method": null,
     "icon": "fa fa-exclamation-triangle",
-    "wrapperClass": "col-md-6",
-    "theme": "success",
-    "solid": false,
-    "submitStore": "Create",
-    "submitUpdate": "Save",
-    "submitDelete": "Delete",
-    "attributes": [{
+    "columns": "1",
+    "prefix": "system.permissions",
+    "fields": [{
         "label": "Name",
         "column": "name",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -21,7 +16,7 @@
         "label": "Description",
         "column": "description",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -29,7 +24,7 @@
         "label": "Type",
         "column": "type",
         "value": null,
-        "config": {
+        "meta": {
             "type": "select",
             "multiple": false,
             "options": null,
@@ -39,7 +34,7 @@
         "label": "Permission Group",
         "column": "permission_group_id",
         "value": null,
-        "config": {
+        "meta": {
             "type": "select",
             "multiple": false,
             "options": null
@@ -48,7 +43,7 @@
         "label": "Roles",
         "column": "roleList",
         "value": null,
-        "config": {
+        "meta": {
             "type": "select",
             "multiple": true,
             "options": null
@@ -57,7 +52,7 @@
         "label": "Default",
         "column": "default",
         "value": false,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "checkbox"
         }

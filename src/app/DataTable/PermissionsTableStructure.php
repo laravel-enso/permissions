@@ -10,9 +10,12 @@ class PermissionsTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
-            'tableName'     => __('Permissions'),
+            'name'          => __('Permissions'),
+            'icon'          => 'fa fa-exclamation-triangle',
             'crtNo'         => __('#'),
-            'actionButtons' => __('Actions'),
+            'actions'       => __('Actions'),
+            'actionButtons' => ['edit', 'destroy'],
+            'headerButtons' => ['create', 'exportExcel'],
             'headerAlign'   => 'center',
             'bodyAlign'     => 'center',
             'render'        => [2],
@@ -34,11 +37,11 @@ class PermissionsTableStructure extends TableStructure
                 2 => [
                     'label' => __('Type'),
                     'data'  => 'type',
-                    'name'  => 'type',
+                    'name'  => 'permissions.type',
                 ],
                 3 => [
                     'label' => __('Group'),
-                    'data'  => 'grup',
+                    'data'  => 'groupName',
                     'name'  => 'permission_groups.name',
                 ],
                 4 => [

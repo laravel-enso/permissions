@@ -18,7 +18,7 @@ class Permission extends Model
 
     protected $casts = ['type' => 'string', 'default' => 'boolean'];
 
-    public function permissions_group()
+    public function permission_group()
     {
         return $this->belongsTo(PermissionGroup::class);
     }
@@ -36,6 +36,16 @@ class Permission extends Model
     public function tutorials()
     {
         return $this->hasMany(Tutorial::class);
+    }
+
+    public function isPage()
+    {
+        return $this->type === 2;
+    }
+
+    public function scopeIsPage($query)
+    {
+        return $query->whereType(2);
     }
 
     public function scopeImplicit($query)

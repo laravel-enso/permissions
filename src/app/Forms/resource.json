@@ -1,0 +1,114 @@
+{
+    "title": "Create Resource",
+    "method": "POST",
+    "icon": "fa fa-exclamation-triangle",
+    "columns": "2",
+    "prefix": "system.resourcePermissions",
+    "fields": [{
+        "label": "Resource Prefix",
+        "column": "prefix",
+        "value": null,
+        "meta": {
+            "type": "input",
+            "content": "text"
+        }
+    }, {
+        "label": "Permission Group",
+        "column": "permission_group_id",
+        "value": null,
+        "meta": {
+            "type": "select",
+            "multiple": false,
+            "options": null,
+            "keyMap": "string"
+        }
+    }, {
+        "label": "index",
+        "column": "index",
+        "value": true,
+        "meta": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }, {
+        "label": "create",
+        "column": "create",
+        "value": true,
+        "meta": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }, {
+        "label": "store",
+        "column": "store",
+        "value": true,
+        "meta": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }, {
+        "label": "show",
+        "column": "show",
+        "value": true,
+        "meta": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }, {
+        "label": "edit",
+        "column": "edit",
+        "value": true,
+        "meta": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }, {
+        "label": "update",
+        "column": "update",
+        "value": true,
+        "meta": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }, {
+        "label": "destroy",
+        "column": "destroy",
+        "value": true,
+        "meta": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }, {
+        "label": "initTable",
+        "column": "initTable",
+        "value": true,
+        "meta": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }, {
+        "label": "getTableData",
+        "column": "getTableData",
+        "value": true,
+        "meta": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }, {
+        "label": "exportExcel",
+        "column": "exportExcel",
+        "value": true,
+        "meta": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }, {
+        "label": "getOptionList",
+        "column": "getOptionList",
+        "value": true,
+        "meta": {
+            "type": "input",
+            "content": "checkbox"
+        }
+    }]
+}

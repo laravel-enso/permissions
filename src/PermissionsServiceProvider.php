@@ -13,6 +13,7 @@ class PermissionsServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel-enso/permissionmanager');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->mergeConfigFrom(__DIR__.'/config/resource-permissions.php', 'resource-permissions');
     }
 
     public function register()

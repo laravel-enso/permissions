@@ -10,40 +10,35 @@ use LaravelEnso\PermissionManager\app\Models\Permission;
 
 class PermissionController extends Controller
 {
-    private $permissions;
+    private $service;
 
-    public function __construct(Request $request)
+    public function __construct(PermissionService $service)
     {
-        $this->permissions = new PermissionService($request);
-    }
-
-    public function index()
-    {
-        return view('laravel-enso/permissionmanager::permissions.index');
+        $this->service = $service;
     }
 
     public function create()
     {
-        return $this->permissions->create();
+        return $this->service->create();
     }
 
     public function store(ValidatePermissionRequest $request, Permission $permission)
     {
-        return $this->permissions->store($permission);
+        return $this->service->store($request, $permission);
     }
 
     public function edit(Permission $permission)
     {
-        return $this->permissions->edit($permission);
+        return $this->service->edit($permission);
     }
 
     public function update(ValidatePermissionRequest $request, Permission $permission)
     {
-        return $this->permissions->update($permission);
+        return $this->service->update($request, $permission);
     }
 
     public function destroy(Permission $permission)
     {
-        return $this->permissions->destroy($permission);
+        return $this->service->destroy($permission);
     }
 }
