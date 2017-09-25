@@ -29,8 +29,8 @@ class ResourceService
                 $permission = Permission::create($permission);
                 $permission->roles()->attach(self::AdminRoleId);
             });
-        })
-;
+        });
+
         return [
             'message'  => __('The permissions were created!'),
             'redirect' => route('system.permissions.index', [], false),

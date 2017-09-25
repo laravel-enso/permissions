@@ -3,7 +3,6 @@
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionGroupRequest;
 use LaravelEnso\PermissionManager\app\Http\Services\PermissionGroupService;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;

@@ -3,7 +3,6 @@
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionRequest;
 use LaravelEnso\PermissionManager\app\Http\Services\PermissionService;
 use LaravelEnso\PermissionManager\app\Models\Permission;
