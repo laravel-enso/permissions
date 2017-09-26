@@ -6,7 +6,7 @@ use LaravelEnso\PermissionManager\app\Enums\ResourcePermissions;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
-use LaravelEnso\TestHelper\app\Classes\Traits\TestCreateForm;
+use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
 
 class ResourceTest extends TestHelper
 {

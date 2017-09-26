@@ -11,9 +11,16 @@ class PermissionsServiceProvider extends ServiceProvider
     {
         $this->app['router']->aliasMiddleware('verify-route-access', VerifyRouteAccess::class);
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel-enso/permissionmanager');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->mergeConfigFrom(__DIR__.'/config/resource-permissions.php', 'resource-permissions');
+
+        $this->publishes([
+            __DIR__.'/resources/assets/js' => resource_path('assets/js'),
+        ], 'permissions-assets');
+
+        $this->publishes([
+            __DIR__.'/resources/assets/js' => resource_path('assets/js'),
+        ], 'enso-assets');
     }
 
     public function register()

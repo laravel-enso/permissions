@@ -39,7 +39,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "LaravelEnso\\PermissionsServiceProvider"
+                "LaravelEnso\\PermissionManager\\PermissionsServiceProvider",
+                "LaravelEnso\\PermissionManager\\AuthServiceProvider"
             ],
             "aliases": {}
         }

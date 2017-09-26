@@ -7,8 +7,8 @@ use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
-use LaravelEnso\TestHelper\app\Classes\Traits\TestCreateForm;
-use LaravelEnso\TestHelper\app\Classes\Traits\TestDataTable;
+use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
+use LaravelEnso\TestHelper\app\Traits\TestDataTable;
 
 class PermissionTest extends TestHelper
 {

@@ -6,8 +6,8 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
-use LaravelEnso\TestHelper\app\Classes\Traits\TestCreateForm;
-use LaravelEnso\TestHelper\app\Classes\Traits\TestDataTable;
+use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
+use LaravelEnso\TestHelper\app\Traits\TestDataTable;
 
 class PermissionGroupTest extends TestHelper
 {
