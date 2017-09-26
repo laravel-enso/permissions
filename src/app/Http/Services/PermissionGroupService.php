@@ -59,7 +59,7 @@ class PermissionGroupService
 
         return [
             'message'  => __(config('enso.labels.successfulOperation')),
-            'redirect' => route('system.permissionGroups.index', [], false)
+            'redirect' => route('system.permissionGroups.index', [], false),
         ];
     }
 }
