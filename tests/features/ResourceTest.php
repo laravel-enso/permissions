@@ -26,7 +26,7 @@ class ResourceTest extends TestCase
     /** @test */
     public function store()
     {
-        $group  = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
+        $group = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
         $params = $this->postParams($group);
 
         $this->post(route('system.resourcePermissions.store', [], false), $params)

@@ -2,14 +2,12 @@
 
 use App\User;
 use Faker\Factory;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
 use LaravelEnso\TestHelper\app\Traits\TestDataTable;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use Tests\TestCase;
 
 class PermissionGroupTest extends TestCase
@@ -32,14 +30,14 @@ class PermissionGroupTest extends TestCase
     public function store()
     {
         $postParams = $this->postParams();
-        $response   = $this->post(route('system.permissionGroups.store', [], false), $postParams);
+        $response = $this->post(route('system.permissionGroups.store', [], false), $postParams);
 
         $group = PermissionGroup::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJson([
                 'message'  => 'The permission group was created!',
-                'redirect' => '/system/permissionGroups/' . $group->id . '/edit',
+                'redirect' => '/system/permissionGroups/'.$group->id.'/edit',
             ]);
     }
 
@@ -56,7 +54,7 @@ class PermissionGroupTest extends TestCase
     /** @test */
     public function update()
     {
-        $group              = PermissionGroup::create($this->postParams());
+        $group = PermissionGroup::create($this->postParams());
         $group->description = 'edited';
 
         $this->patch(route('system.permissionGroups.update', $group->id, false), $group->toArray())
