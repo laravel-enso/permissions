@@ -1,16 +1,17 @@
 <?php
 
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\PermissionManager\app\Enums\ResourcePermissions;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
-use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
+use Tests\TestCase;
 
-class ResourceTest extends TestHelper
+class ResourceTest extends TestCase
 {
-    use DatabaseMigrations, TestCreateForm;
+    use RefreshDatabase, SignIn, TestCreateForm;
 
     private $prefix = 'system.resourcePermissions';
 
@@ -18,14 +19,14 @@ class ResourceTest extends TestHelper
     {
         parent::setUp();
 
-        // $this->disableExceptionHandling();
+        // $this->withoutExceptionHandling();
         $this->signIn(User::first());
     }
 
     /** @test */
     public function store()
     {
-        $group = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
+        $group  = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
         $params = $this->postParams($group);
 
         $this->post(route('system.resourcePermissions.store', [], false), $params)
@@ -39,7 +40,7 @@ class ResourceTest extends TestHelper
 
     private function getPermissionCount()
     {
-        $resourcePermissions = (new ResourcePermissions())->getData();
+        $resourcePermissions = (new ResourcePermissions())->values();
 
         $count = 0;
 

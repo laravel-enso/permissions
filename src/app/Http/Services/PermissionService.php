@@ -8,6 +8,7 @@ use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\RoleManager\app\Models\Role;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class PermissionService
 {
@@ -69,7 +70,7 @@ class PermissionService
     public function destroy(Permission $permission)
     {
         if ($permission->roles->count()) {
-            throw new \EnsoException(__('Operation failed because the permission is allocated to existing role(s)'));
+            throw new ConflictHttpException(__('Operation failed because the permission is allocated to existing role(s)'));
         }
 
         $permission->delete();

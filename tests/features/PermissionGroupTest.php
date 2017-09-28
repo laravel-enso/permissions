@@ -3,15 +3,18 @@
 use App\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
-use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
 use LaravelEnso\TestHelper\app\Traits\TestDataTable;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+use Tests\TestCase;
 
-class PermissionGroupTest extends TestHelper
+class PermissionGroupTest extends TestCase
 {
-    use DatabaseMigrations, TestDataTable, TestCreateForm;
+    use RefreshDatabase, SignIn, TestDataTable, TestCreateForm;
 
     private $faker;
     private $prefix = 'system.permissionGroups';
@@ -20,7 +23,7 @@ class PermissionGroupTest extends TestHelper
     {
         parent::setUp();
 
-        $this->disableExceptionHandling();
+        // $this->withoutExceptionHandling();
         $this->faker = Factory::create();
         $this->signIn(User::first());
     }
@@ -29,14 +32,14 @@ class PermissionGroupTest extends TestHelper
     public function store()
     {
         $postParams = $this->postParams();
-        $response = $this->post(route('system.permissionGroups.store', [], false), $postParams);
+        $response   = $this->post(route('system.permissionGroups.store', [], false), $postParams);
 
         $group = PermissionGroup::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJson([
                 'message'  => 'The permission group was created!',
-                'redirect' => '/system/permissionGroups/'.$group->id.'/edit',
+                'redirect' => '/system/permissionGroups/' . $group->id . '/edit',
             ]);
     }
 
@@ -53,7 +56,7 @@ class PermissionGroupTest extends TestHelper
     /** @test */
     public function update()
     {
-        $group = PermissionGroup::create($this->postParams());
+        $group              = PermissionGroup::create($this->postParams());
         $group->description = 'edited';
 
         $this->patch(route('system.permissionGroups.update', $group->id, false), $group->toArray())
@@ -81,10 +84,8 @@ class PermissionGroupTest extends TestHelper
         $group = PermissionGroup::create($this->postParams());
         $this->addPermission($group);
 
-        $this->expectException(EnsoException::class);
-
         $this->delete(route('system.permissionGroups.destroy', $group->id, false))
-            ->assertStatus(302);
+            ->assertStatus(409);
 
         $this->assertNotNull($group->fresh());
     }

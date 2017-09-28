@@ -3,6 +3,7 @@
 namespace LaravelEnso\PermissionManager\app\Http\Middleware;
 
 use Closure;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class VerifyRouteAccess
 {
@@ -13,7 +14,7 @@ class VerifyRouteAccess
                 'The user having id [ '.$request->user()->id.' ] is not allowed on route [ '.$request->route()->getName().' ] '
                 );
 
-            throw new \EnsoException(__(config('enso.labels.notAuthorized')), 403);
+            throw new AuthorizationException(__(config('enso.labels.notAuthorized')));
         }
 
         return $next($request);

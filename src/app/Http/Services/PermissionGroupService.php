@@ -5,6 +5,7 @@ namespace LaravelEnso\PermissionManager\app\Http\Services;
 use Illuminate\Http\Request;
 use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class PermissionGroupService
 {
@@ -52,7 +53,7 @@ class PermissionGroupService
     public function destroy(PermissionGroup $permissionGroup)
     {
         if ($permissionGroup->permissions->count()) {
-            throw new \EnsoException(__('The permission group cannot be deleted because it has child permissions'));
+            throw new ConflictHttpException(__('The permission group cannot be deleted because it has child permissions'));
         }
 
         $permissionGroup->delete();

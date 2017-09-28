@@ -2,17 +2,18 @@
 
 use App\User;
 use Faker\Factory;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
 use LaravelEnso\TestHelper\app\Traits\TestDataTable;
+use Tests\TestCase;
 
-class PermissionTest extends TestHelper
+class PermissionTest extends TestCase
 {
-    use DatabaseMigrations, TestDataTable, TestCreateForm;
+    use RefreshDatabase, SignIn, TestDataTable, TestCreateForm;
 
     private $faker;
     private $prefix = 'system.permissions';
@@ -21,7 +22,7 @@ class PermissionTest extends TestHelper
     {
         parent::setUp();
 
-        $this->disableExceptionHandling();
+        // $this->withoutExceptionHandling();
         $this->faker = Factory::create();
         $this->signIn(User::first());
     }
@@ -30,14 +31,14 @@ class PermissionTest extends TestHelper
     public function store()
     {
         $postParams = $this->postParams();
-        $response = $this->post(route('system.permissions.store', [], false), $postParams);
+        $response   = $this->post(route('system.permissions.store', [], false), $postParams);
 
         $permission = Permission::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'message'  => 'The permission was created!',
-                'redirect' => '/system/permissions/'.$permission->id.'/edit',
+                'redirect' => '/system/permissions/' . $permission->id . '/edit',
             ]);
     }
 
@@ -54,7 +55,7 @@ class PermissionTest extends TestHelper
     /** @test */
     public function update()
     {
-        $permission = Permission::create($this->postParams());
+        $permission              = Permission::create($this->postParams());
         $permission->description = 'edited';
 
         $this->patch(route('system.permissions.update', $permission->id, false), $permission->toArray())
@@ -80,14 +81,11 @@ class PermissionTest extends TestHelper
     public function cant_destroy_if_has_roles()
     {
         $permission = Permission::create($this->postParams());
-        $role = Role::first(['id']);
+        $role       = Role::first(['id']);
         $permission->roles()->attach($role->id);
 
-        $this->expectException(EnsoException::class);
-
         $this->delete(route('system.permissions.destroy', $permission->id, false))
-            ->assertStatus(302)
-            ->assertJsonStructure(['message']);
+            ->assertStatus(409);
 
         $this->assertNotNull($permission->fresh());
     }
