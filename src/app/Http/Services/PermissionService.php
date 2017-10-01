@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class PermissionService
 {
-    private const FormPath = __DIR__.'/../../Forms/permission.json';
+    const FormPath = __DIR__ . '/../../Forms/permission.json';
 
     public function create()
     {
@@ -36,7 +36,8 @@ class PermissionService
 
         return [
             'message'  => __('The permission was created!'),
-            'redirect' => route('system.permissions.edit', $permission->id, false),
+            'redirect' => 'system.permissions.edit',
+            'id'       => $permission->id,
         ];
     }
 
@@ -77,14 +78,14 @@ class PermissionService
 
         return [
             'message'  => __(config('enso.labels.successfulOperation')),
-            'redirect' => route('system.permissions.index', [], false),
+            'redirect' => 'system.permissions.index',
         ];
     }
 
     private function attachRoles(Request $request, Permission $permission)
     {
         $permission->default
-            ? $permission->roles()->attach(Role::pluck('id'))
-            : $permission->roles()->attach($request->get('roleList'));
+        ? $permission->roles()->attach(Role::pluck('id'))
+        : $permission->roles()->attach($request->get('roleList'));
     }
 }

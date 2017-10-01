@@ -10,8 +10,9 @@ use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 
 class ResourceService
 {
-    private const AdminRoleId = 1;
-    private const FormPath = __DIR__.'/../../Forms/resource.json';
+    const AdminRoleId = 1;
+
+    const FormPath = __DIR__ . '/../../Forms/resource.json';
 
     public function create()
     {
@@ -33,7 +34,7 @@ class ResourceService
 
         return [
             'message'  => __('The permissions were created!'),
-            'redirect' => route('system.permissions.index', [], false),
+            'redirect' => 'system.permissions.index',
         ];
     }
 
@@ -46,8 +47,8 @@ class ResourceService
                 continue;
             }
 
-            $permission['name'] = $request->get('prefix').'.'.$permission['name'];
-            $permission['description'] = $permission['description'].ucfirst($request->get('prefix'));
+            $permission['name']                = $request->get('prefix') . '.' . $permission['name'];
+            $permission['description']         = $permission['description'] . ucfirst($request->get('prefix'));
             $permission['permission_group_id'] = $request->get('permission_group_id');
             $permissions->push($permission);
         }
@@ -57,7 +58,7 @@ class ResourceService
 
     private function getPermissionList()
     {
-        $resource = (new ResourcePermissions());
+        $resource    = (new ResourcePermissions());
         $permissions = $resource->get('resource');
         $permissions = array_merge($permissions, $resource->get('dataTables'));
         $permissions = array_merge($permissions, $resource->get('vueSelect'));

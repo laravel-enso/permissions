@@ -30,14 +30,15 @@ class PermissionGroupTest extends TestCase
     public function store()
     {
         $postParams = $this->postParams();
-        $response = $this->post(route('system.permissionGroups.store', [], false), $postParams);
+        $response   = $this->post(route('system.permissionGroups.store', [], false), $postParams);
 
         $group = PermissionGroup::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJson([
                 'message'  => 'The permission group was created!',
-                'redirect' => '/system/permissionGroups/'.$group->id.'/edit',
+                'redirect' => 'system.permissionGroups.edit',
+                'id'       => $group->id,
             ]);
     }
 
@@ -54,7 +55,7 @@ class PermissionGroupTest extends TestCase
     /** @test */
     public function update()
     {
-        $group = PermissionGroup::create($this->postParams());
+        $group              = PermissionGroup::create($this->postParams());
         $group->description = 'edited';
 
         $this->patch(route('system.permissionGroups.update', $group->id, false), $group->toArray())

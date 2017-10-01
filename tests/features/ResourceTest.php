@@ -30,7 +30,7 @@ class ResourceTest extends TestCase
         $params = $this->postParams($group);
 
         $this->post(route('system.resourcePermissions.store', [], false), $params)
-            ->assertJson(['redirect' => route('system.permissions.index', [], false)]);
+            ->assertJson(['redirect' => 'system.permissions.index']);
 
         $permissions = Permission::wherePermissionGroupId($group->id)->get(['name']);
 
