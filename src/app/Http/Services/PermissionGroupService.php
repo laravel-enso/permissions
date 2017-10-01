@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class PermissionGroupService
 {
-    const FormPath = __DIR__ . '/../../Forms/group.json';
+    const FormPath = __DIR__.'/../../Forms/group.json';
 
     public function create()
     {
@@ -61,7 +61,7 @@ class PermissionGroupService
 
         return [
             'message'  => __(config('enso.labels.successfulOperation')),
-            'redirect' => 'system.permissionGroups.index'
+            'redirect' => 'system.permissionGroups.index',
         ];
     }
 }

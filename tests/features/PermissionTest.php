@@ -31,7 +31,7 @@ class PermissionTest extends TestCase
     public function store()
     {
         $postParams = $this->postParams();
-        $response   = $this->post(route('system.permissions.store', [], false), $postParams);
+        $response = $this->post(route('system.permissions.store', [], false), $postParams);
 
         $permission = Permission::whereName($postParams['name'])->first();
 
@@ -56,7 +56,7 @@ class PermissionTest extends TestCase
     /** @test */
     public function update()
     {
-        $permission              = Permission::create($this->postParams());
+        $permission = Permission::create($this->postParams());
         $permission->description = 'edited';
 
         $this->patch(route('system.permissions.update', $permission->id, false), $permission->toArray())
@@ -82,7 +82,7 @@ class PermissionTest extends TestCase
     public function cant_destroy_if_has_roles()
     {
         $permission = Permission::create($this->postParams());
-        $role       = Role::first(['id']);
+        $role = Role::first(['id']);
         $permission->roles()->attach($role->id);
 
         $this->delete(route('system.permissions.destroy', $permission->id, false))

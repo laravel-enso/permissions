@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class PermissionService
 {
-    const FormPath = __DIR__ . '/../../Forms/permission.json';
+    const FormPath = __DIR__.'/../../Forms/permission.json';
 
     public function create()
     {
