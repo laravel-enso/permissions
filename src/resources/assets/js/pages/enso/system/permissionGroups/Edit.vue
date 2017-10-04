@@ -31,8 +31,6 @@
 			axios.get(route(this.$route.name, this.$route.params.id, false)).then(response => {
 				this.form = response.data.form;
 				this.initialised = true;
-			}).catch(error => {
-				this.handleError(error);
 			});
 		}
 	};

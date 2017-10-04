@@ -25,8 +25,6 @@
 			axios.get(route('system.resourcePermissions.create', null, false)).then(response => {
 				this.form = response.data.form;
 				this.initialised = true;
-			}).catch(error => {
-				this.handleError(error);
 			});
 		}
 	};
