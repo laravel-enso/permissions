@@ -1,41 +1,38 @@
 <?php
 
-Route::middleware(['auth:api', 'api', 'core'])
-    ->prefix('api')
+Route::middleware(['web', 'auth', 'core'])
+    ->prefix('api/system')->as('system.')
     ->namespace('LaravelEnso\PermissionManager\app\Http\Controllers')
     ->group(function () {
-        Route::prefix('system')->as('system.')
+        Route::prefix('permissionGroups')->as('permissionGroups.')
             ->group(function () {
-                Route::prefix('permissionGroups')->as('permissionGroups.')
-                    ->group(function () {
-                        Route::get('initTable', 'PermissionGroupTableController@initTable')
-                            ->name('initTable');
-                        Route::get('getTableData', 'PermissionGroupTableController@getTableData')
-                            ->name('getTableData');
-                        Route::get('exportExcel', 'PermissionGroupTableController@exportExcel')
-                            ->name('exportExcel');
-                    });
+                Route::get('initTable', 'PermissionGroupTableController@initTable')
+                    ->name('initTable');
+                Route::get('getTableData', 'PermissionGroupTableController@getTableData')
+                    ->name('getTableData');
+                Route::get('exportExcel', 'PermissionGroupTableController@exportExcel')
+                    ->name('exportExcel');
+            });
 
-                Route::resource('permissionGroups', 'PermissionGroupController', ['except' => ['show']]);
+        Route::resource('permissionGroups', 'PermissionGroupController', ['except' => ['show']]);
 
-                Route::prefix('permissions')->as('permissions.')
-                    ->group(function () {
-                        Route::get('initTable', 'PermissionTableController@initTable')
-                            ->name('initTable');
-                        Route::get('getTableData', 'PermissionTableController@getTableData')
-                            ->name('getTableData');
-                        Route::get('exportExcel', 'PermissionTableController@exportExcel')
-                            ->name('exportExcel');
-                    });
+        Route::prefix('permissions')->as('permissions.')
+            ->group(function () {
+                Route::get('initTable', 'PermissionTableController@initTable')
+                    ->name('initTable');
+                Route::get('getTableData', 'PermissionTableController@getTableData')
+                    ->name('getTableData');
+                Route::get('exportExcel', 'PermissionTableController@exportExcel')
+                    ->name('exportExcel');
+            });
 
-                Route::resource('permissions', 'PermissionController', ['except' => ['show']]);
+        Route::resource('permissions', 'PermissionController', ['except' => ['show']]);
 
-                Route::prefix('resourcePermissions')->as('resourcePermissions.')
-                    ->group(function () {
-                        Route::get('create', 'ResourceController@create')
-                            ->name('create');
-                        Route::post('', 'ResourceController@store')
-                            ->name('store');
-                    });
+        Route::prefix('resourcePermissions')->as('resourcePermissions.')
+            ->group(function () {
+                Route::get('create', 'ResourceController@create')
+                    ->name('create');
+                Route::post('', 'ResourceController@store')
+                    ->name('store');
             });
     });

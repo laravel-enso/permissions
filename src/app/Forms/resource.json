@@ -23,7 +23,7 @@
             "keyMap": "string"
         }
     }, {
-        "label": "index",
+        "label": ".index",
         "column": "index",
         "value": true,
         "meta": {
@@ -31,7 +31,7 @@
             "content": "checkbox"
         }
     }, {
-        "label": "create",
+        "label": ".create",
         "column": "create",
         "value": true,
         "meta": {
@@ -39,7 +39,7 @@
             "content": "checkbox"
         }
     }, {
-        "label": "store",
+        "label": ".store",
         "column": "store",
         "value": true,
         "meta": {
@@ -47,7 +47,7 @@
             "content": "checkbox"
         }
     }, {
-        "label": "show",
+        "label": ".show",
         "column": "show",
         "value": true,
         "meta": {
@@ -55,7 +55,7 @@
             "content": "checkbox"
         }
     }, {
-        "label": "edit",
+        "label": ".edit",
         "column": "edit",
         "value": true,
         "meta": {
@@ -63,7 +63,7 @@
             "content": "checkbox"
         }
     }, {
-        "label": "update",
+        "label": ".update",
         "column": "update",
         "value": true,
         "meta": {
@@ -71,7 +71,7 @@
             "content": "checkbox"
         }
     }, {
-        "label": "destroy",
+        "label": ".destroy",
         "column": "destroy",
         "value": true,
         "meta": {
@@ -79,7 +79,7 @@
             "content": "checkbox"
         }
     }, {
-        "label": "initTable",
+        "label": ".initTable",
         "column": "initTable",
         "value": true,
         "meta": {
@@ -87,7 +87,7 @@
             "content": "checkbox"
         }
     }, {
-        "label": "getTableData",
+        "label": ".getTableData",
         "column": "getTableData",
         "value": true,
         "meta": {
@@ -95,7 +95,7 @@
             "content": "checkbox"
         }
     }, {
-        "label": "exportExcel",
+        "label": ".exportExcel",
         "column": "exportExcel",
         "value": true,
         "meta": {
@@ -103,7 +103,7 @@
             "content": "checkbox"
         }
     }, {
-        "label": "getOptionList",
+        "label": ".getOptionList",
         "column": "getOptionList",
         "value": true,
         "meta": {
