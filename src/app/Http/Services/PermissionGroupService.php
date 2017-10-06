@@ -59,7 +59,7 @@ class PermissionGroupService
     public function destroy(PermissionGroup $permissionGroup)
     {
         if ($permissionGroup->permissions->count()) {
-            throw new \EnsoException(__('The permission group cannot be deleted because it has child permissions'), 'warning');
+            throw new \EnsoException(__('The permission group cannot be deleted because it has child permissions'));
         }
 
         $permissionGroup->delete();
