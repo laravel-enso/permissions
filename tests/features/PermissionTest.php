@@ -98,8 +98,7 @@ class PermissionTest extends TestHelper
         $permission->roles()->attach($role->id);
 
         $this->delete('/system/permissions/'.$permission->id)
-            ->assertStatus(302)
-            ->assertSessionHas('flash_notification');
+            ->assertStatus(455);
 
         $this->assertNotNull($permission->fresh());
     }

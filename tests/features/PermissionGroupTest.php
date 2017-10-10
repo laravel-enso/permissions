@@ -97,8 +97,7 @@ class PermissionGroupTest extends TestHelper
         $this->addPermission($group);
 
         $this->delete('/system/permissionGroups/'.$group->id)
-            ->assertStatus(302)
-            ->assertSessionHas('flash_notification');
+            ->assertStatus(455);
 
         $this->assertNotNull($group->fresh());
     }
