@@ -9,7 +9,7 @@
 
 Permission Manager dependency for [Laravel Enso](https://github.com/laravel-enso/Enso)
 
-[![Screenshot](https://laravel-enso.github.io/permissionsmanager/screenshots/Selection_029_thumb.png)](https://laravel-enso.github.io/permissionsmanager/screenshots/Selection_029.png)
+[![Screenshot](https://laravel-enso.github.io/permissionsmanager/screenshots/bulma_029_thumb.png)](https://laravel-enso.github.io/permissionsmanager/screenshots/bulma_029.png)
 
 ### Features
 
@@ -22,7 +22,7 @@ Permission Manager dependency for [Laravel Enso](https://github.com/laravel-enso
 ### Under the Hood
 
 - inside `web.php` there is a route for each action within the application, and each route has the `name` attribute defined
-- for each route where we need to have authorization checks, we must define a permission, permission which need to have the same name as the route
+- for each route where we need to have authorization checks, we must define a permission, permission which needs to have the same name as the route
 - routes and groups are nested, the resulting name looking something like `group1.group2...route`
 - for each request we check the existence of the link between the user's role and the permission for the request's route
 - permissions' attributes:
@@ -39,6 +39,16 @@ Permission Manager dependency for [Laravel Enso](https://github.com/laravel-enso
 ### Notes
 
 The [Laravel Enso Core](https://github.com/laravel-enso/Core) package comes with this package included.
+
+Depends on:
+ - [Datatable](https://github.com/laravel-enso/Datatable) for displaying the list of permissions
+ - [DbSyncMigrations](https://github.com/laravel-enso/DbSyncMigrations) for offering the possibility to generate migrations for the changes you make locally
+ - [FormBuilder](https://github.com/laravel-enso/FormBuilder) for creating the forms when managing permissions
+ - [Helpers](https://github.com/laravel-enso/Helpers) for utility classes and traits
+ - [RoleManager](https://github.com/laravel-enso/RoleManager) for the integration with roles 
+ - [StructureManager](https://github.com/laravel-enso/StructureManager) for the migrations
+ - [TutorialManager](https://github.com/laravel-enso/TutorialManager) for the relationship with tutorials
+
 
 <!--h-->
 ### Contributions
