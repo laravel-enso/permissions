@@ -13,7 +13,10 @@
         <small class="text-danger" style="float:right;">
             {{ $errors->first('permission_group_id') }}
         </small>
-        {!! Form::select('permission_group_id', $permissionGroups, null, ['class' => 'form-control select']) !!}
+        <vue-select :options="options"
+            v-model="permissionGroupId">
+        </vue-select>
+        <input type="hidden" v-model="permissionGroupId" name="permission_group_id">
     </div>
 </div>
 <div class="col-sm-12">

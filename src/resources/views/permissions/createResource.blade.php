@@ -34,7 +34,12 @@
     <script>
 
         const vm = new Vue({
-            el: '#app'
+            el: '#app',
+
+            data: {
+                options: {!! $permissionGroups !!},
+                permissionGroupId: "{!! old('permission_group_id') !!}" || null
+            }
         });
 
     </script>
