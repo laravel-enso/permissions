@@ -23,7 +23,7 @@ class PermissionsTableStructure extends TableStructure
             'enumMappings'  => [
                 'type' => PermissionTypes::class,
             ],
-            'columns'       => [
+            'columns' => [
                 0 => [
                     'label' => __('Name'),
                     'data'  => 'name',
