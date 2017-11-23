@@ -2,15 +2,9 @@
 
 namespace LaravelEnso\PermissionManager\app\Enums;
 
-use LaravelEnso\Helpers\Classes\AbstractEnum;
+use LaravelEnso\Helpers\Classes\Enum;
 
-class PermissionTypes extends AbstractEnum
+class PermissionTypes extends Enum
 {
-    public function __construct()
-    {
-        $this->data = [
-            0 => __('Read'),
-            1 => __('Write'),
-        ];
-    }
+    protected static $data = ['Read', 'Write'];
 }

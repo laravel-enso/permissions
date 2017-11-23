@@ -3,10 +3,11 @@
 namespace LaravelEnso\PermissionManager\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
-use LaravelEnso\Helpers\Traits\FormattedTimestamps;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\Helpers\Traits\FormattedTimestamps;
 use LaravelEnso\TutorialManager\app\Models\Tutorial;
+use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
+use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
 
 class Permission extends Model
 {
@@ -16,7 +17,7 @@ class Permission extends Model
 
     protected $attributes = ['default' => false];
 
-    protected $casts = ['type' => 'string', 'default' => 'boolean'];
+    protected $casts = ['default' => 'boolean'];
 
     public function permission_group()
     {
@@ -38,14 +39,9 @@ class Permission extends Model
         return $this->hasMany(Tutorial::class);
     }
 
-    public function isPage()
+    public function getIsReadAttribute()
     {
-        return $this->type === 2;
-    }
-
-    public function scopeIsPage($query)
-    {
-        return $query->whereType(2);
+        return $this->type === PermissionTypes::get(0);
     }
 
     public function scopeImplicit($query)

@@ -1,0 +1,43 @@
+{
+    "routePrefix": "system.permissions",
+    "readSuffix": "getTableData",
+    "writeSuffix": null,
+    "name": "Permissions",
+    "icon": "fa fa-exclamation-triangle",
+    "crtNo": true,
+    "buttons": ["create","edit","destroy","excel"],
+    "appends": ["isRead"],
+    "columns": [
+        {
+            "label": "Name",
+            "name": "name",
+            "meta": ["searchable", "sortable"]
+        },
+        {
+            "label": "Description",
+            "name": "description",
+            "meta": ["searchable", "sortable"]
+        },
+        {
+            "label": "Type",
+            "name": "type",
+            "enum": "\\LaravelEnso\\PermissionManager\\app\\Enums\\PermissionTypes",
+            "meta": ["render", "sortable"]
+        },
+        {
+            "label": "Group",
+            "name": "groupName",
+            "meta": ["searchable", "sortable"]
+        },
+        {
+            "label": "Default",
+            "name": "default",
+            "meta": ["boolean"]
+        },
+        {
+            "label": "Created At",
+            "name": "created_at",
+            "meta": ["sortable"]
+        }
+    ]
+}

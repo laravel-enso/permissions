@@ -1,0 +1,31 @@
+{
+    "routePrefix": "system.permissionGroups",
+    "readSuffix": "getTableData",
+    "writeSuffix": null,
+    "name": "Permission Groups",
+    "icon": "fa fa-object-group",
+    "crtNo": true,
+    "buttons": ["create","edit","destroy","excel"],
+    "columns": [
+        {
+            "label": "Name",
+            "name": "name",
+            "meta": ["searchable", "sortable"]
+        },
+        {
+            "label": "Description",
+            "name": "description",
+            "meta": ["searchable", "sortable"]
+        },
+        {
+            "label": "Created At",
+            "name": "created_at",
+            "meta": ["sortable"]
+        },
+        {
+            "label": "Updated At",
+            "name": "updated_at",
+            "meta": ["sortable"]
+        }
+    ]
+}

@@ -19,7 +19,7 @@ class PermissionService
         $form = (new FormBuilder(self::FormPath))
             ->setMethod('POST')
             ->setTitle('Create Permission')
-            ->setSelectOptions('type', (object) (new PermissionTypes())->getData())
+            ->setSelectOptions('type', PermissionTypes::object())
             ->setSelectOptions('permission_group_id', PermissionGroup::pluck('name', 'id'))
             ->setSelectOptions('roleList', Role::pluck('name', 'id'))
             ->getData();
@@ -48,7 +48,7 @@ class PermissionService
         $form = (new FormBuilder(self::FormPath, $permission))
             ->setMethod('PATCH')
             ->setTitle('Edit Permission')
-            ->setSelectOptions('type', (object) (new PermissionTypes())->getData())
+            ->setSelectOptions('type', PermissionTypes::object())
             ->setSelectOptions('permission_group_id', PermissionGroup::pluck('name', 'id'))
             ->setSelectOptions('roleList', Role::pluck('name', 'id'))
             ->getData();

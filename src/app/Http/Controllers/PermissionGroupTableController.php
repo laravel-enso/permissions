@@ -3,18 +3,18 @@
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\DataTable\app\Traits\DataTable;
-use LaravelEnso\PermissionManager\app\DataTable\PermissionGroupsTableStructure;
+use LaravelEnso\VueDatatable\app\Traits\Excel;
+use LaravelEnso\VueDatatable\app\Traits\Datatable;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 
 class PermissionGroupTableController extends Controller
 {
-    use DataTable;
+    use Datatable, Excel;
 
-    protected $tableStructureClass = PermissionGroupsTableStructure::class;
+    private const Template = __DIR__ . '/../../Tables/permissionGroups.json';
 
-    public function getTableQuery()
+    public function query()
     {
-        return PermissionGroup::select(\DB::raw('id as DT_RowId, name, description, created_at, updated_at'));
+        return PermissionGroup::select(\DB::raw('id as dtRowId, name, description, created_at, updated_at'));
     }
 }

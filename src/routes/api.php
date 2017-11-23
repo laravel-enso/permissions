@@ -6,11 +6,11 @@ Route::middleware(['web', 'auth', 'core'])
     ->group(function () {
         Route::prefix('permissionGroups')->as('permissionGroups.')
             ->group(function () {
-                Route::get('initTable', 'PermissionGroupTableController@initTable')
+                Route::get('initTable', 'PermissionGroupTableController@init')
                     ->name('initTable');
-                Route::get('getTableData', 'PermissionGroupTableController@getTableData')
+                Route::get('getTableData', 'PermissionGroupTableController@data')
                     ->name('getTableData');
-                Route::get('exportExcel', 'PermissionGroupTableController@exportExcel')
+                Route::get('exportExcel', 'PermissionGroupTableController@excel')
                     ->name('exportExcel');
             });
 
@@ -18,11 +18,11 @@ Route::middleware(['web', 'auth', 'core'])
 
         Route::prefix('permissions')->as('permissions.')
             ->group(function () {
-                Route::get('initTable', 'PermissionTableController@initTable')
+                Route::get('initTable', 'PermissionTableController@init')
                     ->name('initTable');
-                Route::get('getTableData', 'PermissionTableController@getTableData')
+                Route::get('getTableData', 'PermissionTableController@data')
                     ->name('getTableData');
-                Route::get('exportExcel', 'PermissionTableController@exportExcel')
+                Route::get('exportExcel', 'PermissionTableController@excel')
                     ->name('exportExcel');
             });
 

@@ -40,7 +40,7 @@ class ResourceTest extends TestCase
 
     private function getPermissionCount()
     {
-        $resourcePermissions = (new ResourcePermissions())->values();
+        $resourcePermissions = ResourcePermissions::values();
 
         $count = 0;
 
@@ -61,19 +61,19 @@ class ResourceTest extends TestCase
     private function postParams(PermissionGroup $group)
     {
         return [
-            'prefix'              => 'testPrefix',
+            'prefix' => 'testPrefix',
             'permission_group_id' => $group->id,
-            'index'               => true,
-            'create'              => true,
-            'store'               => true,
-            'show'                => true,
-            'edit'                => true,
-            'update'              => true,
-            'destroy'             => true,
-            'initTable'           => true,
-            'getTableData'        => true,
-            'exportExcel'         => true,
-            'getOptionList'       => true,
+            'index' => true,
+            'create' => true,
+            'store' => true,
+            'show' => true,
+            'edit' => true,
+            'update' => true,
+            'destroy' => true,
+            'initTable' => true,
+            'getTableData' => true,
+            'exportExcel' => true,
+            'getOptionList' => true,
         ];
     }
 }
