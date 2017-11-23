@@ -11,32 +11,38 @@
         {
             "label": "Name",
             "name": "name",
+            "data": "permissions.name",
             "meta": ["searchable", "sortable"]
         },
         {
             "label": "Description",
             "name": "description",
+            "data": "permissions.description",
             "meta": ["searchable", "sortable"]
         },
         {
             "label": "Type",
             "name": "type",
+            "data": "permissions.type",
             "enum": "\\LaravelEnso\\PermissionManager\\app\\Enums\\PermissionTypes",
             "meta": ["render", "sortable"]
         },
         {
             "label": "Group",
             "name": "groupName",
+            "data": "permission_groups.name",
             "meta": ["searchable", "sortable"]
         },
         {
             "label": "Default",
             "name": "default",
+            "data": "permissions.default",
             "meta": ["boolean"]
         },
         {
             "label": "Created At",
             "name": "created_at",
+            "data": "permissions.created_at",
             "meta": ["sortable"]
         }
     ]
