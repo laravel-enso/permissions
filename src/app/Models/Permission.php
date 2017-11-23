@@ -3,11 +3,11 @@
 namespace LaravelEnso\PermissionManager\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\Helpers\Traits\FormattedTimestamps;
-use LaravelEnso\TutorialManager\app\Models\Tutorial;
-use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
 use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
+use LaravelEnso\Helpers\Traits\FormattedTimestamps;
+use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
+use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\TutorialManager\app\Models\Tutorial;
 
 class Permission extends Model
 {

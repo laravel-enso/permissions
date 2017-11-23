@@ -3,15 +3,15 @@
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\VueDatatable\app\Traits\Excel;
-use LaravelEnso\VueDatatable\app\Traits\Datatable;
 use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\VueDatatable\app\Traits\Datatable;
+use LaravelEnso\VueDatatable\app\Traits\Excel;
 
 class PermissionTableController extends Controller
 {
     use Datatable, Excel;
 
-    private const Template = __DIR__ . '/../../Tables/permissions.json';
+    private const Template = __DIR__.'/../../Tables/permissions.json';
 
     public function query()
     {
