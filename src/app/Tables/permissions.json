@@ -25,7 +25,7 @@
             "name": "type",
             "data": "permissions.type",
             "enum": "\\LaravelEnso\\PermissionManager\\app\\Enums\\PermissionTypes",
-            "meta": ["render", "sortable"]
+            "meta": ["render", "sortable", "translation"]
         },
         {
             "label": "Group",
@@ -37,7 +37,7 @@
             "label": "Default",
             "name": "default",
             "data": "permissions.default",
-            "meta": ["boolean"]
+            "meta": ["boolean", "sortable"]
         },
         {
             "label": "Created At",
