@@ -3,8 +3,8 @@
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\PermissionManager\app\Http\Requests\ValidateResourceRequest;
 use LaravelEnso\PermissionManager\app\Http\Services\ResourceService;
+use LaravelEnso\PermissionManager\app\Http\Requests\ValidateResourceRequest;
 
 class ResourceController extends Controller
 {

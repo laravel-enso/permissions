@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\PermissionManager\app\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
 class ValidatePermissionGroupRequest extends FormRequest
 {
@@ -17,12 +17,12 @@ class ValidatePermissionGroupRequest extends FormRequest
         $permissionGroup = $this->route('permissionGroup');
         $nameUnique = Rule::unique('permission_groups', 'name');
 
-        $nameUnique = request()->getMethod() == 'PATCH'
+        $nameUnique = request()->getMethod() === 'PATCH'
             ? $nameUnique->ignore($permissionGroup->id)
             : $nameUnique;
 
         return [
-            'name'        => ['required', $nameUnique],
+            'name' => ['required', $nameUnique],
             'description' => 'required',
         ];
     }

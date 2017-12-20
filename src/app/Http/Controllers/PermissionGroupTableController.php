@@ -3,9 +3,9 @@
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
-use LaravelEnso\VueDatatable\app\Traits\Datatable;
 use LaravelEnso\VueDatatable\app\Traits\Excel;
+use LaravelEnso\VueDatatable\app\Traits\Datatable;
+use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 
 class PermissionGroupTableController extends Controller
 {

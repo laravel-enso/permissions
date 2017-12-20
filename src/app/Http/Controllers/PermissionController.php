@@ -3,9 +3,9 @@
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionRequest;
-use LaravelEnso\PermissionManager\app\Http\Services\PermissionService;
 use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\PermissionManager\app\Http\Services\PermissionService;
+use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionRequest;
 
 class PermissionController extends Controller
 {

@@ -3,9 +3,9 @@
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionGroupRequest;
-use LaravelEnso\PermissionManager\app\Http\Services\PermissionGroupService;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
+use LaravelEnso\PermissionManager\app\Http\Services\PermissionGroupService;
+use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionGroupRequest;
 
 class PermissionGroupController extends Controller
 {

@@ -4,9 +4,9 @@ namespace LaravelEnso\PermissionManager\app\Http\Services;
 
 use Illuminate\Http\Request;
 use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
-use LaravelEnso\PermissionManager\app\Enums\ResourcePermissions;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
+use LaravelEnso\PermissionManager\app\Enums\ResourcePermissions;
 
 class ResourceService
 {
@@ -33,7 +33,7 @@ class ResourceService
         });
 
         return [
-            'message'  => __('The permissions were created!'),
+            'message' => __('The permissions were created!'),
             'redirect' => 'system.permissions.index',
         ];
     }

@@ -3,11 +3,11 @@
 namespace LaravelEnso\PermissionManager\app\Http\Services;
 
 use Illuminate\Http\Request;
-use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
-use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
-use LaravelEnso\PermissionManager\app\Models\Permission;
-use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
+use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
+use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class PermissionService
@@ -35,9 +35,9 @@ class PermissionService
         });
 
         return [
-            'message'  => __('The permission was created!'),
+            'message' => __('The permission was created!'),
             'redirect' => 'system.permissions.edit',
-            'id'       => $permission->id,
+            'id' => $permission->id,
         ];
     }
 
@@ -77,7 +77,7 @@ class PermissionService
         $permission->delete();
 
         return [
-            'message'  => __(config('enso.labels.successfulOperation')),
+            'message' => __(config('enso.labels.successfulOperation')),
             'redirect' => 'system.permissions.index',
         ];
     }

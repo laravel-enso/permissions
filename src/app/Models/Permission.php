@@ -3,10 +3,10 @@
 namespace LaravelEnso\PermissionManager\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
-use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\TutorialManager\app\Models\Tutorial;
+use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
+use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
 
 class Permission extends Model
 {

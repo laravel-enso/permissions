@@ -26,9 +26,9 @@ class PermissionGroupService
         $group = $permissionGroup->create($request->all());
 
         return [
-            'message'  => __('The permission group was created!'),
+            'message' => __('The permission group was created!'),
             'redirect' => 'system.permissionGroups.edit',
-            'id'       => $group->id,
+            'id' => $group->id,
         ];
     }
 
@@ -60,7 +60,7 @@ class PermissionGroupService
         $permissionGroup->delete();
 
         return [
-            'message'  => __(config('enso.labels.successfulOperation')),
+            'message' => __(config('enso.labels.successfulOperation')),
             'redirect' => 'system.permissionGroups.index',
         ];
     }
