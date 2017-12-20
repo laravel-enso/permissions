@@ -4,14 +4,13 @@ namespace LaravelEnso\PermissionManager\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
-use LaravelEnso\Helpers\Traits\FormattedTimestamps;
 use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\TutorialManager\app\Models\Tutorial;
 
 class Permission extends Model
 {
-    use FormattedTimestamps, DbSyncMigrations;
+    use DbSyncMigrations;
 
     protected $fillable = ['permission_group_id', 'name', 'description', 'type', 'default'];
 
