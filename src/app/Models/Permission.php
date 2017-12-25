@@ -5,7 +5,6 @@ namespace LaravelEnso\PermissionManager\app\Models;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\TutorialManager\app\Models\Tutorial;
-use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
 use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
 
 class Permission extends Model
@@ -40,7 +39,7 @@ class Permission extends Model
 
     public function getIsReadAttribute()
     {
-        return $this->type === PermissionTypes::get(0);
+        return $this->type === 0;
     }
 
     public function scopeImplicit($query)
