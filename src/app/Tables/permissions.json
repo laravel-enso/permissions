@@ -44,6 +44,12 @@
             "name": "created_at",
             "data": "permissions.created_at",
             "meta": ["sortable", "date"]
+        },
+        {
+            "label": "Updated At",
+            "name": "updated_at",
+            "data": "permissions.updated_at",
+            "meta": ["sortable", "date"]
         }
     ]
 }
