@@ -43,7 +43,7 @@
             "label": "Created At",
             "name": "created_at",
             "data": "permissions.created_at",
-            "meta": ["sortable", "date", "total"]
+            "meta": ["sortable", "date"]
         }
     ]
 }
