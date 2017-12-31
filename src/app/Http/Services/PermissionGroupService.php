@@ -3,7 +3,7 @@
 namespace LaravelEnso\PermissionManager\app\Http\Services;
 
 use Illuminate\Http\Request;
-use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
+use LaravelEnso\FormBuilder\app\Classes\Form;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
@@ -13,10 +13,9 @@ class PermissionGroupService
 
     public function create()
     {
-        $form = (new FormBuilder(self::FormPath))
-            ->setMethod('POST')
-            ->setTitle('Create Permission Group')
-            ->getData();
+        $form = (new Form(self::FormPath))
+            ->create()
+            ->get();
 
         return compact('form');
     }
@@ -34,10 +33,9 @@ class PermissionGroupService
 
     public function edit(PermissionGroup $permissionGroup)
     {
-        $form = (new FormBuilder(self::FormPath, $permissionGroup))
-            ->setMethod('PATCH')
-            ->setTitle('Edit Permission Group')
-            ->getData();
+        $form = (new Form(self::FormPath))
+            ->edit($permissionGroup)
+            ->get();
 
         return compact('form');
     }

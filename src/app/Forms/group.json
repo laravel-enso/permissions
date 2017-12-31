@@ -1,12 +1,9 @@
 {
-    "title": null,
-    "method": null,
-    "icon": "fa fa-object-group",
     "columns": "1",
-    "prefix": "system.permissionGroups",
+    "routePrefix": "system.permissionGroups",
     "fields": [{
         "label": "Name",
-        "column": "name",
+        "name": "name",
         "value": null,
         "meta": {
             "type": "input",
@@ -14,7 +11,7 @@
         }
     }, {
         "label": "Description",
-        "column": "description",
+        "name": "description",
         "value": null,
         "meta": {
             "type": "input",

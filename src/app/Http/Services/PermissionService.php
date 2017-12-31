@@ -4,7 +4,7 @@ namespace LaravelEnso\PermissionManager\app\Http\Services;
 
 use Illuminate\Http\Request;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
+use LaravelEnso\FormBuilder\app\Classes\Form;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Enums\PermissionTypes;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
@@ -16,13 +16,12 @@ class PermissionService
 
     public function create()
     {
-        $form = (new FormBuilder(self::FormPath))
-            ->setMethod('POST')
-            ->setTitle('Create Permission')
-            ->setSelectOptions('type', PermissionTypes::object())
-            ->setSelectOptions('permission_group_id', PermissionGroup::pluck('name', 'id'))
-            ->setSelectOptions('roleList', Role::pluck('name', 'id'))
-            ->getData();
+        $form = (new Form(self::FormPath))
+            ->create()
+            ->options('type', PermissionTypes::object())
+            ->options('permission_group_id', PermissionGroup::pluck('name', 'id'))
+            ->options('roleList', Role::pluck('name', 'id'))
+            ->get();
 
         return compact('form');
     }
@@ -45,13 +44,12 @@ class PermissionService
     {
         $permission->append(['roleList']);
 
-        $form = (new FormBuilder(self::FormPath, $permission))
-            ->setMethod('PATCH')
-            ->setTitle('Edit Permission')
-            ->setSelectOptions('type', PermissionTypes::object())
-            ->setSelectOptions('permission_group_id', PermissionGroup::pluck('name', 'id'))
-            ->setSelectOptions('roleList', Role::pluck('name', 'id'))
-            ->getData();
+        $form = (new Form(self::FormPath))
+            ->edit($permission)
+            ->options('type', PermissionTypes::object())
+            ->options('permission_group_id', PermissionGroup::pluck('name', 'id'))
+            ->options('roleList', Role::pluck('name', 'id'))
+            ->get();
 
         return compact('form');
     }

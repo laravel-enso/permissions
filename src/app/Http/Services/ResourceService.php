@@ -3,7 +3,7 @@
 namespace LaravelEnso\PermissionManager\app\Http\Services;
 
 use Illuminate\Http\Request;
-use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
+use LaravelEnso\FormBuilder\app\Classes\Form;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\PermissionManager\app\Enums\ResourcePermissions;
@@ -16,9 +16,10 @@ class ResourceService
 
     public function create()
     {
-        $form = (new FormBuilder(self::FormPath))
-            ->setSelectOptions('permission_group_id', PermissionGroup::pluck('name', 'id'))
-            ->getData();
+        $form = (new Form(self::FormPath))
+            ->create()
+            ->options('permission_group_id', PermissionGroup::pluck('name', 'id'))
+            ->get();
 
         return compact('form');
     }

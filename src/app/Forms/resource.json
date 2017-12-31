@@ -1,12 +1,9 @@
 {
-    "title": "Create Resource",
-    "method": "POST",
-    "icon": "fa fa-exclamation-triangle",
+    "routePrefix": "system.resourcePermissions",
     "columns": "2",
-    "prefix": "system.resourcePermissions",
     "fields": [{
         "label": "Resource Prefix",
-        "column": "prefix",
+        "name": "prefix",
         "value": null,
         "meta": {
             "type": "input",
@@ -14,17 +11,16 @@
         }
     }, {
         "label": "Permission Group",
-        "column": "permission_group_id",
+        "name": "permission_group_id",
         "value": null,
         "meta": {
             "type": "select",
             "multiple": false,
-            "options": null,
-            "keyMap": "string"
+            "options": null
         }
     }, {
         "label": ".index",
-        "column": "index",
+        "name": "index",
         "value": true,
         "meta": {
             "type": "input",
@@ -32,7 +28,7 @@
         }
     }, {
         "label": ".create",
-        "column": "create",
+        "name": "create",
         "value": true,
         "meta": {
             "type": "input",
@@ -40,7 +36,7 @@
         }
     }, {
         "label": ".store",
-        "column": "store",
+        "name": "store",
         "value": true,
         "meta": {
             "type": "input",
@@ -48,7 +44,7 @@
         }
     }, {
         "label": ".show",
-        "column": "show",
+        "name": "show",
         "value": true,
         "meta": {
             "type": "input",
@@ -56,7 +52,7 @@
         }
     }, {
         "label": ".edit",
-        "column": "edit",
+        "name": "edit",
         "value": true,
         "meta": {
             "type": "input",
@@ -64,7 +60,7 @@
         }
     }, {
         "label": ".update",
-        "column": "update",
+        "name": "update",
         "value": true,
         "meta": {
             "type": "input",
@@ -72,7 +68,7 @@
         }
     }, {
         "label": ".destroy",
-        "column": "destroy",
+        "name": "destroy",
         "value": true,
         "meta": {
             "type": "input",
@@ -80,7 +76,7 @@
         }
     }, {
         "label": ".initTable",
-        "column": "initTable",
+        "name": "initTable",
         "value": true,
         "meta": {
             "type": "input",
@@ -88,7 +84,7 @@
         }
     }, {
         "label": ".getTableData",
-        "column": "getTableData",
+        "name": "getTableData",
         "value": true,
         "meta": {
             "type": "input",
@@ -96,7 +92,7 @@
         }
     }, {
         "label": ".exportExcel",
-        "column": "exportExcel",
+        "name": "exportExcel",
         "value": true,
         "meta": {
             "type": "input",
@@ -104,7 +100,7 @@
         }
     }, {
         "label": ".getOptionList",
-        "column": "getOptionList",
+        "name": "getOptionList",
         "value": true,
         "meta": {
             "type": "input",
