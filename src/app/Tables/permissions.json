@@ -5,7 +5,7 @@
     "name": "Permissions",
     "icon": "fa fa-exclamation-triangle",
     "crtNo": true,
-    "buttons": ["create","edit","destroy","excel"],
+    "buttons": ["excel", "create", "edit", "destroy"],
     "appends": ["isRead"],
     "columns": [
         {
