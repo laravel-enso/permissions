@@ -1,4 +1,4 @@
-import PermissionEdit from '../../../../pages/enso/system/permissions/Edit.vue';
+const PermissionEdit = () => import('../../../pages/system/permissions/Edit.vue');
 
 export default {
     name: 'system.permissions.edit',

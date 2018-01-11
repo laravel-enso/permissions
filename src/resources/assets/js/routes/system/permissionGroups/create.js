@@ -1,4 +1,4 @@
-import PermissionGroupCreate from '../../../../pages/enso/system/permissionGroups/Create.vue';
+const PermissionGroupCreate = () => import('../../../pages/system/permissionGroups/Create.vue');
 
 export default {
     name: 'system.permissionGroups.create',

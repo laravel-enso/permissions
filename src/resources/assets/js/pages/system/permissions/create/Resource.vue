@@ -9,7 +9,7 @@
 
 <script>
 
-import VueForm from '../../../../../components/enso/vueforms/VueForm.vue';
+import VueForm from '../../../../components/enso/vueforms/VueForm.vue';
 
 export default {
     components: { VueForm },

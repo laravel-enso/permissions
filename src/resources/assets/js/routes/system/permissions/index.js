@@ -1,4 +1,4 @@
-import PermissionsIndex from '../../../../pages/enso/system/permissions/Index.vue';
+const PermissionsIndex = () => import('../../../pages/system/permissions/Index.vue');
 
 export default {
     name: 'system.permissions.index',

@@ -1,4 +1,4 @@
-import PermissionCreate from '../../../../../pages/enso/system/permissions/create/Permission.vue';
+const PermissionCreate = () => import('../../../../pages/system/permissions/create/Permission.vue');
 
 export default {
     name: 'system.permissions.create',

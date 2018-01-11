@@ -1,4 +1,4 @@
-import ResourceCreate from '../../../../../pages/enso/system/permissions/create/Resource.vue';
+const ResourceCreate = () => import('../../../../pages/system/permissions/create/Resource.vue');
 
 export default {
     name: 'system.permissions.createResource',
