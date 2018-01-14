@@ -9,35 +9,28 @@ use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionGroupReque
 
 class PermissionGroupController extends Controller
 {
-    private $service;
-
-    public function __construct(PermissionGroupService $service)
+    public function create(PermissionGroupService $service)
     {
-        $this->service = $service;
+        return $service->create();
     }
 
-    public function create()
+    public function store(ValidatePermissionGroupRequest $request, PermissionGroup $permissionGroup, PermissionGroupService $service)
     {
-        return $this->service->create();
+        return $service->store($request, $permissionGroup);
     }
 
-    public function store(ValidatePermissionGroupRequest $request, PermissionGroup $permissionGroup)
+    public function edit(PermissionGroup $permissionGroup, PermissionGroupService $service)
     {
-        return $this->service->store($request, $permissionGroup);
+        return $service->edit($permissionGroup);
     }
 
-    public function edit(PermissionGroup $permissionGroup)
+    public function update(ValidatePermissionGroupRequest $request, PermissionGroup $permissionGroup, PermissionGroupService $service)
     {
-        return $this->service->edit($permissionGroup);
+        return $service->update($request, $permissionGroup);
     }
 
-    public function update(ValidatePermissionGroupRequest $request, PermissionGroup $permissionGroup)
+    public function destroy(PermissionGroup $permissionGroup, PermissionGroupService $service)
     {
-        return $this->service->update($request, $permissionGroup);
-    }
-
-    public function destroy(PermissionGroup $permissionGroup)
-    {
-        return $this->service->destroy($permissionGroup);
+        return $service->destroy($permissionGroup);
     }
 }

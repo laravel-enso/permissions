@@ -8,20 +8,13 @@ use LaravelEnso\PermissionManager\app\Http\Requests\ValidateResourceRequest;
 
 class ResourceController extends Controller
 {
-    private $service;
-
-    public function __construct(ResourceService $service)
+    public function create(ResourceService $service)
     {
-        $this->service = $service;
+        return $service->create();
     }
 
-    public function create()
+    public function store(ValidateResourceRequest $request, ResourceService $service)
     {
-        return $this->service->create();
-    }
-
-    public function store(ValidateResourceRequest $request)
-    {
-        return $this->service->store($request);
+        return $service->store($request);
     }
 }

@@ -9,35 +9,28 @@ use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionRequest;
 
 class PermissionController extends Controller
 {
-    private $service;
-
-    public function __construct(PermissionService $service)
+    public function create(PermissionService $service)
     {
-        $this->service = $service;
+        return $service->create();
     }
 
-    public function create()
+    public function store(ValidatePermissionRequest $request, Permission $permission, PermissionService $service)
     {
-        return $this->service->create();
+        return $service->store($request, $permission);
     }
 
-    public function store(ValidatePermissionRequest $request, Permission $permission)
+    public function edit(Permission $permission, PermissionService $service)
     {
-        return $this->service->store($request, $permission);
+        return $service->edit($permission);
     }
 
-    public function edit(Permission $permission)
+    public function update(ValidatePermissionRequest $request, Permission $permission, PermissionService $service)
     {
-        return $this->service->edit($permission);
+        return $service->update($request, $permission);
     }
 
-    public function update(ValidatePermissionRequest $request, Permission $permission)
+    public function destroy(Permission $permission, PermissionService $service)
     {
-        return $this->service->update($request, $permission);
-    }
-
-    public function destroy(Permission $permission)
-    {
-        return $this->service->destroy($permission);
+        return $service->destroy($permission);
     }
 }
