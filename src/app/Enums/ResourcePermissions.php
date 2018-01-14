@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\PermissionManager\app\Enums;
 
-use LaravelEnso\Helpers\Classes\Enum;
+use LaravelEnso\Helpers\app\Classes\Enum;
 
 class ResourcePermissions extends Enum
 {
