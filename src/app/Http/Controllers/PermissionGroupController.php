@@ -4,33 +4,48 @@ namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
-use LaravelEnso\PermissionManager\app\Http\Services\PermissionGroupService;
+use LaravelEnso\PermissionManager\app\Forms\Builders\PermissionGroupForm;
 use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionGroupRequest;
 
 class PermissionGroupController extends Controller
 {
-    public function create(PermissionGroupService $service)
+    public function create(PermissionGroupForm $form)
     {
-        return $service->create();
+        return ['form' => $form->create()];
     }
 
-    public function store(ValidatePermissionGroupRequest $request, PermissionGroup $permissionGroup, PermissionGroupService $service)
+    public function store(ValidatePermissionGroupRequest $request)
     {
-        return $service->store($request, $permissionGroup);
+        $group = PermissionGroup::create($request->all());
+
+        return [
+            'message' => __('The permission group was created!'),
+            'redirect' => 'system.permissionGroups.edit',
+            'id' => $group->id,
+        ];
     }
 
-    public function edit(PermissionGroup $permissionGroup, PermissionGroupService $service)
+    public function edit(PermissionGroup $permissionGroup, PermissionGroupForm $form)
     {
-        return $service->edit($permissionGroup);
+        return ['form' => $form->edit($permissionGroup)];
     }
 
-    public function update(ValidatePermissionGroupRequest $request, PermissionGroup $permissionGroup, PermissionGroupService $service)
+    public function update(ValidatePermissionGroupRequest $request, PermissionGroup $permissionGroup)
     {
-        return $service->update($request, $permissionGroup);
+        $permissionGroup->update($request->all());
+
+        return [
+            'message' => __(config('enso.labels.savedChanges')),
+        ];
     }
 
-    public function destroy(PermissionGroup $permissionGroup, PermissionGroupService $service)
+    public function destroy(PermissionGroup $permissionGroup)
     {
-        return $service->destroy($permissionGroup);
+        $permissionGroup->delete();
+
+        return [
+            'message' => __(config('enso.labels.successfulOperation')),
+            'redirect' => 'system.permissionGroups.index',
+        ];
     }
 }

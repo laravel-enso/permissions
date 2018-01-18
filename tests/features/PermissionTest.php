@@ -37,9 +37,9 @@ class PermissionTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'message'  => 'The permission was created!',
+                'message' => 'The permission was created!',
                 'redirect' => 'system.permissions.edit',
-                'id'       => $permission->id,
+                'id' => $permission->id,
             ]);
     }
 
@@ -56,7 +56,7 @@ class PermissionTest extends TestCase
     /** @test */
     public function update()
     {
-        $permission = Permission::create($this->postParams());
+        $permission = Permission::create($this->postParams())->append(['roleList']);
         $permission->description = 'edited';
 
         $this->patch(route('system.permissions.update', $permission->id, false), $permission->toArray())
@@ -95,10 +95,11 @@ class PermissionTest extends TestCase
     {
         return [
             'permission_group_id' => PermissionGroup::first(['id'])->id,
-            'name'                => $this->faker->word,
-            'description'         => $this->faker->sentence,
-            'type'                => 0,
-            'default'             => 0,
+            'name' => $this->faker->word,
+            'description' => $this->faker->sentence,
+            'type' => 0,
+            'default' => 0,
+            'roleList' => []
         ];
     }
 }

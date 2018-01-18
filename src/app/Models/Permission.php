@@ -4,12 +4,13 @@ namespace LaravelEnso\PermissionManager\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\RoleManager\app\Traits\HasRoles;
 use LaravelEnso\TutorialManager\app\Models\Tutorial;
-use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Permission extends Model
 {
-    use DbSyncMigrations;
+    use HasRoles;
 
     protected $fillable = ['permission_group_id', 'name', 'description', 'type', 'default'];
 
@@ -45,5 +46,14 @@ class Permission extends Model
     public function scopeImplicit($query)
     {
         return $query->whereDefault(true);
+    }
+
+    public function delete()
+    {
+        if ($this->roles()->count()) {
+            throw new ConflictHttpException(__('Operation failed because the permission is allocated to existing role(s)'));
+        }
+
+        parent::delete();
     }
 }

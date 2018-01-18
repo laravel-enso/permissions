@@ -5,7 +5,19 @@
     "name": "Permissions",
     "icon": "fa fa-exclamation-triangle",
     "crtNo": true,
-    "buttons": ["excel", "create", "edit", "destroy"],
+    "buttons": [
+        "excel", 
+        {
+            "type": "global",
+            "icon": "fa fa-plus",
+            "class": "is-info",
+            "fullRoute": "system.resourcePermissions.create",
+            "event": "create-resource",
+            "action": "router",
+            "label": "Resource"
+        },
+        "create", "edit", "destroy"
+    ],
     "appends": ["isRead"],
     "columns": [
         {

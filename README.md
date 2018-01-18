@@ -42,7 +42,6 @@ The [Laravel Enso Core](https://github.com/laravel-enso/Core) package comes with
 
 Depends on:
  - [Datatable](https://github.com/laravel-enso/Datatable) for displaying the list of permissions
- - [DbSyncMigrations](https://github.com/laravel-enso/DbSyncMigrations) for offering the possibility to generate migrations for the changes you make locally
  - [FormBuilder](https://github.com/laravel-enso/FormBuilder) for creating the forms when managing permissions
  - [Helpers](https://github.com/laravel-enso/Helpers) for utility classes and traits
  - [RoleManager](https://github.com/laravel-enso/RoleManager) for the integration with roles 

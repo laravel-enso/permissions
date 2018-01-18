@@ -3,18 +3,24 @@
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\PermissionManager\app\Http\Services\ResourceService;
+use LaravelEnso\PermissionManager\app\Handlers\ResourceCreator;
+use LaravelEnso\PermissionManager\app\Forms\Builders\ResourceForm;
 use LaravelEnso\PermissionManager\app\Http\Requests\ValidateResourceRequest;
 
 class ResourceController extends Controller
 {
-    public function create(ResourceService $service)
+    public function create(ResourceForm $form)
     {
-        return $service->create();
+        return ['form' => $form->create()];
     }
 
-    public function store(ValidateResourceRequest $request, ResourceService $service)
+    public function store(ValidateResourceRequest $request)
     {
-        return $service->store($request);
+        (new ResourceCreator($request->all()))->store();
+
+        return [
+            'message' => __('The permissions were created!'),
+            'redirect' => 'system.permissions.index',
+        ];
     }
 }

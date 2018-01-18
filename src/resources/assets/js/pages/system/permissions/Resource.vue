@@ -26,7 +26,7 @@ export default {
     },
 
     created() {
-        axios.get(route('system.permissions.create', null, false)).then(({ data }) => {
+        axios.get(route('system.resourcePermissions.create', null, false)).then(({ data }) => {
             this.form = data.form;
             this.initialised = true;
         }).catch(error => this.handleError(error));
