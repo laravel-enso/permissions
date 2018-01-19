@@ -5,7 +5,6 @@ namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 use App\Http\Controllers\Controller;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Forms\Builders\PermissionForm;
-use LaravelEnso\PermissionManager\app\Http\Services\PermissionService;
 use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionRequest;
 
 class PermissionController extends Controller
@@ -44,7 +43,7 @@ class PermissionController extends Controller
         return ['message' => __(config('enso.labels.savedChanges'))];
     }
 
-    public function destroy(Permission $permission, PermissionService $service)
+    public function destroy(Permission $permission)
     {
         $permission->delete();
 
