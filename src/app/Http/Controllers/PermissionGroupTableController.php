@@ -15,6 +15,6 @@ class PermissionGroupTableController extends Controller
 
     public function query()
     {
-        return PermissionGroup::select(\DB::raw('id as dtRowId, name, description, created_at, updated_at'));
+        return PermissionGroup::select(\DB::raw('id as "dtRowId", name, description, created_at, updated_at'));
     }
 }
