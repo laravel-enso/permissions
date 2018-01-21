@@ -1,6 +1,6 @@
 {
     "routePrefix": "system.permissions",
-    "columns": "1",
+    "columns": "2",
     "fields": [{
         "label": "Name",
         "name": "name",
