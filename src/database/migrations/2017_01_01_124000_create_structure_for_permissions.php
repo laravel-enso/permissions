@@ -23,7 +23,7 @@ class CreateStructureForPermissions extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'Permissions', 'icon' => 'fa fa-fw fa-exclamation-triangle', 'link' => 'system.permissions.index', 'has_children' => false,
+        'name' => 'Permissions', 'icon' => 'fas fa-fw fa-exclamation-triangle', 'link' => 'system.permissions.index', 'has_children' => false,
     ];
 
     protected $parentMenu = 'System';

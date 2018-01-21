@@ -3,13 +3,13 @@
     "readSuffix": "getTableData",
     "writeSuffix": null,
     "name": "Permissions",
-    "icon": "fa fa-exclamation-triangle",
+    "icon": "fas fa-exclamation-triangle",
     "crtNo": true,
     "buttons": [
         "excel", 
         {
             "type": "global",
-            "icon": "fa fa-plus",
+            "icon": "fas fa-plus",
             "class": "is-info",
             "fullRoute": "system.resourcePermissions.create",
             "event": "create-resource",
