@@ -3,7 +3,7 @@
     "readSuffix": "getTableData",
     "writeSuffix": null,
     "name": "Permission Groups",
-    "icon": "fas fa-object-group",
+    "icon": "object-group",
     "crtNo": true,
     "buttons": ["excel", "create", "edit", "destroy"],
     "columns": [
