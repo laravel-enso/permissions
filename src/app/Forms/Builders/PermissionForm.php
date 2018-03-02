@@ -22,9 +22,9 @@ class PermissionForm
     public function create()
     {
         return $this->form
-            ->options('type', PermissionTypes::object())
-            ->options('permission_group_id', PermissionGroup::pluck('name', 'id'))
-            ->options('roleList', Role::pluck('name', 'id'))
+            ->options('type', PermissionTypes::select())
+            ->options('permission_group_id', PermissionGroup::get(['name', 'id']))
+            ->options('roleList', Role::get(['name', 'id']))
             ->create();
     }
 
@@ -33,9 +33,9 @@ class PermissionForm
         $permission->append(['roleList']);
 
         return $this->form
-            ->options('type', PermissionTypes::object())
-            ->options('permission_group_id', PermissionGroup::pluck('name', 'id'))
-            ->options('roleList', Role::pluck('name', 'id'))
+            ->options('type', PermissionTypes::select())
+            ->options('permission_group_id', PermissionGroup::get(['name', 'id']))
+            ->options('roleList', Role::get(['name', 'id']))
             ->edit($permission);
     }
 }

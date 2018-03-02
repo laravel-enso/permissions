@@ -16,7 +16,7 @@
         "meta": {
             "type": "select",
             "multiple": false,
-            "options": null
+            "options": []
         }
     }, {
         "label": ".index",

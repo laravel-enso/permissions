@@ -19,7 +19,7 @@ class ResourceForm
     public function create()
     {
         return $this->form
-            ->options('permission_group_id', PermissionGroup::pluck('name', 'id'))
+            ->options('permission_group_id', PermissionGroup::get(['name', 'id']))
             ->create();
     }
 
