@@ -2,15 +2,6 @@
     "routePrefix": "system.permissions",
     "columns": "2",
     "fields": [{
-            "label": "Permission Group",
-            "name": "permission_group_id",
-            "value": null,
-            "meta": {
-                "type": "select",
-                "multiple": false,
-                "options": []
-            }
-        },{
         "label": "Name",
         "name": "name",
         "value": null,
@@ -35,7 +26,16 @@
             "multiple": false,
             "options": []
         }
-    },  {
+    }, {
+        "label": "Permission Group",
+        "name": "permission_group_id",
+        "value": null,
+        "meta": {
+            "type": "select",
+            "multiple": false,
+            "options": []
+        }
+    }, {
         "label": "Roles",
         "name": "roleList",
         "value": [],
