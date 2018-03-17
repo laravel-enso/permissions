@@ -1,56 +1,58 @@
 {
     "routePrefix": "system.permissions",
-    "columns": "2",
-    "fields": [{
-        "label": "Name",
-        "name": "name",
-        "value": null,
-        "meta": {
-            "type": "input",
-            "content": "text"
-        }
-    }, {
-        "label": "Description",
-        "name": "description",
-        "value": null,
-        "meta": {
-            "type": "input",
-            "content": "text"
-        }
-    }, {
-        "name": "type",
-        "label": "Type",
-        "value": null,
-        "meta": {
-            "type": "select",
-            "multiple": false,
-            "options": []
-        }
-    }, {
-        "label": "Permission Group",
-        "name": "permission_group_id",
-        "value": null,
-        "meta": {
-            "type": "select",
-            "multiple": false,
-            "options": []
-        }
-    }, {
-        "label": "Roles",
-        "name": "roleList",
-        "value": [],
-        "meta": {
-            "type": "select",
-            "multiple": true,
-            "options": []
-        }
-    }, {
-        "label": "Default",
-        "name": "default",
-        "value": false,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
+    "sections": [{
+        "columns": "2",
+        "fields": [{
+            "label": "Name",
+            "name": "name",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "label": "Description",
+            "name": "description",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "name": "type",
+            "label": "Type",
+            "value": null,
+            "meta": {
+                "type": "select",
+                "multiple": false,
+                "options": []
+            }
+        }, {
+            "label": "Permission Group",
+            "name": "permission_group_id",
+            "value": null,
+            "meta": {
+                "type": "select",
+                "multiple": false,
+                "options": []
+            }
+        }, {
+            "label": "Roles",
+            "name": "roleList",
+            "value": [],
+            "meta": {
+                "type": "select",
+                "multiple": true,
+                "options": []
+            }
+        }, {
+            "label": "Default",
+            "name": "default",
+            "value": false,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }]
     }]
 }

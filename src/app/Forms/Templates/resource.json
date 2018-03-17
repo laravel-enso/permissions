@@ -1,110 +1,112 @@
 {
     "routePrefix": "system.resourcePermissions",
-    "columns": "2",
-    "fields": [{
-        "label": "Resource Prefix",
-        "name": "prefix",
-        "value": null,
-        "meta": {
-            "type": "input",
-            "content": "text"
-        }
-    }, {
-        "label": "Permission Group",
-        "name": "permission_group_id",
-        "value": null,
-        "meta": {
-            "type": "select",
-            "multiple": false,
-            "options": []
-        }
-    }, {
-        "label": ".index",
-        "name": "index",
-        "value": true,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
-    }, {
-        "label": ".create",
-        "name": "create",
-        "value": true,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
-    }, {
-        "label": ".store",
-        "name": "store",
-        "value": true,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
-    }, {
-        "label": ".show",
-        "name": "show",
-        "value": true,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
-    }, {
-        "label": ".edit",
-        "name": "edit",
-        "value": true,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
-    }, {
-        "label": ".update",
-        "name": "update",
-        "value": true,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
-    }, {
-        "label": ".destroy",
-        "name": "destroy",
-        "value": true,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
-    }, {
-        "label": ".initTable",
-        "name": "initTable",
-        "value": true,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
-    }, {
-        "label": ".getTableData",
-        "name": "getTableData",
-        "value": true,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
-    }, {
-        "label": ".exportExcel",
-        "name": "exportExcel",
-        "value": true,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
-    }, {
-        "label": ".selectOptions",
-        "name": "selectOptions",
-        "value": true,
-        "meta": {
-            "type": "input",
-            "content": "checkbox"
-        }
+    "sections": [{
+        "columns": "2",
+        "fields": [{
+            "label": "Resource Prefix",
+            "name": "prefix",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "label": "Permission Group",
+            "name": "permission_group_id",
+            "value": null,
+            "meta": {
+                "type": "select",
+                "multiple": false,
+                "options": []
+            }
+        }, {
+            "label": ".index",
+            "name": "index",
+            "value": true,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }, {
+            "label": ".create",
+            "name": "create",
+            "value": true,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }, {
+            "label": ".store",
+            "name": "store",
+            "value": true,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }, {
+            "label": ".show",
+            "name": "show",
+            "value": true,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }, {
+            "label": ".edit",
+            "name": "edit",
+            "value": true,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }, {
+            "label": ".update",
+            "name": "update",
+            "value": true,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }, {
+            "label": ".destroy",
+            "name": "destroy",
+            "value": true,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }, {
+            "label": ".initTable",
+            "name": "initTable",
+            "value": true,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }, {
+            "label": ".getTableData",
+            "name": "getTableData",
+            "value": true,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }, {
+            "label": ".exportExcel",
+            "name": "exportExcel",
+            "value": true,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }, {
+            "label": ".selectOptions",
+            "name": "selectOptions",
+            "value": true,
+            "meta": {
+                "type": "input",
+                "content": "checkbox"
+            }
+        }]
     }]
 }

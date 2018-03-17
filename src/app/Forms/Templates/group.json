@@ -1,21 +1,23 @@
 {
-    "columns": "2",
     "routePrefix": "system.permissionGroups",
-    "fields": [{
-        "label": "Name",
-        "name": "name",
-        "value": null,
-        "meta": {
-            "type": "input",
-            "content": "text"
-        }
-    }, {
-        "label": "Description",
-        "name": "description",
-        "value": null,
-        "meta": {
-            "type": "input",
-            "content": "text"
-        }
+    "sections": [{
+        "columns": "2",
+        "fields": [{
+            "label": "Name",
+            "name": "name",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }, {
+            "label": "Description",
+            "name": "description",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        }]
     }]
 }
