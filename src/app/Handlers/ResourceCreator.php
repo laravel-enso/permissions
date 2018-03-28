@@ -30,7 +30,7 @@ class ResourceCreator
     {
         return collect($this->permissionList())
             ->filter(function ($permission) {
-                return isset($this->request[$permission['name']]);
+                return $this->request[$permission['name']];
             })->reduce(function ($permissions, $permission) {
                 $permissions->push([
                     'name' => $this->request['prefix'].'.'.$permission['name'],
