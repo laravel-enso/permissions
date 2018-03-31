@@ -7,9 +7,7 @@
             slot-scope="{ row }"
             :class="[
                 'tag is-table-tag',
-                row.isRead
-                    ? 'is-success'
-                    : 'is-warning'
+                row.isRead ? 'is-success' : 'is-warning'
             ]">
                 {{ row['type'] }}
         </span>
