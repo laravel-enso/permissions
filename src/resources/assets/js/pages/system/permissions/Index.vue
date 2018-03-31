@@ -2,7 +2,17 @@
 
     <vue-table class="box"
         :path="path"
-        id="permissionGroups">
+        id="permissions">
+        <span slot="type"
+            slot-scope="{ row }"
+            :class="[
+                'tag is-table-tag',
+                row.isRead
+                    ? 'is-success'
+                    : 'is-warning'
+            ]">
+                {{ row['type'] }}
+        </span>
     </vue-table>
 
 </template>

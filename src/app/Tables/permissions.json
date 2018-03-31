@@ -37,7 +37,7 @@
             "name": "type",
             "data": "permissions.type",
             "enum": "\\LaravelEnso\\PermissionManager\\app\\Enums\\PermissionTypes",
-            "meta": ["render", "sortable", "translation"]
+            "meta": ["slot", "sortable", "translation"]
         },
         {
             "label": "Group",
