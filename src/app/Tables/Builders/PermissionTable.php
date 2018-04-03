@@ -5,7 +5,7 @@ namespace LaravelEnso\PermissionManager\app\Tables\Builders;
 use LaravelEnso\VueDatatable\app\Classes\Table;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 
-class PermissionGroupTable extends Table
+class PermissionTable extends Table
 {
     protected $templatePath = __DIR__.'/../Templates/permissions.json';
 
