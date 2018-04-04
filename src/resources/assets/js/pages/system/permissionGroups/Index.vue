@@ -9,7 +9,6 @@
 
 <script>
 
-import { mapGetters } from 'vuex';
 import VueTable from '../../../components/enso/vuedatatable/VueTable.vue';
 
 export default {
@@ -17,7 +16,7 @@ export default {
 
     data() {
         return {
-            path: route('system.permissionGroups.initTable'),
+            path: route('system.permissions.initTable'),
         };
     },
 };
