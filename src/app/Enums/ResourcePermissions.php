@@ -6,5 +6,8 @@ use LaravelEnso\Helpers\app\Classes\Enum;
 
 class ResourcePermissions extends Enum
 {
-    protected static $config = 'resource-permissions';
+    protected static function attributes()
+    {
+        return config('resource-permissions');
+    }
 }
