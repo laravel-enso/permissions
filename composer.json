@@ -20,7 +20,7 @@
     "require": {
         "php": ">=7.1.0",
         "laravel-enso/core": "2.6.*",
-        "laravel-enso/formbuilder": "2.5.*",
+        "laravel-enso/formbuilder": "2.6.*",
         "laravel-enso/helpers": "1.7.*",
         "laravel-enso/rolemanager": "2.2.*",
         "laravel-enso/structuremanager": "2.1.*",
