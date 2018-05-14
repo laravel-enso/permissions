@@ -36,9 +36,9 @@ class PermissionGroupTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson([
-                'message'  => 'The permission group was created!',
+                'message' => 'The permission group was created!',
                 'redirect' => 'system.permissionGroups.edit',
-                'id'       => $group->id,
+                'id' => $group->id,
             ]);
     }
 
@@ -60,7 +60,7 @@ class PermissionGroupTest extends TestCase
 
         $this->patch(route('system.permissionGroups.update', $group->id, false), $group->toArray())
             ->assertStatus(200)
-            ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
+            ->assertJsonFragment(['message']);
 
         $this->assertEquals('edited', $group->fresh()->description);
     }
@@ -93,19 +93,19 @@ class PermissionGroupTest extends TestCase
     {
         Permission::create([
             'permission_group_id' => $group->id,
-            'name'                => $this->faker->word,
-            'description'         => $this->faker->sentence,
-            'type'                => 0,
-            'default'             => 0,
+            'name' => $this->faker->word,
+            'description' => $this->faker->sentence,
+            'type' => 0,
+            'default' => 0,
         ]);
     }
 
     private function postParams()
     {
         return [
-            'name'        => $this->faker->word,
+            'name' => $this->faker->word,
             'description' => $this->faker->sentence,
-            '_method'     => 'POST',
+            '_method' => 'POST',
         ];
     }
 }

@@ -3,7 +3,7 @@
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\PermissionManager\app\Handlers\ResourceCreator;
+use LaravelEnso\PermissionManager\app\Classes\ResourceCreator;
 use LaravelEnso\PermissionManager\app\Forms\Builders\ResourceForm;
 use LaravelEnso\PermissionManager\app\Http\Requests\ValidateResourceRequest;
 

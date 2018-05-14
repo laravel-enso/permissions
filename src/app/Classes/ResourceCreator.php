@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\PermissionManager\app\Handlers;
+namespace LaravelEnso\PermissionManager\app\Classes;
 
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Enums\ResourcePermissions;
@@ -21,7 +21,8 @@ class ResourceCreator
         \DB::transaction(function () {
             $this->permissionCollection($this->request)
                 ->each(function ($permission) {
-                    (new Permission())->storeWithRoles($permission, self::AdminRoleId);
+                    (new Permission())
+                        ->storeWithRoles($permission, self::AdminRoleId);
                 });
         });
     }

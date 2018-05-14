@@ -9,8 +9,11 @@ class VerifyRouteAccess
 {
     public function handle($request, Closure $next)
     {
-        if (!$request->user()->can('access-route', $request->route()->getName())) {
-            throw new AuthorizationException(__(config('enso.labels.notAuthorized')));
+        if ($request->user()->cannot(
+            'access-route',
+            $request->route()->getName()
+        )) {
+            throw new AuthorizationException(__('You are not authorized to perform this action'));
         }
 
         return $next($request);

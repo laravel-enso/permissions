@@ -17,7 +17,9 @@ class PermissionGroup extends Model
     public function delete()
     {
         if ($this->permissions()->count()) {
-            throw new ConflictHttpException(__('The permission group cannot be deleted because it has child permissions'));
+            throw new ConflictHttpException(__(
+                'The permission group cannot be deleted because it has child permissions'
+            ));
         }
 
         parent::delete();

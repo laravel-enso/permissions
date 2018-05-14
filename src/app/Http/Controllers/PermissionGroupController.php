@@ -35,7 +35,7 @@ class PermissionGroupController extends Controller
         $permissionGroup->update($request->all());
 
         return [
-            'message' => __(config('enso.labels.savedChanges')),
+            'message' => __('The permission group was successfully updated'),
         ];
     }
 
@@ -44,7 +44,7 @@ class PermissionGroupController extends Controller
         $permissionGroup->delete();
 
         return [
-            'message' => __(config('enso.labels.successfulOperation')),
+            'message' => __('The permission group was successfully deleted'),
             'redirect' => 'system.permissionGroups.index',
         ];
     }

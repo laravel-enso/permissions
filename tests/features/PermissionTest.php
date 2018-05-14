@@ -61,7 +61,7 @@ class PermissionTest extends TestCase
 
         $this->patch(route('system.permissions.update', $permission->id, false), $permission->toArray())
             ->assertStatus(200)
-            ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
+            ->assertJsonFragment(['message']);
 
         $this->assertEquals('edited', $permission->fresh()->description);
     }
