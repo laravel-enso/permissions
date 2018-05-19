@@ -21,7 +21,7 @@ class CreateStructureForPermissionGroups extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'Permission Groups', 'icon' => 'object-group', 'link' => 'system.permissionGroups.index', 'has_children' => false,
+        'name' => 'Permission Groups', 'icon' => 'object-group', 'link' => 'system.permissionGroups.index', 'order' => 999, 'has_children' => false,
     ];
 
     protected $parentMenu = 'System';
