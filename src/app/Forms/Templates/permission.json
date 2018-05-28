@@ -47,7 +47,7 @@
             }
         }, {
             "label": "Default",
-            "name": "default",
+            "name": "is_default",
             "value": false,
             "meta": {
                 "type": "input",

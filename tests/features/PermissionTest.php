@@ -98,7 +98,7 @@ class PermissionTest extends TestCase
             'name' => $this->faker->word,
             'description' => $this->faker->sentence,
             'type' => 0,
-            'default' => 0,
+            'is_default' => 0,
             'roleList' => []
         ];
     }

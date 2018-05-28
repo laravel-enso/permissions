@@ -25,7 +25,7 @@ class ValidatePermissionRequest extends FormRequest
             'name' => ['required', $nameUnique],
             'description' => 'required',
             'type' => 'required',
-            'default' => 'required',
+            'is_default' => 'required',
         ];
     }
 }

@@ -47,8 +47,8 @@
         },
         {
             "label": "Default",
-            "name": "default",
-            "data": "permissions.default",
+            "name": "is_default",
+            "data": "permissions.is_default",
             "meta": ["boolean", "sortable"]
         },
         {

@@ -29,7 +29,7 @@ Permission Manager dependency for [Laravel Enso](https://github.com/laravel-enso
      - name: see above
      - description - is human readable and is used when displaying a user's action history (on his profile page)
      - type - may be `read` or `write` and is an informative flag
-     - default - flag which lets us know if a permission needs to be automatically allotted to any new role we create
+     - is_default - flag which lets us know if a permission needs to be automatically allotted to any new role we create
 - for routes where we don't need to have authorization checks, permissions are not mandatory, **BUT**
 - if we want to log and display the users' actions, permissions become necessary, as they're used when displaying statistics
 - permissions are grouped together in groups, which have mainly a descriptive purpose
