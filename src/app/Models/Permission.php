@@ -30,7 +30,7 @@ class Permission extends Model
 
     public function getRoleListAttribute()
     {
-        return $this->roles->pluck('id')->toArray();
+        return $this->roles()->pluck('id');
     }
 
     public function tutorials()
