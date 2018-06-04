@@ -13,7 +13,7 @@ class Permission extends Model
     use HasRoles;
 
     protected $fillable = [
-        'permission_group_id', 'name', 'description', 'type', 'is_default'
+        'permission_group_id', 'name', 'description', 'type', 'is_default',
     ];
 
     protected $casts = ['is_default' => 'boolean'];
