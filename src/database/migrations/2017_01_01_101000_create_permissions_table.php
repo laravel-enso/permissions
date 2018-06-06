@@ -13,6 +13,7 @@ class CreatePermissionsTable extends Migration
             $table->integer('permission_group_id')->unsigned()->index();
             $table->foreign('permission_group_id')->references('id')
                 ->on('permission_groups');
+
             $table->string('name')->unique()->index();
             $table->string('description')->nullable();
             $table->tinyInteger('type');

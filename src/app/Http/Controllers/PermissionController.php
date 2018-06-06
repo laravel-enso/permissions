@@ -40,7 +40,9 @@ class PermissionController extends Controller
             $request->get('roleList')
         );
 
-        return ['message' => __('The permission was successfully updated')];
+        return [
+            'message' => __('The permission was successfully updated')
+        ];
     }
 
     public function destroy(Permission $permission)

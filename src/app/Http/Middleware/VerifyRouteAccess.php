@@ -13,7 +13,9 @@ class VerifyRouteAccess
             'access-route',
             $request->route()->getName()
         )) {
-            throw new AuthorizationException(__('You are not authorized to perform this action'));
+            throw new AuthorizationException(
+                __('You are not authorized to perform this action')
+            );
         }
 
         return $next($request);

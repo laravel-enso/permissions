@@ -14,11 +14,10 @@ class ValidatePermissionGroupRequest extends FormRequest
 
     public function rules()
     {
-        $permissionGroup = $this->route('permissionGroup');
         $nameUnique = Rule::unique('permission_groups', 'name');
 
         $nameUnique = request()->getMethod() === 'PATCH'
-            ? $nameUnique->ignore($permissionGroup->id)
+            ? $nameUnique->ignore($this->route('permissionGroup')->id)
             : $nameUnique;
 
         return [
