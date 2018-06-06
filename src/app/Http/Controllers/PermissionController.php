@@ -41,7 +41,7 @@ class PermissionController extends Controller
         );
 
         return [
-            'message' => __('The permission was successfully updated')
+            'message' => __('The permission was successfully updated'),
         ];
     }
 
