@@ -23,13 +23,13 @@
             "label": "Created At",
             "name": "created_at",
             "data": "permission_groups.created_at",
-            "meta": ["sortable"]
+            "meta": ["sortable", "date"]
         },
         {
             "label": "Updated At",
             "name": "updated_at",
             "data": "permission_groups.updated_at",
-            "meta": ["sortable"]
+            "meta": ["sortable", "date"]
         }
     ]
 }
