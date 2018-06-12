@@ -41,7 +41,7 @@ class AddMissingPermissions extends Command
                 'name' => 'system.menus.index',
                 'description' => 'Menus index',
                 'type' => 0,
-                'is_default' => false
+                'is_default' => false,
             ]);
 
             $this->permissionIds->push($permission->id);
