@@ -3,12 +3,17 @@
 namespace LaravelEnso\PermissionManager;
 
 use Illuminate\Support\ServiceProvider;
+use LaravelEnso\PermissionManager\app\Commands\AddMissingPermissions;
 use LaravelEnso\PermissionManager\app\Http\Middleware\VerifyRouteAccess;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->commands([
+            AddMissingPermissions::class,
+        ]);
+
         $this->loadDependencies();
         $this->publishesAll();
 

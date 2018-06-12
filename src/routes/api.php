@@ -14,7 +14,7 @@ Route::middleware(['web', 'auth', 'core'])
                     ->name('exportExcel');
             });
 
-        Route::resource('permissionGroups', 'PermissionGroupController', ['except' => ['show']]);
+        Route::resource('permissionGroups', 'PermissionGroupController', ['except' => ['show', 'index']]);
 
         Route::prefix('permissions')->as('permissions.')
             ->group(function () {
@@ -26,7 +26,7 @@ Route::middleware(['web', 'auth', 'core'])
                     ->name('exportExcel');
             });
 
-        Route::resource('permissions', 'PermissionController', ['except' => ['show']]);
+        Route::resource('permissions', 'PermissionController', ['except' => ['show', 'index']]);
 
         Route::prefix('resourcePermissions')->as('resourcePermissions.')
             ->group(function () {
