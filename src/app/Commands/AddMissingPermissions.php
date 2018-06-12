@@ -57,6 +57,6 @@ class AddMissingPermissions extends Command
         $role = Role::first();
         $role->permissions()->attach($this->permissionIds);
 
-        $this->info('The added permissions were attached to the "admin" role');
+        $this->info('The new permissions were attached to the "admin" role');
     }
 }
