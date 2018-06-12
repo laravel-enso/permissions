@@ -20,6 +20,7 @@ class AddMissingPermissions extends Command
         $this->permissionIds = collect();
 
         $this->addSystemMenusIndex();
+        $this->addSystemRolesConfigure();
 
         $this->attachToAdmin();
     }
@@ -28,28 +29,60 @@ class AddMissingPermissions extends Command
     {
         $permission = Permission::whereName('system.menus.index')->first();
 
-        if (!$permission) {
-            $group = PermissionGroup::whereName('system.menus')->first();
-            if (!$group) {
-                $this->warning('"system.menus" is missing!!!');
-
-                return;
-            }
-
-            $permission = Permission::create([
-                'permission_group_id' => $group->id,
-                'name' => 'system.menus.index',
-                'description' => 'Menus index',
-                'type' => 0,
-                'is_default' => false
-            ]);
-
-            $this->permissionIds->push($permission->id);
-
-            $this->info('"system.menus.index" was successfully added');
-        } else {
+        if ($permission) {
             $this->info('"system.menus.index" already exists');
+
+            return;
         }
+
+        $group = PermissionGroup::whereName('system.menus')->first();
+        if (!$group) {
+            $this->info('"system.menus" group is missing!!!');
+
+            return;
+        }
+
+        $permission = Permission::create([
+            'permission_group_id' => $group->id,
+            'name' => 'system.menus.index',
+            'description' => 'Menus index',
+            'type' => 0,
+            'is_default' => false
+        ]);
+
+        $this->permissionIds->push($permission->id);
+
+        $this->info('"system.menus.index" was successfully added');
+    }
+
+    private function addSystemRolesConfigure()
+    {
+        $permission = Permission::whereName('system.roles.configure')->first();
+
+        if ($permission) {
+            $this->info('"system.roles.configure" already exists');
+
+            return;
+        }
+
+        $group = PermissionGroup::whereName('system.roles')->first();
+        if (!$group) {
+            $this->info('"system.roles" group is missing!!!');
+
+            return;
+        }
+
+        $permission = Permission::create([
+            'permission_group_id' => $group->id,
+            'name' => 'system.roles.configure',
+            'description' => 'Configure role permissions',
+            'type' => 1,
+            'is_default' => false,
+        ]);
+
+        $this->permissionIds->push($permission->id);
+
+        $this->info('"system.roles.configure" was successfully added');
     }
 
     private function attachToAdmin()
