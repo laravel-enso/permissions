@@ -16,10 +16,7 @@ class PermissionController extends Controller
 
     public function store(ValidatePermissionRequest $request, Permission $permission)
     {
-        $permission = $permission->storeWithRoles(
-            $request->all(),
-            $request->get('roleList')
-        );
+        $permission = $permission->storeWithRoles($request->validated());
 
         return [
             'message' => __('The permission was created!'),
@@ -35,10 +32,7 @@ class PermissionController extends Controller
 
     public function update(ValidatePermissionRequest $request, Permission $permission)
     {
-        $permission->updateWithRoles(
-            $request->all(),
-            $request->get('roleList')
-        );
+        $permission->updateWithRoles($request->validated());
 
         return [
             'message' => __('The permission was successfully updated'),
