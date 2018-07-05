@@ -22,7 +22,7 @@
         "laravel-enso/core": "2.10.*",
         "laravel-enso/formbuilder": "2.6.*",
         "laravel-enso/helpers": "1.7.*",
-        "laravel-enso/rolemanager": "2.2.*",
+        "laravel-enso/rolemanager": "2.3.*",
         "laravel-enso/structuremanager": "2.2.*",
         "laravel-enso/tutorialmanager": "2.1.*",
         "laravel-enso/vuedatatable": "1.2.*"
