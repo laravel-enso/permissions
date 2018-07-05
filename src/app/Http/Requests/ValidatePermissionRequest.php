@@ -26,6 +26,7 @@ class ValidatePermissionRequest extends FormRequest
             'description' => 'required',
             'type' => 'required',
             'is_default' => 'required',
+            'roleList' => 'array'
         ];
     }
 }

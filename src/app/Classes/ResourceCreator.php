@@ -21,8 +21,9 @@ class ResourceCreator
         \DB::transaction(function () {
             $this->permissionCollection($this->request)
                 ->each(function ($permission) {
+                    $permission['roleList'] = self::AdminRoleId;
                     (new Permission())
-                        ->storeWithRoles($permission, self::AdminRoleId);
+                        ->storeWithRoles($permission);
                 });
         });
     }

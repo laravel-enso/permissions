@@ -19,7 +19,7 @@ class ResourceTest extends TestCase
     {
         parent::setUp();
 
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         $this->signIn(User::first());
     }
 
