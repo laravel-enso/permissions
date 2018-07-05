@@ -16,7 +16,7 @@ class PermissionGroupController extends Controller
 
     public function store(ValidatePermissionGroupRequest $request)
     {
-        $group = PermissionGroup::create($request->all());
+        $group = PermissionGroup::create($request->validated());
 
         return [
             'message' => __('The permission group was created!'),
@@ -32,7 +32,7 @@ class PermissionGroupController extends Controller
 
     public function update(ValidatePermissionGroupRequest $request, PermissionGroup $permissionGroup)
     {
-        $permissionGroup->update($request->all());
+        $permissionGroup->update($request->validated());
 
         return [
             'message' => __('The permission group was successfully updated'),

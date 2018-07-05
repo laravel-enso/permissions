@@ -8,14 +8,27 @@ class ValidateResourceRequest extends FormRequest
 {
     public function authorize()
     {
-        return true;
+        return 'boolean';
     }
 
     public function rules()
     {
+        \Log::info(request()->all());
+
         return [
             'prefix' => 'required',
             'permission_group_id' => 'required|exists:permission_groups,id',
+            'index' => 'boolean',
+            'create' => 'boolean',
+            'store' => 'boolean',
+            'show' => 'boolean',
+            'edit' => 'boolean',
+            'update' => 'boolean',
+            'destroy' => 'boolean',
+            'initTable' => 'boolean',
+            'getTableData' => 'boolean',
+            'exportExcel' => 'boolean',
+            'selectOptions' => 'boolean',
         ];
     }
 }

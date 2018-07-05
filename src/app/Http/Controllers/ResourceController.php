@@ -16,7 +16,7 @@ class ResourceController extends Controller
 
     public function store(ValidateResourceRequest $request)
     {
-        (new ResourceCreator($request->all()))->store();
+        (new ResourceCreator($request->validated()))->store();
 
         return [
             'message' => __('The permissions were created!'),
