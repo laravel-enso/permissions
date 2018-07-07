@@ -1,7 +1,6 @@
 {
     "routePrefix": "system.permissions",
     "readSuffix": "getTableData",
-    "writeSuffix": null,
     "name": "Permissions",
     "icon": "exclamation-triangle",
     "crtNo": true,

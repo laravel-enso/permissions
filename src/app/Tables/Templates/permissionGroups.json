@@ -1,7 +1,6 @@
 {
     "routePrefix": "system.permissionGroups",
     "readSuffix": "getTableData",
-    "writeSuffix": null,
     "name": "Permission Groups",
     "icon": "object-group",
     "crtNo": true,
