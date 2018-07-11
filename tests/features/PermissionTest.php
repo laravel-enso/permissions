@@ -37,7 +37,7 @@ class PermissionTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'message' => 'The permission was created!',
+                'message',
                 'redirect' => 'system.permissions.edit',
                 'id' => $permission->id,
             ]);
