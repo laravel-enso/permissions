@@ -13,8 +13,6 @@ class ValidateResourceRequest extends FormRequest
 
     public function rules()
     {
-        \Log::info(request()->all());
-
         return [
             'prefix' => 'required',
             'permission_group_id' => 'required|exists:permission_groups,id',
