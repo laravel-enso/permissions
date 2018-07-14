@@ -35,8 +35,8 @@ class PermissionGroupTest extends TestCase
         $group = PermissionGroup::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
-            ->assertJson([
-                'message' => 'The permission group was created!',
+            ->assertJsonFragment([
+                'message',
                 'redirect' => 'system.permissionGroups.edit',
                 'id' => $group->id,
             ]);
