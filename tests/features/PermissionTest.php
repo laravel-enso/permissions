@@ -37,9 +37,10 @@ class PermissionTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'message',
                 'redirect' => 'system.permissions.edit',
                 'id' => $permission->id,
+            ])->assertJsonStructure([
+                'message',
             ]);
     }
 
@@ -61,7 +62,7 @@ class PermissionTest extends TestCase
 
         $this->patch(route('system.permissions.update', $permission->id, false), $permission->toArray())
             ->assertStatus(200)
-            ->assertJsonFragment(['message']);
+            ->assertJsonStructure(['message']);
 
         $this->assertEquals('edited', $permission->fresh()->description);
     }

@@ -36,9 +36,10 @@ class PermissionGroupTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'message',
                 'redirect' => 'system.permissionGroups.edit',
                 'id' => $group->id,
+            ])->assertJsonStructure([
+                'message'
             ]);
     }
 
@@ -60,7 +61,7 @@ class PermissionGroupTest extends TestCase
 
         $this->patch(route('system.permissionGroups.update', $group->id, false), $group->toArray())
             ->assertStatus(200)
-            ->assertJsonFragment(['message']);
+            ->assertJsonStructure(['message']);
 
         $this->assertEquals('edited', $group->fresh()->description);
     }
