@@ -1,15 +1,13 @@
 {
     "routePrefix": "system.permissions",
     "readSuffix": "getTableData",
-    "name": "Permissions",
-    "icon": "exclamation-triangle",
     "crtNo": true,
     "buttons": [
         "excel", 
         {
             "type": "global",
             "icon": "plus",
-            "class": "is-info",
+            "class": null,
             "fullRoute": "system.resourcePermissions.create",
             "event": "create-resource",
             "action": "router",

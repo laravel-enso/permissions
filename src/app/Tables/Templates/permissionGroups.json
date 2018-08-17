@@ -1,8 +1,6 @@
 {
     "routePrefix": "system.permissionGroups",
     "readSuffix": "getTableData",
-    "name": "Permission Groups",
-    "icon": "object-group",
     "crtNo": true,
     "buttons": ["excel", "create", "edit", "destroy"],
     "columns": [
