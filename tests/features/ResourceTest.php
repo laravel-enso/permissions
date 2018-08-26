@@ -19,14 +19,17 @@ class ResourceTest extends TestCase
     {
         parent::setUp();
 
-        $this->withoutExceptionHandling();
-        $this->signIn(User::first());
+        // $this->withoutExceptionHandling();
+
+        $this->seed()
+            ->signIn(User::first());
     }
 
     /** @test */
     public function store()
     {
         $group = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
+
         $params = $this->postParams($group);
 
         $this->post(route('system.resourcePermissions.store', [], false), $params)
@@ -35,6 +38,7 @@ class ResourceTest extends TestCase
         $permissions = Permission::wherePermissionGroupId($group->id)->get(['name']);
 
         $this->assertEquals($this->getPermissionCount(), $permissions->count());
+
         $this->assertTrue($this->hasRightPrefix($permissions, $group->name));
     }
 

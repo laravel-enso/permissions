@@ -22,14 +22,18 @@ class PermissionGroupTest extends TestCase
         parent::setUp();
 
         // $this->withoutExceptionHandling();
+
+        $this->seed()
+            ->signIn(User::first());
+
         $this->faker = Factory::create();
-        $this->signIn(User::first());
     }
 
     /** @test */
     public function store()
     {
         $postParams = $this->postParams();
+
         $response = $this->post(route('system.permissionGroups.store', [], false), $postParams);
 
         $group = PermissionGroup::whereName($postParams['name'])->first();
@@ -57,6 +61,7 @@ class PermissionGroupTest extends TestCase
     public function update()
     {
         $group = PermissionGroup::create($this->postParams());
+
         $group->description = 'edited';
 
         $this->patch(route('system.permissionGroups.update', $group->id, false), $group->toArray())
@@ -82,6 +87,7 @@ class PermissionGroupTest extends TestCase
     public function cant_destroy_if_has_permission()
     {
         $group = PermissionGroup::create($this->postParams());
+
         $this->addPermission($group);
 
         $this->delete(route('system.permissionGroups.destroy', $group->id, false))
