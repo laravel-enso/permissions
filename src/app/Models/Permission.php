@@ -25,12 +25,8 @@ class Permission extends Model
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class)->withTimestamps();
-    }
-
-    public function getRoleListAttribute()
-    {
-        return $this->roles()->pluck('id');
+        return $this->belongsToMany(Role::class)
+            ->withTimestamps();
     }
 
     public function tutorials()

@@ -9,20 +9,21 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->loadDependencies();
-        $this->publishesAll();
-
         $this->app['router']->aliasMiddleware('verify-route-access', VerifyRouteAccess::class);
+
+        $this->load();
+
+        $this->publish();
     }
 
-    private function loadDependencies()
+    private function load()
     {
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         $this->mergeConfigFrom(__DIR__.'/config/resource-permissions.php', 'resource-permissions');
     }
 
-    private function publishesAll()
+    private function publish()
     {
         $this->publishes([
             __DIR__.'/resources/assets/js' => resource_path('assets/js'),

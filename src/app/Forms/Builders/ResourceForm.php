@@ -22,9 +22,4 @@ class ResourceForm
             ->options('permission_group_id', PermissionGroup::get(['name', 'id']))
             ->create();
     }
-
-    public function edit(PermissionGroup $permissionGroup)
-    {
-        return $this->form->edit($permissionGroup);
-    }
 }

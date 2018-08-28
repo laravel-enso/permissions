@@ -16,26 +16,21 @@ class PermissionForm
 
     public function __construct()
     {
-        $this->form = new Form(self::FormPath);
+        $this->form = (new Form(self::FormPath))
+            ->options('type', PermissionTypes::select())
+            ->options('permission_group_id', PermissionGroup::get(['name', 'id']))
+            ->options('roleList', Role::get(['name', 'id']));
     }
 
     public function create()
     {
-        return $this->form
-            ->options('type', PermissionTypes::select())
-            ->options('permission_group_id', PermissionGroup::get(['name', 'id']))
-            ->options('roleList', Role::get(['name', 'id']))
-            ->create();
+        return $this->form->create();
     }
 
     public function edit(Permission $permission)
     {
-        $permission->append(['roleList']);
-
         return $this->form
-            ->options('type', PermissionTypes::select())
-            ->options('permission_group_id', PermissionGroup::get(['name', 'id']))
-            ->options('roleList', Role::get(['name', 'id']))
+            ->value('roleList', $permission->roleList())
             ->edit($permission);
     }
 }

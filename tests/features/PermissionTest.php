@@ -61,12 +61,14 @@ class PermissionTest extends TestCase
     /** @test */
     public function update()
     {
-        $permission = Permission::create($this->postParams())
-                        ->append(['roleList']);
+        $permission = Permission::create($this->postParams());
 
         $permission->description = 'edited';
 
-        $this->patch(route('system.permissions.update', $permission->id, false), $permission->toArray())
+        $this->patch(
+            route('system.permissions.update', $permission->id, false),
+            $permission->toArray() + ['roleList' => []]
+        )
             ->assertStatus(200)
             ->assertJsonStructure(['message']);
 
