@@ -44,7 +44,7 @@ class PermissionController extends Controller
         $permission->delete();
 
         return [
-            'message' => __('The permission was successfully updated'),
+            'message' => __('The permission was successfully deleted'),
             'redirect' => 'system.permissions.index',
         ];
     }
