@@ -2,13 +2,12 @@
 
 namespace LaravelEnso\PermissionManager\app\Classes;
 
+use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Enums\ResourcePermissions;
 
 class ResourceCreator
 {
-    private const AdminRoleId = [1];
-
     private $request;
 
     public function __construct(array $request)
@@ -21,7 +20,7 @@ class ResourceCreator
         \DB::transaction(function () {
             $this->permissionCollection($this->request)
                 ->each(function ($permission) {
-                    $permission['roleList'] = self::AdminRoleId;
+                    $permission['roleList'] = [Role::AdminId];
                     (new Permission())
                         ->storeWithRoles($permission);
                 });
