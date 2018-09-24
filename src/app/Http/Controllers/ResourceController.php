@@ -2,13 +2,16 @@
 
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use LaravelEnso\PermissionManager\app\Classes\ResourceCreator;
 use LaravelEnso\PermissionManager\app\Forms\Builders\ResourceForm;
 use LaravelEnso\PermissionManager\app\Http\Requests\ValidateResourceRequest;
 
 class ResourceController extends Controller
 {
+    use ValidatesRequests;
+
     public function create(ResourceForm $form)
     {
         return ['form' => $form->create()];
