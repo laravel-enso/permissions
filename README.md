@@ -13,7 +13,7 @@ Permission Manager dependency for [Laravel Enso](https://github.com/laravel-enso
 
 - permissions are managed based on the user role
 - allows creating, updating and deleting of permissions for each route
-- permits the one step creation of permissions for a resource type of route
+- one step creation of permissions for a resource type of route
 - has the `access-route` policy which can be used to check if the a user is authorized on a given route
 - comes with the `VerifyRouteAccess` middleware that checks against unauthorized access
 
