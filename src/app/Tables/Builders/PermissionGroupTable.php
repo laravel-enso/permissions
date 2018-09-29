@@ -12,7 +12,7 @@ class PermissionGroupTable extends Table
     public function query()
     {
         return PermissionGroup::select(\DB::raw('
-            id as "dtRowId", name, description, created_at, updated_at
+            id as "dtRowId", name, description, created_at
         '));
     }
 }
