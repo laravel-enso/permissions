@@ -16,6 +16,6 @@ return [
         ['name' => 'exportExcel', 'type' => 0, 'permission_group_id' => null, 'description' => 'Export excel for  ', 'is_default' => false],
     ],
     'vueSelect' => [
-        ['name' => 'selectOptions', 'type' => 0, 'permission_group_id' => null, 'description' => 'Get vue-select options for  ', 'is_default' => false],
+        ['name' => 'options', 'type' => 0, 'permission_group_id' => null, 'description' => 'Get vue-select options for  ', 'is_default' => false],
     ],
 ];

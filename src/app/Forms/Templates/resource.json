@@ -100,8 +100,8 @@
                 "content": "checkbox"
             }
         }, {
-            "label": ".selectOptions",
-            "name": "selectOptions",
+            "label": ".options",
+            "name": "options",
             "value": true,
             "meta": {
                 "type": "input",

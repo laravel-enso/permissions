@@ -1,68 +1,65 @@
 <?php
 
+use Tests\TestCase;
 use LaravelEnso\Core\app\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\PermissionManager\app\Enums\ResourcePermissions;
+use LaravelEnso\FormBuilder\app\TestTraits\CreateForm;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
-use LaravelEnso\TestHelper\app\Traits\SignIn;
-use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
-use Tests\TestCase;
+use LaravelEnso\PermissionManager\app\Enums\ResourcePermissions;
 
 class ResourceTest extends TestCase
 {
-    use RefreshDatabase, SignIn, TestCreateForm;
+    use CreateForm, RefreshDatabase;
 
-    private $prefix = 'system.resourcePermissions';
+    private $permissionGroup = 'system.resourcePermissions';
 
     protected function setUp()
     {
         parent::setUp();
 
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $this->seed()
-            ->signIn(User::first());
+            ->actingAs(User::first());
     }
 
     /** @test */
-    public function store()
+    public function can_create_resource_permissions()
     {
-        $group = PermissionGroup::create(['name' => 'test', 'description' => 'test']);
+        $group = factory(PermissionGroup::class)->create([
+            'name' => 'test',
+            'description' => 'test'
+        ]);
 
-        $params = $this->postParams($group);
+        $this->post(
+            route('system.resourcePermissions.store'),
+            $this->params($group)
+        )->assertJson(['redirect' => 'system.permissions.index']);
 
-        $this->post(route('system.resourcePermissions.store', [], false), $params)
-            ->assertJson(['redirect' => 'system.permissions.index']);
+        $permissions = Permission::wherePermissionGroupId($group->id)
+            ->get(['name']);
 
-        $permissions = Permission::wherePermissionGroupId($group->id)->get(['name']);
+        $this->assertEquals($this->permissionCount(), $permissions->count());
 
-        $this->assertEquals($this->getPermissionCount(), $permissions->count());
-
-        $this->assertTrue($this->hasRightPrefix($permissions, $group->name));
+        $this->assertTrue($this->prefixIsCorrect($permissions, $group->name));
     }
 
-    private function getPermissionCount()
+    private function permissionCount()
     {
-        $resourcePermissions = ResourcePermissions::values();
-
-        $count = 0;
-
-        foreach ($resourcePermissions as $group) {
-            $count += count($group);
-        }
-
-        return $count;
+        return collect(ResourcePermissions::values())
+            ->flatten(1)
+            ->count();
     }
 
-    private function hasRightPrefix($permissions, $preffix)
+    private function prefixIsCorrect($permissions, $preffix)
     {
         return $permissions->filter(function ($permission) use ($preffix) {
             return strpos($permission->name, $preffix) !== 0;
         })->count() === 0;
     }
 
-    private function postParams(PermissionGroup $group)
+    private function params(PermissionGroup $group)
     {
         return [
             'prefix' => 'testPrefix',
@@ -77,7 +74,7 @@ class ResourceTest extends TestCase
             'initTable' => true,
             'getTableData' => true,
             'exportExcel' => true,
-            'selectOptions' => true,
+            'options' => true,
         ];
     }
 }

@@ -6,5 +6,6 @@ use LaravelEnso\Helpers\app\Classes\Enum;
 
 class PermissionTypes extends Enum
 {
-    protected static $data = ['Read', 'Write'];
+    const Read = 0;
+    const Write = 1;
 }

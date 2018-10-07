@@ -3,15 +3,12 @@
 namespace LaravelEnso\PermissionManager\app\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Forms\Builders\PermissionForm;
 use LaravelEnso\PermissionManager\app\Http\Requests\ValidatePermissionRequest;
 
 class PermissionController extends Controller
 {
-    use ValidatesRequests;
-
     public function create(PermissionForm $form)
     {
         return ['form' => $form->create()];

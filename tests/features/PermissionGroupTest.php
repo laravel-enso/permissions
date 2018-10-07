@@ -1,21 +1,21 @@
 <?php
 
-use LaravelEnso\Core\app\Models\User;
-use Faker\Factory;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\PermissionManager\app\Models\Permission;
-use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
-use LaravelEnso\TestHelper\app\Traits\SignIn;
-use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
-use LaravelEnso\TestHelper\app\Traits\TestDataTable;
+use App\User;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use LaravelEnso\FormBuilder\app\TestTraits\EditForm;
+use LaravelEnso\FormBuilder\app\TestTraits\CreateForm;
+use LaravelEnso\FormBuilder\app\TestTraits\DestroyForm;
+use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\VueDatatable\app\Traits\Tests\Datatable;
+use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 
 class PermissionGroupTest extends TestCase
 {
-    use RefreshDatabase, SignIn, TestDataTable, TestCreateForm;
+    use CreateForm, Datatable, DestroyForm, EditForm, RefreshDatabase;
 
-    private $faker;
-    private $prefix = 'system.permissionGroups';
+    private $permissionGroup = 'system.permissionGroups';
+    private $testModel;
 
     protected function setUp()
     {
@@ -24,19 +24,22 @@ class PermissionGroupTest extends TestCase
         // $this->withoutExceptionHandling();
 
         $this->seed()
-            ->signIn(User::first());
+            ->actingAs(User::first());
 
-        $this->faker = Factory::create();
+        $this->testModel = factory(PermissionGroup::class)
+            ->make();
     }
 
     /** @test */
-    public function store()
+    public function can_store_permission_group()
     {
-        $postParams = $this->postParams();
+        $response = $this->post(
+            route('system.permissionGroups.store', [], false),
+            $this->testModel->toArray()
+        );
 
-        $response = $this->post(route('system.permissionGroups.store', [], false), $postParams);
-
-        $group = PermissionGroup::whereName($postParams['name'])->first();
+        $group = PermissionGroup::whereName($this->testModel->name)
+            ->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
@@ -48,71 +51,29 @@ class PermissionGroupTest extends TestCase
     }
 
     /** @test */
-    public function edit()
+    public function can_update_permission_group()
     {
-        $group = PermissionGroup::create($this->postParams());
+        $this->testModel->save();
 
-        $this->get(route('system.permissionGroups.edit', $group->id, false))
-            ->assertStatus(200)
-            ->assertJsonStructure(['form']);
-    }
+        $this->testModel->description = 'edited';
 
-    /** @test */
-    public function update()
-    {
-        $group = PermissionGroup::create($this->postParams());
-
-        $group->description = 'edited';
-
-        $this->patch(route('system.permissionGroups.update', $group->id, false), $group->toArray())
+        $this->patch(route('system.permissionGroups.update', $this->testModel->id, false), $this->testModel->toArray())
             ->assertStatus(200)
             ->assertJsonStructure(['message']);
 
-        $this->assertEquals('edited', $group->fresh()->description);
-    }
-
-    /** @test */
-    public function destroy()
-    {
-        $group = PermissionGroup::create($this->postParams());
-
-        $this->delete(route('system.permissionGroups.destroy', $group->id, false))
-            ->assertStatus(200)
-            ->assertJsonStructure(['message', 'redirect']);
-
-        $this->assertNull($group->fresh());
+        $this->assertEquals('edited', $this->testModel->fresh()->description);
     }
 
     /** @test */
     public function cant_destroy_if_has_permission()
     {
-        $group = PermissionGroup::create($this->postParams());
+        $this->testModel->save();
+        $this->testModel->permissions()
+            ->save(factory(Permission::class)->make());
 
-        $this->addPermission($group);
-
-        $this->delete(route('system.permissionGroups.destroy', $group->id, false))
+        $this->delete(route('system.permissionGroups.destroy', $this->testModel->id, false))
             ->assertStatus(409);
 
-        $this->assertNotNull($group->fresh());
-    }
-
-    private function addPermission($group)
-    {
-        Permission::create([
-            'permission_group_id' => $group->id,
-            'name' => $this->faker->word,
-            'description' => $this->faker->sentence,
-            'type' => 0,
-            'is_default' => 0,
-        ]);
-    }
-
-    private function postParams()
-    {
-        return [
-            'name' => $this->faker->word,
-            'description' => $this->faker->sentence,
-            '_method' => 'POST',
-        ];
+        $this->assertNotNull($this->testModel->fresh());
     }
 }

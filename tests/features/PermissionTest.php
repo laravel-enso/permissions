@@ -1,22 +1,22 @@
 <?php
 
-use LaravelEnso\Core\app\Models\User;
 use Faker\Factory;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\PermissionManager\app\Models\Permission;
-use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
-use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\TestHelper\app\Traits\SignIn;
-use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
-use LaravelEnso\TestHelper\app\Traits\TestDataTable;
 use Tests\TestCase;
+use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\RoleManager\app\Models\Role;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use LaravelEnso\FormBuilder\app\TestTraits\EditForm;
+use LaravelEnso\FormBuilder\app\TestTraits\CreateForm;
+use LaravelEnso\FormBuilder\app\TestTraits\DestroyForm;
+use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\VueDatatable\app\Traits\Tests\Datatable;
 
 class PermissionTest extends TestCase
 {
-    use RefreshDatabase, SignIn, TestDataTable, TestCreateForm;
+    use CreateForm, Datatable, DestroyForm, EditForm, RefreshDatabase;
 
-    private $faker;
-    private $prefix = 'system.permissions';
+    private $permissionGroup = 'system.permissions';
+    private $testModel;
 
     protected function setUp()
     {
@@ -25,19 +25,22 @@ class PermissionTest extends TestCase
         // $this->withoutExceptionHandling();
 
         $this->seed()
-            ->signIn(User::first());
+            ->actingAs(User::first());
 
-        $this->faker = Factory::create();
+        $this->testModel = factory(Permission::class)
+            ->make();
     }
 
     /** @test */
-    public function store()
+    public function can_store_permission()
     {
-        $postParams = $this->postParams();
+        $response = $this->post(
+            route('system.permissions.store'),
+            $this->testModel->toArray() + ['roleList' => []]
+        );
 
-        $response = $this->post(route('system.permissions.store', [], false), $postParams);
-
-        $permission = Permission::whereName($postParams['name'])->first();
+        $permission = Permission::whereName($this->testModel->name)
+            ->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
@@ -49,68 +52,31 @@ class PermissionTest extends TestCase
     }
 
     /** @test */
-    public function edit()
+    public function can_update_permission()
     {
-        $permission = Permission::create($this->postParams());
+        $this->testModel->save();
 
-        $this->get(route('system.permissions.edit', $permission->id, false))
-            ->assertStatus(200)
-            ->assertJsonStructure(['form']);
-    }
-
-    /** @test */
-    public function update()
-    {
-        $permission = Permission::create($this->postParams());
-
-        $permission->description = 'edited';
+        $this->testModel->description = 'edited';
 
         $this->patch(
-            route('system.permissions.update', $permission->id, false),
-            $permission->toArray() + ['roleList' => []]
-        )
-            ->assertStatus(200)
-            ->assertJsonStructure(['message']);
+            route('system.permissions.update', $this->testModel->id, false),
+            $this->testModel->toArray() + ['roleList' => []]
+        )->assertStatus(200)
+        ->assertJsonStructure(['message']);
 
-        $this->assertEquals('edited', $permission->fresh()->description);
-    }
-
-    /** @test */
-    public function destroy()
-    {
-        $permission = Permission::create($this->postParams());
-
-        $this->delete(route('system.permissions.destroy', $permission->id, false))
-            ->assertStatus(200)
-            ->assertJsonStructure(['message']);
-
-        $this->assertNull($permission->fresh());
+        $this->assertEquals('edited', $this->testModel->fresh()->description);
     }
 
     /** @test */
     public function cant_destroy_if_has_roles()
     {
-        $permission = Permission::create($this->postParams());
+        $this->testModel->save();
 
-        $role = Role::first(['id']);
+        $this->testModel->roles()->attach(Role::first(['id']));
 
-        $permission->roles()->attach($role->id);
-
-        $this->delete(route('system.permissions.destroy', $permission->id, false))
+        $this->delete(route('system.permissions.destroy', $this->testModel->id, false))
             ->assertStatus(409);
 
-        $this->assertNotNull($permission->fresh());
-    }
-
-    private function postParams()
-    {
-        return [
-            'permission_group_id' => PermissionGroup::first(['id'])->id,
-            'name' => $this->faker->word,
-            'description' => $this->faker->sentence,
-            'type' => 0,
-            'is_default' => 0,
-            'roleList' => []
-        ];
+        $this->assertNotNull($this->testModel->fresh());
     }
 }

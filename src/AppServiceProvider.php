@@ -26,6 +26,14 @@ class AppServiceProvider extends ServiceProvider
     private function publish()
     {
         $this->publishes([
+            __DIR__.'/database/factories' => database_path('factories'),
+        ], 'permissions-factories');
+
+        $this->publishes([
+            __DIR__.'/database/factories' => database_path('factories'),
+        ], 'enso-factories');
+
+        $this->publishes([
             __DIR__.'/resources/js' => resource_path('js'),
         ], 'permissions-assets');
 

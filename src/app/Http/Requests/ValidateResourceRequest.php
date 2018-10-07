@@ -26,7 +26,7 @@ class ValidateResourceRequest extends FormRequest
             'initTable' => 'boolean',
             'getTableData' => 'boolean',
             'exportExcel' => 'boolean',
-            'selectOptions' => 'boolean',
+            'options' => 'boolean',
         ];
     }
 }
