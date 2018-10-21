@@ -10,8 +10,7 @@ class VerifyRouteAccess
     public function handle($request, Closure $next)
     {
         if ($request->user()->cannot(
-            'access-route',
-            $request->route()->getName()
+            'access-route', $request->route()->getName()
         )) {
             throw new AuthorizationException(
                 __('You are not authorized to perform this action')
