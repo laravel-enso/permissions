@@ -13,8 +13,7 @@ class PermissionTable extends Table
     {
         return Permission::select(\DB::raw('
             permissions.id as "dtRowId", permissions.name, permissions.description,
-            permissions.type, permissions.created_at, permission_groups.name as groupName,
-            permissions.is_default
-        '))->join('permission_groups', 'permissions.permission_group_id', '=', 'permission_groups.id');
+            permissions.type, permissions.created_at, permissions.is_default
+        '));
     }
 }

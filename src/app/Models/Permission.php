@@ -3,6 +3,7 @@
 namespace LaravelEnso\PermissionManager\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\RoleManager\app\Traits\HasRoles;
 use LaravelEnso\TutorialManager\app\Models\Tutorial;
@@ -12,21 +13,18 @@ class Permission extends Model
 {
     use HasRoles;
 
-    protected $fillable = [
-        'permission_group_id', 'name', 'description', 'type', 'is_default',
-    ];
+    protected $fillable = ['name', 'description', 'type', 'is_default'];
 
     protected $casts = ['is_default' => 'boolean'];
 
-    public function permission_group()
+    public function menu()
     {
-        return $this->belongsTo(PermissionGroup::class);
+        return $this->hasOne(Menu::class);
     }
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class)
-            ->withTimestamps();
+        return $this->belongsToMany(Role::class);
     }
 
     public function tutorials()

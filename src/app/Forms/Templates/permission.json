@@ -28,15 +28,6 @@
                 "options": "LaravelEnso\\PermissionManager\\app\\Enums\\PermissionTypes"
             }
         }, {
-            "label": "Permission Group",
-            "name": "permission_group_id",
-            "value": null,
-            "meta": {
-                "type": "select",
-                "multiple": false,
-                "options": []
-            }
-        }, {
             "label": "Roles",
             "name": "roleList",
             "value": [],

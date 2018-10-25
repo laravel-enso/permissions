@@ -21,7 +21,6 @@ class ValidatePermissionRequest extends FormRequest
             : $nameUnique;
 
         return [
-            'permission_group_id' => 'required',
             'name' => ['required', $nameUnique],
             'description' => 'required',
             'type' => 'required',

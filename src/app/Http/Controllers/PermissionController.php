@@ -21,7 +21,7 @@ class PermissionController extends Controller
         return [
             'message' => __('The permission was created!'),
             'redirect' => 'system.permissions.edit',
-            'id' => $permission->id,
+            'param' => ['permission' => $permission->id],
         ];
     }
 

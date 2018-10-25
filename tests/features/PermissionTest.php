@@ -45,7 +45,7 @@ class PermissionTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'redirect' => 'system.permissions.edit',
-                'id' => $permission->id,
+                'param' => ['permission' => $permission->id],
             ])->assertJsonStructure([
                 'message',
             ]);

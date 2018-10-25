@@ -23,8 +23,6 @@ class AppServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
-        $this->mergeConfigFrom(__DIR__.'/config/resource-permissions.php', 'resource-permissions');
-
         return $this;
     }
 

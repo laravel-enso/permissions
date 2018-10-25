@@ -1,20 +1,7 @@
 {
     "routePrefix": "system.permissions",
-    "readSuffix": "getTableData",
     "crtNo": true,
-    "buttons": [
-        "excel", 
-        {
-            "type": "global",
-            "icon": "plus",
-            "class": null,
-            "fullRoute": "system.resourcePermissions.create",
-            "event": "create-resource",
-            "action": "router",
-            "label": "Resource"
-        },
-        "create", "edit", "destroy"
-    ],
+    "buttons": ["excel", "create", "edit", "destroy"],
     "appends": ["isRead"],
     "columns": [
         {
@@ -33,11 +20,6 @@
             "data": "permissions.type",
             "enum": "\\LaravelEnso\\PermissionManager\\app\\Enums\\PermissionTypes",
             "meta": ["slot", "sortable", "translation"]
-        }, {
-            "label": "Group",
-            "name": "groupName",
-            "data": "permission_groups.name",
-            "meta": ["searchable", "sortable"]
         }, {
             "label": "Default",
             "name": "is_default",
