@@ -29,7 +29,7 @@
             }
         }, {
             "label": "Roles",
-            "name": "roleList",
+            "name": "roles",
             "value": [],
             "meta": {
                 "type": "select",

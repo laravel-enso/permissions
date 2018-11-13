@@ -36,7 +36,7 @@ class PermissionTest extends TestCase
     {
         $response = $this->post(
             route('system.permissions.store'),
-            $this->testModel->toArray() + ['roleList' => []]
+            $this->testModel->toArray() + ['roles' => []]
         );
 
         $permission = Permission::whereName($this->testModel->name)
@@ -60,7 +60,7 @@ class PermissionTest extends TestCase
 
         $this->patch(
             route('system.permissions.update', $this->testModel->id, false),
-            $this->testModel->toArray() + ['roleList' => []]
+            $this->testModel->toArray() + ['roles' => []]
         )->assertStatus(200)
         ->assertJsonStructure(['message']);
 

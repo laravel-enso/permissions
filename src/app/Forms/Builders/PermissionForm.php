@@ -15,7 +15,7 @@ class PermissionForm
     public function __construct()
     {
         $this->form = (new Form(self::FormPath))
-            ->options('roleList', Role::get(['name', 'id']));
+            ->options('roles', Role::get(['name', 'id']));
     }
 
     public function create()
@@ -26,7 +26,6 @@ class PermissionForm
     public function edit(Permission $permission)
     {
         return $this->form
-            ->value('roleList', $permission->roleList())
             ->edit($permission);
     }
 }
