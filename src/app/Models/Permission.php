@@ -7,11 +7,12 @@ use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\RoleManager\app\Traits\HasRoles;
 use LaravelEnso\TutorialManager\app\Models\Tutorial;
+use LaravelEnso\Multitenancy\app\Traits\SystemConnection;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Permission extends Model
 {
-    use HasRoles;
+    use HasRoles, SystemConnection;
 
     protected $fillable = ['name', 'description', 'type', 'is_default'];
 
