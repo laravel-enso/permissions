@@ -3,6 +3,7 @@
     "crtNo": true,
     "buttons": ["excel", "create", "edit", "destroy"],
     "appends": ["isRead"],
+    "cache": true,
     "columns": [
         {
             "label": "Name",
