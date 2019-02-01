@@ -9,7 +9,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->app['router']->middleware(
+        $this->app['router']->aliasMiddleware(
             'verify-route-access', VerifyRouteAccess::class
         );
 
