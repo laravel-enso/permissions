@@ -8,12 +8,11 @@ use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\RoleManager\app\Traits\HasRoles;
 use LaravelEnso\VueDatatable\app\Traits\TableCache;
 use LaravelEnso\TutorialManager\app\Models\Tutorial;
-use LaravelEnso\Multitenancy\app\Traits\SystemConnection;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Permission extends Model
 {
-    use HasRoles, SystemConnection, TableCache;
+    use HasRoles, TableCache;
 
     protected $fillable = ['name', 'description', 'type', 'is_default'];
 
