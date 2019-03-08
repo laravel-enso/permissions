@@ -18,7 +18,7 @@ class PermissionTest extends TestCase
     private $permissionGroup = 'system.permissions';
     private $testModel;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
