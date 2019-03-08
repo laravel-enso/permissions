@@ -35,18 +35,10 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/database/factories' => database_path('factories'),
         ], 'enso-factories');
-
-        $this->publishes([
-            __DIR__.'/resources/js' => resource_path('js'),
-        ], 'permissions-assets');
-
-        $this->publishes([
-            __DIR__.'/resources/js' => resource_path('js'),
-        ], 'enso-assets');
     }
 
     public function register()
     {
-        $this->app->register(AuthServiceProvider::class);
+        //
     }
 }
