@@ -46,9 +46,7 @@ class PermissionTest extends TestCase
             ->assertJsonFragment([
                 'redirect' => 'system.permissions.edit',
                 'param' => ['permission' => $permission->id],
-            ])->assertJsonStructure([
-                'message',
-            ]);
+            ])->assertJsonStructure(['message']);
     }
 
     /** @test */
@@ -64,7 +62,7 @@ class PermissionTest extends TestCase
         )->assertStatus(200)
         ->assertJsonStructure(['message']);
 
-        $this->assertEquals('edited', $this->testModel->fresh()->description);
+        $this->assertEquals($this->testModel->description, $this->testModel->fresh()->description);
     }
 
     /** @test */

@@ -18,8 +18,6 @@ class Permission extends Model
 
     protected $casts = ['is_default' => 'boolean'];
 
-    protected $cachedTable = 'permissions';
-
     public function menu()
     {
         return $this->hasOne(Menu::class);

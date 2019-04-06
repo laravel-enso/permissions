@@ -14,5 +14,6 @@ Route::middleware(['web', 'auth', 'core'])
                     ->name('exportExcel');
             });
 
-        Route::resource('permissions', 'PermissionController', ['except' => ['show', 'index']]);
+        Route::resource('permissions', 'PermissionController')
+            ->except('show', 'index');
     });

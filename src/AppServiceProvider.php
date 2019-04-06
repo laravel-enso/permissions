@@ -36,9 +36,4 @@ class AppServiceProvider extends ServiceProvider
             __DIR__.'/database/factories' => database_path('factories'),
         ], 'enso-factories');
     }
-
-    public function register()
-    {
-        //
-    }
 }
