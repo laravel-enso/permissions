@@ -1,12 +1,12 @@
 {
-    "name": "laravel-enso/permissionmanager",
-    "description": "Permission Manager dependency for Laravel Enso",
+    "name": "laravel-enso/permissions",
+    "description": "Permissions dependency for Laravel Enso",
     "keywords": [
         "laravel-enso",
         "permission-manager",
         "laravel-permissions"
     ],
-    "homepage": "https://github.com/laravel-enso/PermissionManager",
+    "homepage": "https://github.com/laravel-enso/permissions",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -19,24 +19,24 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "laravel-enso/core": "4.2.*",
-        "laravel-enso/formbuilder": "3.0.*",
-        "laravel-enso/helpers": "1.10.*",
-        "laravel-enso/rolemanager": "3.0.*",
-        "laravel-enso/structuremanager": "3.0.*",
-        "laravel-enso/tutorialmanager": "3.0.*",
-        "laravel-enso/vuedatatable": "2.0.*"
+        "laravel-enso/core": "4.3.*",
+        "laravel-enso/forms": "3.1.*",
+        "laravel-enso/helpers": "1.11.*",
+        "laravel-enso/roles": "3.1.*",
+        "laravel-enso/migrator": "1.0.*",
+        "laravel-enso/tutorials": "3.1.*",
+        "laravel-enso/tables": "2.1.*"
     },
     "autoload": {
         "psr-4": {
-            "LaravelEnso\\PermissionManager\\": "src/"
+            "LaravelEnso\\Permissions\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "LaravelEnso\\PermissionManager\\AppServiceProvider",
-                "LaravelEnso\\PermissionManager\\AuthServiceProvider"
+                "LaravelEnso\\Permissions\\AppServiceProvider",
+                "LaravelEnso\\Permissions\\AuthServiceProvider"
             ],
             "aliases": {}
         }

@@ -1,13 +1,14 @@
 <?php
 
-namespace LaravelEnso\PermissionManager\app\Models;
+namespace LaravelEnso\Permissions\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\MenuManager\app\Models\Menu;
-use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\RoleManager\app\Traits\HasRoles;
-use LaravelEnso\VueDatatable\app\Traits\TableCache;
-use LaravelEnso\TutorialManager\app\Models\Tutorial;
+use LaravelEnso\Menus\app\Models\Menu;
+use LaravelEnso\Permissions\app\Enums\Types;
+use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Roles\app\Traits\HasRoles;
+use LaravelEnso\Tables\app\Traits\TableCache;
+use LaravelEnso\Tutorials\app\Models\Tutorial;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Permission extends Model
@@ -35,7 +36,7 @@ class Permission extends Model
 
     public function getIsReadAttribute()
     {
-        return $this->type === 0;
+        return $this->type === Types::Read;
     }
 
     public function scopeImplicit($query)

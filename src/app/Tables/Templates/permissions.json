@@ -19,7 +19,7 @@
             "label": "Type",
             "name": "type",
             "data": "permissions.type",
-            "enum": "\\LaravelEnso\\PermissionManager\\app\\Enums\\PermissionTypes",
+            "enum": "LaravelEnso\\Permissions\\app\\Enums\\Types",
             "meta": ["slot", "sortable"]
         }, {
             "label": "Default",

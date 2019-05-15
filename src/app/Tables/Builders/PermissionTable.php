@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\PermissionManager\app\Tables\Builders;
+namespace LaravelEnso\Permissions\app\Tables\Builders;
 
-use LaravelEnso\VueDatatable\app\Classes\Table;
-use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\Tables\app\Services\Table;
+use LaravelEnso\Permissions\app\Models\Permission;
 
 class PermissionTable extends Table
 {
@@ -11,9 +11,9 @@ class PermissionTable extends Table
 
     public function query()
     {
-        return Permission::select(\DB::raw('
+        return Permission::selectRaw('
             permissions.id as "dtRowId", permissions.name, permissions.description,
             permissions.type, permissions.created_at, permissions.is_default
-        '));
+        ');
     }
 }

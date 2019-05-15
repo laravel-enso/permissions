@@ -1,20 +1,26 @@
 <?php
 
-namespace LaravelEnso\PermissionManager;
+namespace LaravelEnso\Permissions;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\PermissionManager\app\Http\Middleware\VerifyRouteAccess;
+use LaravelEnso\Permissions\app\Http\Middleware\VerifyRouteAccess;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->addMiddleware()
+            ->loadDependencies()
+            ->publishDependencies();
+    }
+
+    private function addMiddleware()
+    {
         $this->app['router']->aliasMiddleware(
             'verify-route-access', VerifyRouteAccess::class
         );
 
-        $this->loadDependencies()
-            ->publishDependencies();
+        return $this;
     }
 
     private function loadDependencies()

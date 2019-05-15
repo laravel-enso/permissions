@@ -1,8 +1,8 @@
 <?php
 
-use LaravelEnso\StructureManager\app\Classes\StructureMigration;
+use LaravelEnso\Migrator\app\Database\Migration;
 
-class CreateStructureForPermissions extends StructureMigration
+class CreateStructureForPermissions extends Migration
 {
     protected $permissions = [
         ['name' => 'system.permissions.index', 'description' => 'Permissions index', 'type' => 0, 'is_default' => false],

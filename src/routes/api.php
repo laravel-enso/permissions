@@ -1,19 +1,16 @@
 <?php
 
 Route::middleware(['web', 'auth', 'core'])
-    ->prefix('api/system')->as('system.')
-    ->namespace('LaravelEnso\PermissionManager\app\Http\Controllers')
+    ->prefix('api/system/permissions')->as('system.permissions.')
+    ->namespace('LaravelEnso\Permissions\app\Http\Controllers')
     ->group(function () {
-        Route::prefix('permissions')->as('permissions.')
-            ->group(function () {
-                Route::get('initTable', 'PermissionTableController@init')
-                    ->name('initTable');
-                Route::get('tableData', 'PermissionTableController@data')
-                    ->name('tableData');
-                Route::get('exportExcel', 'PermissionTableController@excel')
-                    ->name('exportExcel');
-            });
+        Route::get('create', 'Create')->name('create');
+        Route::post('', 'Store')->name('store');
+        Route::get('{permission}/edit', 'Edit')->name('edit');
+        Route::patch('{permission}', 'Update')->name('update');
+        Route::delete('{permission}', 'Destroy')->name('destroy');
 
-        Route::resource('permissions', 'PermissionController')
-            ->except('show', 'index');
+        Route::get('initTable', 'Table@init')->name('initTable');
+        Route::get('tableData', 'Table@data')->name('tableData');
+        Route::get('exportExcel', 'Table@excel')->name('exportExcel');
     });
