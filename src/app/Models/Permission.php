@@ -2,11 +2,11 @@
 
 namespace LaravelEnso\Permissions\app\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Menus\app\Models\Menu;
-use LaravelEnso\Permissions\app\Enums\Types;
 use LaravelEnso\Roles\app\Models\Role;
+use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Roles\app\Traits\HasRoles;
+use LaravelEnso\Permissions\app\Enums\Types;
 use LaravelEnso\Tables\app\Traits\TableCache;
 use LaravelEnso\Tutorials\app\Models\Tutorial;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;

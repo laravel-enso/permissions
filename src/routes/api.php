@@ -10,7 +10,7 @@ Route::middleware(['web', 'auth', 'core'])
         Route::patch('{permission}', 'Update')->name('update');
         Route::delete('{permission}', 'Destroy')->name('destroy');
 
-        Route::get('initTable', 'Table@init')->name('initTable');
-        Route::get('tableData', 'Table@data')->name('tableData');
-        Route::get('exportExcel', 'Table@excel')->name('exportExcel');
+        Route::get('initTable', 'InitTable')->name('initTable');
+        Route::get('tableData', 'TableData')->name('tableData');
+        Route::get('exportExcel', 'ExportExcel')->name('exportExcel');
     });
