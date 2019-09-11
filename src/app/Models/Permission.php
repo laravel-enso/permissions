@@ -46,9 +46,9 @@ class Permission extends Model
 
     public function delete()
     {
-        if ($this->roles()->count()) {
+        if ($this->roles()->exists()) {
             throw new ConflictHttpException(__(
-                'Operation failed because the permission is allocated to existing role(s)'
+                'You cannot delete this permission while being allocated to existing role(s)'
             ));
         }
 

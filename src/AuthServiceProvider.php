@@ -12,7 +12,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('access-route', function ($user, $route) {
             return $user->role->permissions()
                 ->whereName($route)
-                ->first() !== null;
+                ->exists();
         });
     }
 }

@@ -9,21 +9,15 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->addMiddleware()
-            ->loadDependencies()
-            ->publishDependencies();
-    }
-
-    private function addMiddleware()
-    {
         $this->app['router']->aliasMiddleware(
             'verify-route-access', VerifyRouteAccess::class
         );
 
-        return $this;
+        $this->load()
+            ->publish();
     }
 
-    private function loadDependencies()
+    private function load()
     {
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
 
@@ -32,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         return $this;
     }
 
-    private function publishDependencies()
+    private function publish()
     {
         $this->publishes([
             __DIR__.'/database/factories' => database_path('factories'),

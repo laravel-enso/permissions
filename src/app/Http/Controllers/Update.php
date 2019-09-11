@@ -12,8 +12,6 @@ class Update extends Controller
     {
         $permission->updateWithRoles($request->validated());
 
-        return [
-            'message' => __('The permission was successfully updated'),
-        ];
+        return ['message' => __('The permission was successfully updated')];
     }
 }

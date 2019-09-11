@@ -8,13 +8,13 @@ use LaravelEnso\Permissions\app\Models\Permission;
 
 class PermissionForm
 {
-    private const FormPath = __DIR__.'/../Templates/permission.json';
+    protected const FormPath = __DIR__.'/../Templates/permission.json';
 
-    private $form;
+    protected $form;
 
     public function __construct()
     {
-        $this->form = (new Form(self::FormPath))
+        $this->form = (new Form(static::FormPath))
             ->options('roles', Role::get(['name', 'id']));
     }
 

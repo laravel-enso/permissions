@@ -12,7 +12,7 @@ class PermissionTable extends Table
     public function query()
     {
         return Permission::selectRaw('
-            permissions.id as "dtRowId", permissions.name, permissions.description,
+            permissions.id, permissions.name, permissions.description,
             permissions.type, permissions.created_at, permissions.is_default
         ');
     }
