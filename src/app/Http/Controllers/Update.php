@@ -4,11 +4,11 @@ namespace LaravelEnso\Permissions\app\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use LaravelEnso\Permissions\app\Models\Permission;
-use LaravelEnso\Permissions\app\Http\Requests\ValidatePermissionUpdate;
+use LaravelEnso\Permissions\app\Http\Requests\ValidatePermissionRequest;
 
 class Update extends Controller
 {
-    public function __invoke(ValidatePermissionUpdate $request, Permission $permission)
+    public function __invoke(ValidatePermissionRequest $request, Permission $permission)
     {
         $permission->updateWithRoles($request->validated());
 

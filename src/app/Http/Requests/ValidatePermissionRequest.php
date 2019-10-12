@@ -5,7 +5,7 @@ namespace LaravelEnso\Permissions\app\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidatePermissionStore extends FormRequest
+class ValidatePermissionRequest extends FormRequest
 {
     public function authorize()
     {
@@ -25,6 +25,7 @@ class ValidatePermissionStore extends FormRequest
 
     protected function nameUnique()
     {
-        return Rule::unique('permissions', 'name');
+        return Rule::unique('permissions', 'name')
+            ->ignore(optional($this->route('permission'))->id);
     }
 }
