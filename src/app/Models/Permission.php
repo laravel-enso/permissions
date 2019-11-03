@@ -52,6 +52,12 @@ class Permission extends Model
             ));
         }
 
+        if ($this->menu()->exists()) {
+            throw new ConflictHttpException(__(
+                'You cannot delete this permission while being set on a menu'
+            ));
+        }
+
         parent::delete();
     }
 }
