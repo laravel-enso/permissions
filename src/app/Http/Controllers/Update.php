@@ -3,8 +3,8 @@
 namespace LaravelEnso\Permissions\app\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Permissions\app\Models\Permission;
 use LaravelEnso\Permissions\app\Http\Requests\ValidatePermissionRequest;
+use LaravelEnso\Permissions\app\Models\Permission;
 
 class Update extends Controller
 {
