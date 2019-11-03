@@ -14,22 +14,11 @@ The front end assets that utilize this api are present in the [ui](https://githu
 
 For live examples and demos, you may visit [laravel-enso.com](https://www.laravel-enso.com)
 
-[![Screenshot](https://laravel-enso.github.io/permissionsmanager/screenshots/bulma_029_thumb.png)](https://laravel-enso.github.io/permissionsmanager/screenshots/bulma_029.png)
+[![Screenshot](https://laravel-enso.github.io/permissions/screenshots/bulma_029_thumb.png)](https://laravel-enso.github.io/permissions/screenshots/bulma_029.png)
 
-## Installation
+### Installation, Configuration & Usage
 
-Comes pre-installed in Enso.
-
-## Features
-
-- permissions are managed based on the user role
-- allows creating, updating and deleting of permissions for each route
-- has the `access-route` policy which can be used to check if the a user is authorized on a given route
-- comes with the `VerifyRouteAccess` middleware that checks against unauthorized access
-
-## Configuration & Usage
-
-Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/backend/permission-manager.html)
+Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/backend/permissions.html)
 
 ## Contributions
 
