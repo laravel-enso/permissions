@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Permissions\app\Tables\Builders;
+namespace LaravelEnso\Permissions\App\Tables\Builders;
 
 use Illuminate\Database\Eloquent\Builder;
-use LaravelEnso\Permissions\app\Models\Permission;
-use LaravelEnso\Tables\app\Contracts\Table;
+use LaravelEnso\Permissions\App\Models\Permission;
+use LaravelEnso\Tables\App\Contracts\Table;
 
 class PermissionTable implements Table
 {

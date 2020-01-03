@@ -1,14 +1,14 @@
 <?php
 
 use Tests\TestCase;
-use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Roles\App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\Permissions\app\Models\Permission;
-use LaravelEnso\Forms\app\TestTraits\EditForm;
-use LaravelEnso\Forms\app\TestTraits\CreateForm;
-use LaravelEnso\Forms\app\TestTraits\DestroyForm;
-use LaravelEnso\Tables\app\Traits\Tests\Datatable;
+use LaravelEnso\Permissions\App\Models\Permission;
+use LaravelEnso\Forms\App\TestTraits\EditForm;
+use LaravelEnso\Forms\App\TestTraits\CreateForm;
+use LaravelEnso\Forms\App\TestTraits\DestroyForm;
+use LaravelEnso\Tables\App\Traits\Tests\Datatable;
 
 class PermissionTest extends TestCase
 {

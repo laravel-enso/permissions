@@ -9,10 +9,7 @@ class AuthServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Gate::define('access-route', function ($user, $route) {
-            return $user->role->permissions()
-                ->whereName($route)
-                ->exists();
-        });
+        Gate::define('access-route', fn ($user, $route) => $user->role
+            ->permissions()->whereName($route)->exists());
     }
 }

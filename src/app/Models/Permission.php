@@ -1,15 +1,15 @@
 <?php
 
-namespace LaravelEnso\Permissions\app\Models;
+namespace LaravelEnso\Permissions\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\Menus\app\Models\Menu;
-use LaravelEnso\Permissions\app\Enums\Types;
-use LaravelEnso\Roles\app\Models\Role;
-use LaravelEnso\Roles\app\Traits\HasRoles;
-use LaravelEnso\Tables\app\Traits\TableCache;
-use LaravelEnso\Tutorials\app\Models\Tutorial;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+use LaravelEnso\Menus\App\Models\Menu;
+use LaravelEnso\Permissions\App\Enums\Types;
+use LaravelEnso\Permissions\App\Exceptions\Permission as Exception;
+use LaravelEnso\Roles\App\Models\Role;
+use LaravelEnso\Roles\App\Traits\HasRoles;
+use LaravelEnso\Tables\App\Traits\TableCache;
+use LaravelEnso\Tutorials\App\Models\Tutorial;
 
 class Permission extends Model
 {
@@ -47,15 +47,11 @@ class Permission extends Model
     public function delete()
     {
         if ($this->roles()->exists()) {
-            throw new ConflictHttpException(__(
-                'You cannot delete this permission while being allocated to existing role(s)'
-            ));
+            throw Exception::roles();
         }
 
         if ($this->menu()->exists()) {
-            throw new ConflictHttpException(__(
-                'You cannot delete this permission while being set on a menu'
-            ));
+            throw Exception::menu();
         }
 
         parent::delete();

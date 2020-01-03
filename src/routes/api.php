@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::middleware(['web', 'auth', 'core'])
     ->prefix('api/system/permissions')->as('system.permissions.')
-    ->namespace('LaravelEnso\Permissions\app\Http\Controllers')
+    ->namespace('LaravelEnso\Permissions\App\Http\Controllers')
     ->group(function () {
         Route::get('create', 'Create')->name('create');
         Route::post('', 'Store')->name('store');

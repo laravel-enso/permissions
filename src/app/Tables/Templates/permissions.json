@@ -1,33 +1,61 @@
 {
     "routePrefix": "system.permissions",
     "crtNo": true,
-    "buttons": ["excel", "create", "edit", "destroy"],
-    "appends": ["isRead"],
-    "columns": [{
-        "label": "Name",
-        "name": "name",
-        "data": "permissions.name",
-        "meta": ["searchable", "sortable"]
-    }, {
-        "label": "Description",
-        "name": "description",
-        "data": "permissions.description",
-        "meta": ["searchable", "sortable"]
-    }, {
-        "label": "Type",
-        "name": "type",
-        "data": "permissions.type",
-        "enum": "LaravelEnso\\Permissions\\app\\Enums\\Types",
-        "meta": ["slot", "sortable"]
-    }, {
-        "label": "Default",
-        "name": "is_default",
-        "data": "permissions.is_default",
-        "meta": ["boolean", "sortable"]
-    }, {
-        "label": "Created At",
-        "name": "created_at",
-        "data": "permissions.created_at",
-        "meta": ["sortable", "date"]
-    }]
+    "buttons": [
+        "excel",
+        "create",
+        "edit",
+        "destroy"
+    ],
+    "appends": [
+        "isRead"
+    ],
+    "columns": [
+        {
+            "label": "Name",
+            "name": "name",
+            "data": "permissions.name",
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Description",
+            "name": "description",
+            "data": "permissions.description",
+            "meta": [
+                "searchable",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Type",
+            "name": "type",
+            "data": "permissions.type",
+            "enum": "LaravelEnso\\Permissions\\App\\Enums\\Types",
+            "meta": [
+                "slot",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Default",
+            "name": "is_default",
+            "data": "permissions.is_default",
+            "meta": [
+                "boolean",
+                "sortable"
+            ]
+        },
+        {
+            "label": "Created At",
+            "name": "created_at",
+            "data": "permissions.created_at",
+            "meta": [
+                "sortable",
+                "date"
+            ]
+        }
+    ]
 }

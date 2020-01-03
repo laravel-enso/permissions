@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Permissions\app\Http\Middleware;
+namespace LaravelEnso\Permissions\App\Http\Middleware;
 
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;

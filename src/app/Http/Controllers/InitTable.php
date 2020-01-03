@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Permissions\app\Http\Controllers;
+namespace LaravelEnso\Permissions\App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Permissions\app\Tables\Builders\PermissionTable;
-use LaravelEnso\Tables\app\Traits\Init;
+use LaravelEnso\Permissions\App\Tables\Builders\PermissionTable;
+use LaravelEnso\Tables\App\Traits\Init;
 
 class InitTable extends Controller
 {

@@ -1,16 +1,16 @@
 <?php
 
-namespace LaravelEnso\Permissions\app\Forms\Builders;
+namespace LaravelEnso\Permissions\App\Forms\Builders;
 
-use LaravelEnso\Forms\app\Services\Form;
-use LaravelEnso\Permissions\app\Models\Permission;
-use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Forms\App\Services\Form;
+use LaravelEnso\Permissions\App\Models\Permission;
+use LaravelEnso\Roles\App\Models\Role;
 
 class PermissionForm
 {
     protected const FormPath = __DIR__.'/../Templates/permission.json';
 
-    protected $form;
+    protected Form $form;
 
     public function __construct()
     {
@@ -25,7 +25,6 @@ class PermissionForm
 
     public function edit(Permission $permission)
     {
-        return $this->form
-            ->edit($permission);
+        return $this->form->edit($permission);
     }
 }

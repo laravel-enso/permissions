@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelEnso\Permissions\app\Enums;
+namespace LaravelEnso\Permissions\App\Enums;
 
-use LaravelEnso\Enums\app\Services\Enum;
+use LaravelEnso\Enums\App\Services\Enum;
 
 class Types extends Enum
 {
-    const Read = 0;
-    const Write = 1;
+    public const Read = 0;
+    public const Write = 1;
 }

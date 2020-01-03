@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Permissions\app\Http\Controllers;
+namespace LaravelEnso\Permissions\App\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Permissions\app\Http\Requests\ValidatePermissionRequest;
-use LaravelEnso\Permissions\app\Models\Permission;
+use LaravelEnso\Permissions\App\Http\Requests\ValidatePermissionRequest;
+use LaravelEnso\Permissions\App\Models\Permission;
 
 class Update extends Controller
 {
