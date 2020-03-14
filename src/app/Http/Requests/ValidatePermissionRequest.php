@@ -17,7 +17,6 @@ class ValidatePermissionRequest extends FormRequest
         return [
             'name' => ['required', $this->nameUnique()],
             'description' => 'required',
-            'type' => 'required',
             'is_default' => 'required',
             'roles' => 'array',
         ];

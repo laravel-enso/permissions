@@ -23,16 +23,6 @@
                     }
                 },
                 {
-                    "name": "type",
-                    "label": "Type",
-                    "value": null,
-                    "meta": {
-                        "type": "select",
-                        "multiple": false,
-                        "options": "LaravelEnso\\Permissions\\App\\Enums\\Types"
-                    }
-                },
-                {
                     "label": "Roles",
                     "name": "roles",
                     "value": [],

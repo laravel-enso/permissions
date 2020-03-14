@@ -8,7 +8,7 @@
         "destroy"
     ],
     "appends": [
-        "isRead"
+        "type"
     ],
     "columns": [
         {
@@ -32,11 +32,10 @@
         {
             "label": "Type",
             "name": "type",
-            "data": "permissions.type",
+            "data": "type",
             "enum": "LaravelEnso\\Permissions\\App\\Enums\\Types",
             "meta": [
-                "slot",
-                "sortable"
+                "slot"
             ]
         },
         {

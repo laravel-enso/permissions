@@ -14,7 +14,7 @@ class PermissionTable implements Table
     {
         return Permission::selectRaw('
             permissions.id, permissions.name, permissions.description,
-            permissions.type, permissions.created_at, permissions.is_default
+            permissions.created_at, permissions.is_default
         ');
     }
 

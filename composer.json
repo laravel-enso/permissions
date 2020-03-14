@@ -36,7 +36,8 @@
         "laravel": {
             "providers": [
                 "LaravelEnso\\Permissions\\AppServiceProvider",
-                "LaravelEnso\\Permissions\\AuthServiceProvider"
+                "LaravelEnso\\Permissions\\AuthServiceProvider",
+                "LaravelEnso\\Permissions\\EnumServiceProvider"
             ],
             "aliases": {}
         }

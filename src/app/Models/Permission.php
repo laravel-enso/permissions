@@ -3,6 +3,7 @@
 namespace LaravelEnso\Permissions\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Route;
 use LaravelEnso\Menus\App\Models\Menu;
 use LaravelEnso\Permissions\App\Enums\Types;
 use LaravelEnso\Permissions\App\Exceptions\Permission as Exception;
@@ -15,7 +16,7 @@ class Permission extends Model
 {
     use HasRoles, TableCache;
 
-    protected $fillable = ['name', 'description', 'type', 'is_default'];
+    protected $fillable = ['name', 'description', 'is_default'];
 
     protected $casts = ['is_default' => 'boolean'];
 
@@ -34,9 +35,21 @@ class Permission extends Model
         return $this->hasMany(Tutorial::class);
     }
 
-    public function getIsReadAttribute()
+    public function getTypeAttribute()
     {
-        return $this->type === Types::Read;
+        return $this->type();
+    }
+
+    public function type()
+    {
+        return Types::get($this->method()) ?? Types::Link;
+    }
+
+    public function method()
+    {
+        $methods = optional(Route::getRoutes()->getByName($this->name))->methods;
+
+        return $methods[0] ?? null;
     }
 
     public function scopeImplicit($query)
