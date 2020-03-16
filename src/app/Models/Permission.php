@@ -47,7 +47,7 @@ class Permission extends Model
 
     public function method()
     {
-        $methods = optional(Route::getRoutes()->getByName($this->name))->methods;
+        $methods = optional(Route::getRoutes()->getByName($this->name))->methods();
 
         return $methods[0] ?? null;
     }
