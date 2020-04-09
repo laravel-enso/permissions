@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
 use LaravelEnso\Menus\App\Models\Menu;
 use LaravelEnso\Permissions\App\Enums\Types;
+use LaravelEnso\Permissions\App\Enums\Verbs;
 use LaravelEnso\Permissions\App\Exceptions\Permission as Exception;
 use LaravelEnso\Roles\App\Models\Role;
 use LaravelEnso\Roles\App\Traits\HasRoles;
@@ -42,7 +43,7 @@ class Permission extends Model
 
     public function type()
     {
-        return Types::get($this->method()) ?? Types::Link;
+        return Verbs::get($this->method()) ?? Types::Link;
     }
 
     public function method()
