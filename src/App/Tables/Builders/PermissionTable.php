@@ -12,7 +12,7 @@ class PermissionTable implements Table
 
     public function query(): Builder
     {
-        return Permission::selectRaw('
+        return Permission::with('menu:permission_id')->selectRaw('
             permissions.id, permissions.name, permissions.description,
             permissions.created_at, permissions.is_default
         ');

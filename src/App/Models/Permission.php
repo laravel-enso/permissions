@@ -43,6 +43,10 @@ class Permission extends Model
 
     public function type()
     {
+        if ($this->relationLoaded('menu') && $this->menu !== null) {
+            return Types::Menu;
+        }
+
         return Verbs::get($this->method()) ?? Types::Link;
     }
 
