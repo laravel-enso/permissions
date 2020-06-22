@@ -58,6 +58,11 @@ class Permission extends Model
         return $query->whereIsDefault(true);
     }
 
+    public function scopeControlPanel($query)
+    {
+        return $query->where('name', 'like', 'api.controlPanel.%');
+    }
+
     public function delete()
     {
         if ($this->roles()->exists()) {
