@@ -3,7 +3,7 @@
 namespace LaravelEnso\Permissions;
 
 use LaravelEnso\Enums\EnumServiceProvider as ServiceProvider;
-use LaravelEnso\Permissions\App\Enums\Types;
+use LaravelEnso\Permissions\Enums\Types;
 
 class EnumServiceProvider extends ServiceProvider
 {

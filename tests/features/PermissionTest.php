@@ -1,14 +1,14 @@
 <?php
 
-use Tests\TestCase;
-use LaravelEnso\Core\App\Models\User;
-use LaravelEnso\Roles\App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\Permissions\App\Models\Permission;
-use LaravelEnso\Forms\App\TestTraits\EditForm;
-use LaravelEnso\Forms\App\TestTraits\CreateForm;
-use LaravelEnso\Forms\App\TestTraits\DestroyForm;
-use LaravelEnso\Tables\App\Traits\Tests\Datatable;
+use LaravelEnso\Core\Models\User;
+use LaravelEnso\Forms\TestTraits\CreateForm;
+use LaravelEnso\Forms\TestTraits\DestroyForm;
+use LaravelEnso\Forms\TestTraits\EditForm;
+use LaravelEnso\Permissions\Models\Permission;
+use LaravelEnso\Roles\Models\Role;
+use LaravelEnso\Tables\Traits\Tests\Datatable;
+use Tests\TestCase;
 
 class PermissionTest extends TestCase
 {
@@ -59,7 +59,7 @@ class PermissionTest extends TestCase
             route('system.permissions.update', $this->testModel->id, false),
             $this->testModel->toArray() + ['roles' => []]
         )->assertStatus(200)
-        ->assertJsonStructure(['message']);
+            ->assertJsonStructure(['message']);
 
         $this->assertEquals($this->testModel->description, $this->testModel->fresh()->description);
     }

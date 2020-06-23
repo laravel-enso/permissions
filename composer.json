@@ -9,23 +9,20 @@
     "homepage": "https://github.com/laravel-enso/permissions",
     "type": "library",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Adrian Ocneanu",
-            "email": "aocneanu@gmail.com",
-            "homepage": "https://laravel-enso.com",
-            "role": "Developer"
-        }
-    ],
+    "authors": [{
+        "name": "Adrian Ocneanu",
+        "email": "aocneanu@gmail.com",
+        "homepage": "https://laravel-enso.com",
+        "role": "Developer"
+    }],
     "require": {
-        "laravel-enso/core": "4.8.*",
-        "laravel-enso/enums": "1.2.*",
-        "laravel-enso/forms": "3.4.*",
-        "laravel-enso/helpers": "1.15.*",
-        "laravel-enso/roles": "3.4.*",
-        "laravel-enso/migrator": "1.1.*",
-        "laravel-enso/tutorials": "3.3.*",
-        "laravel-enso/tables": "3.2.*"
+        "laravel-enso/core": "^5.0",
+        "laravel-enso/enums": "^2.0",
+        "laravel-enso/forms": "^4.0",
+        "laravel-enso/helpers": "^2.0",
+        "laravel-enso/migrator": "^2.0",
+        "laravel-enso/roles": "^4.0",
+        "laravel-enso/tables": "^4.0"
     },
     "autoload": {
         "psr-4": {
