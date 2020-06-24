@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['web', 'auth', 'core'])
+Route::middleware(['api', 'auth', 'core'])
     ->prefix('api/system/permissions')->as('system.permissions.')
     ->namespace('LaravelEnso\Permissions\Http\Controllers')
     ->group(function () {
