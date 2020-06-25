@@ -20,5 +20,5 @@ class CreateStructureForPermissions extends Migration
         'name' => 'Permissions', 'icon' => 'exclamation-triangle', 'route' => 'system.permissions.index', 'order_index' => 999, 'has_children' => false,
     ];
 
-    protected string $parentMenu = 'System';
+    protected ?string $parentMenu = 'System';
 }
