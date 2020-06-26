@@ -10,7 +10,10 @@ class Store extends Controller
 {
     public function __invoke(ValidatePermissionRequest $request, Permission $permission)
     {
-        $permission = $permission->storeWithRoles($request->validated());
+        $permission = $permission->storeWithRoles(
+            $request->validatedExcept('roles'),
+            $request->get('roles'),
+        );
 
         return [
             'message' => __('The permission was created!'),
