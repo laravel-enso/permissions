@@ -16,18 +16,19 @@
         "role": "Developer"
     }],
     "require": {
-        "laravel-enso/core": "^5.0",
+        "laravel-enso/core": "^6.0",
         "laravel-enso/dynamic-methods": "^2.0",
         "laravel-enso/enums": "^2.0",
         "laravel-enso/forms": "^4.0",
-        "laravel-enso/helpers": "^2.0",
+        "laravel-enso/helpers": "^3.0",
         "laravel-enso/migrator": "^2.0",
         "laravel-enso/roles": "^4.0",
         "laravel-enso/tables": "^4.0"
     },
     "autoload": {
         "psr-4": {
-            "LaravelEnso\\Permissions\\": "src/"
+            "LaravelEnso\\Permissions\\": "src/",
+            "LaravelEnso\\Permissions\\Database\\Factories\\": "database/factories/"
         }
     },
     "extra": {
