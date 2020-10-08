@@ -26,7 +26,7 @@ class PermissionTest extends TestCase
         $this->seed()
             ->actingAs(User::first());
 
-        $this->testModel = factory(Permission::class)
+        $this->testModel = Permission::factory()
             ->make();
     }
 
