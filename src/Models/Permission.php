@@ -2,10 +2,10 @@
 
 namespace LaravelEnso\Permissions\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
 use LaravelEnso\DynamicMethods\Traits\Abilities;
-use LaravelEnso\Helpers\Traits\HasFactory;
 use LaravelEnso\Menus\Models\Menu;
 use LaravelEnso\Permissions\Enums\Types;
 use LaravelEnso\Permissions\Enums\Verbs;
