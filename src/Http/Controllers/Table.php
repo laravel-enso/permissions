@@ -4,11 +4,11 @@ namespace LaravelEnso\Permissions\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use LaravelEnso\Permissions\Tables\Builders\PermissionTable;
-use LaravelEnso\Tables\Traits\Init;
+use LaravelEnso\Tables\Traits\TableBuilder;
 
-class InitTable extends Controller
+class Table extends Controller
 {
-    use Init;
+    use TableBuilder;
 
     protected $tableClass = PermissionTable::class;
 }

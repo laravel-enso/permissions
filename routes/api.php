@@ -4,11 +4,10 @@ use Illuminate\Support\Facades\Route;
 use LaravelEnso\Permissions\Http\Controllers\Create;
 use LaravelEnso\Permissions\Http\Controllers\Destroy;
 use LaravelEnso\Permissions\Http\Controllers\Edit;
-use LaravelEnso\Permissions\Http\Controllers\ExportExcel;
-use LaravelEnso\Permissions\Http\Controllers\InitTable;
 use LaravelEnso\Permissions\Http\Controllers\Store;
-use LaravelEnso\Permissions\Http\Controllers\TableData;
+use LaravelEnso\Permissions\Http\Controllers\Table;
 use LaravelEnso\Permissions\Http\Controllers\Update;
+use LaravelEnso\Tables\Services\RouteBuilder;
 
 Route::middleware(['api', 'auth', 'core'])
     ->prefix('api/system/permissions')->as('system.permissions.')
@@ -19,7 +18,5 @@ Route::middleware(['api', 'auth', 'core'])
         Route::patch('{permission}', Update::class)->name('update');
         Route::delete('{permission}', Destroy::class)->name('destroy');
 
-        Route::get('initTable', InitTable::class)->name('initTable');
-        Route::get('tableData', TableData::class)->name('tableData');
-        Route::get('exportExcel', ExportExcel::class)->name('exportExcel');
+        (new RouteBuilder(Table::class))->withExport()->build();
     });
