@@ -28,6 +28,6 @@ class ValidatePermissionRequest extends FormRequest
     protected function nameUnique()
     {
         return Rule::unique('permissions', 'name')
-            ->ignore(optional($this->route('permission'))->id);
+            ->ignore($this->route('permission')?->id);
     }
 }

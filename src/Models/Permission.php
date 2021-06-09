@@ -31,18 +31,18 @@ class Permission extends Model
         return $this->type();
     }
 
-    public function type()
+    public function type(): string
     {
         if ($this->relationLoaded('menu') && $this->menu !== null) {
-            return Types::Menu;
+            return __(Types::Menu);
         }
 
-        return Verbs::get($this->method()) ?? Types::Link;
+        return Verbs::get($this->method()) ?? __(Types::Link);
     }
 
     public function method()
     {
-        $methods = optional(Route::getRoutes()->getByName($this->name))->methods();
+        $methods = Route::getRoutes()->getByName($this->name)?->methods();
 
         return $methods[0] ?? null;
     }
