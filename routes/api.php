@@ -9,6 +9,7 @@ use LaravelEnso\Permissions\Http\Controllers\InitTable;
 use LaravelEnso\Permissions\Http\Controllers\Store;
 use LaravelEnso\Permissions\Http\Controllers\TableData;
 use LaravelEnso\Permissions\Http\Controllers\Update;
+use LaravelEnso\Permissions\Http\Controllers\Options;
 
 Route::middleware(['api', 'auth', 'core'])
     ->prefix('api/system/permissions')->as('system.permissions.')
@@ -22,4 +23,5 @@ Route::middleware(['api', 'auth', 'core'])
         Route::get('initTable', InitTable::class)->name('initTable');
         Route::get('tableData', TableData::class)->name('tableData');
         Route::get('exportExcel', ExportExcel::class)->name('exportExcel');
+        Route::get('options', Options::class)->name('options');
     });

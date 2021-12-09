@@ -14,6 +14,7 @@ class CreateStructureForPermissions extends Migration
         ['name' => 'system.permissions.tableData', 'description' => 'Get table data for permissions', 'is_default' => false],
         ['name' => 'system.permissions.exportExcel', 'description' => 'Export excel for permissions', 'is_default' => false],
         ['name' => 'system.permissions.initTable', 'description' => 'Init table data for permissions', 'is_default' => false],
+        ['name' => 'system.permissions.options', 'description' => 'Get options for select', 'is_default' => false],
     ];
 
     protected array $menu = [
