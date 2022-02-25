@@ -6,10 +6,10 @@ use LaravelEnso\Permissions\Http\Controllers\Destroy;
 use LaravelEnso\Permissions\Http\Controllers\Edit;
 use LaravelEnso\Permissions\Http\Controllers\ExportExcel;
 use LaravelEnso\Permissions\Http\Controllers\InitTable;
+use LaravelEnso\Permissions\Http\Controllers\Options;
 use LaravelEnso\Permissions\Http\Controllers\Store;
 use LaravelEnso\Permissions\Http\Controllers\TableData;
 use LaravelEnso\Permissions\Http\Controllers\Update;
-use LaravelEnso\Permissions\Http\Controllers\Options;
 
 Route::middleware(['api', 'auth', 'core'])
     ->prefix('api/system/permissions')->as('system.permissions.')
