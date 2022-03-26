@@ -9,7 +9,9 @@ class AuthServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Gate::define('access-route', fn ($user, $route) => $user
-            ->canAccess($route));
+        Gate::define(
+            'access-route',
+            fn ($user, $route) => $user->canAccess($route)
+        );
     }
 }
