@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
 use LaravelEnso\DynamicMethods\Traits\Abilities;
 use LaravelEnso\Menus\Models\Menu;
-use LaravelEnso\Permissions\Enums\Types;
-use LaravelEnso\Permissions\Enums\Verbs;
+use LaravelEnso\Permissions\Enums\Type;
 use LaravelEnso\Permissions\Exceptions\Permission as Exception;
 use LaravelEnso\Roles\Traits\HasRoles;
 use LaravelEnso\Tables\Traits\TableCache;
@@ -19,7 +18,10 @@ class Permission extends Model
 
     protected $guarded = ['id'];
 
-    protected $casts = ['is_default' => 'boolean'];
+    protected $casts = [
+        'is_default' => 'boolean',
+        'type' => Type::class,
+    ];
 
     public function menu()
     {
@@ -31,13 +33,13 @@ class Permission extends Model
         return $this->type();
     }
 
-    public function type(): string
+    public function type(): Type
     {
         if ($this->relationLoaded('menu') && $this->menu !== null) {
-            return __(Types::Menu);
+            return Type::Menu;
         }
 
-        return Verbs::get($this->method()) ?? __(Types::Link);
+        return Type::type($this->method());
     }
 
     public function method()

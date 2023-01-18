@@ -18,9 +18,9 @@
         }
     ],
     "require": {
-        "laravel-enso/core": "^8.0",
-        "laravel-enso/dynamic-methods": "^2.0",
-        "laravel-enso/enums": "^2.0",
+        "laravel-enso/core": "^9.0",
+        "laravel-enso/dynamic-methods": "^3.0",
+        "laravel-enso/enums": "^3.0",
         "laravel-enso/forms": "^4.0",
         "laravel-enso/helpers": "^2.0",
         "laravel-enso/migrator": "^2.0",
@@ -37,8 +37,7 @@
         "laravel": {
             "providers": [
                 "LaravelEnso\\Permissions\\AppServiceProvider",
-                "LaravelEnso\\Permissions\\AuthServiceProvider",
-                "LaravelEnso\\Permissions\\EnumServiceProvider"
+                "LaravelEnso\\Permissions\\AuthServiceProvider"
             ],
             "aliases": {}
         }
