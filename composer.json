@@ -22,7 +22,7 @@
         "laravel-enso/dynamic-methods": "^3.0",
         "laravel-enso/enums": "^2.0",
         "laravel-enso/forms": "^4.0",
-        "laravel-enso/helpers": "^2.0",
+        "laravel-enso/helpers": "^3.0",
         "laravel-enso/migrator": "^2.0",
         "laravel-enso/roles": "^5.0",
         "laravel-enso/tables": "^4.0"
