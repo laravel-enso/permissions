@@ -19,8 +19,6 @@ class Permission extends Model
 
     protected $guarded = ['id'];
 
-    protected $casts = ['is_default' => 'boolean'];
-
     public function menu()
     {
         return $this->hasOne(Menu::class);
@@ -63,5 +61,12 @@ class Permission extends Model
         }
 
         parent::delete();
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'is_default' => 'boolean',
+        ];
     }
 }
