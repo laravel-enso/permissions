@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Route;
 use LaravelEnso\DynamicMethods\Traits\Abilities;
 use LaravelEnso\Menus\Models\Menu;
-use LaravelEnso\Permissions\Enums\Types;
-use LaravelEnso\Permissions\Enums\Verbs;
+use LaravelEnso\Permissions\Enums\Type;
+use LaravelEnso\Permissions\Enums\Verb;
 use LaravelEnso\Permissions\Exceptions\Permission as Exception;
 use LaravelEnso\Roles\Traits\HasRoles;
 use LaravelEnso\Tables\Traits\TableCache;
@@ -32,10 +32,10 @@ class Permission extends Model
     public function type(): string
     {
         if ($this->relationLoaded('menu') && $this->menu !== null) {
-            return __(Types::Menu);
+            return __(Type::Menu->value);
         }
 
-        return Verbs::get($this->method()) ?? __(Types::Link);
+        return Verb::tryFrom($this->method())?->map() ?? __(Type::Link->value);
     }
 
     public function method()

@@ -10,7 +10,8 @@
     "appends": [
         "type"
     ],
-    "columns": [{
+    "columns": [
+        {
             "label": "Name",
             "name": "name",
             "data": "permissions.name",
@@ -32,7 +33,7 @@
             "label": "Type",
             "name": "type",
             "data": "type",
-            "enum": "LaravelEnso\\Permissions\\Enums\\Types",
+            "enum": "LaravelEnso\\Permissions\\Enums\\Type",
             "meta": [
                 "slot"
             ]
