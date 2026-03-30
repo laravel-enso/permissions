@@ -9,6 +9,7 @@ use LaravelEnso\Roles\Models\Role;
 use LaravelEnso\Tables\Traits\Tests\Datatable;
 use LaravelEnso\Users\Models\User;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class PermissionTest extends TestCase
 {
@@ -28,7 +29,7 @@ class PermissionTest extends TestCase
             ->make();
     }
 
-    /** @test */
+    #[Test]
     public function can_store_permission()
     {
         $response = $this->post(
@@ -46,7 +47,7 @@ class PermissionTest extends TestCase
             ])->assertJsonStructure(['message']);
     }
 
-    /** @test */
+    #[Test]
     public function can_update_permission()
     {
         $this->testModel->save();
@@ -62,7 +63,7 @@ class PermissionTest extends TestCase
         $this->assertEquals($this->testModel->description, $this->testModel->fresh()->description);
     }
 
-    /** @test */
+    #[Test]
     public function cant_destroy_if_has_roles()
     {
         $this->testModel->save();
