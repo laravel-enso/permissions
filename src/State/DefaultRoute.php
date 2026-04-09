@@ -7,13 +7,13 @@ use LaravelEnso\Core\Contracts\ProvidesState;
 
 class DefaultRoute implements ProvidesState
 {
-    public function mutation(): string
+    public function store(): string
     {
-        return 'setDefaultRoute';
+        return 'app';
     }
 
-    public function state(): mixed
+    public function state(): array
     {
-        return Auth::user()->role->menu->permission->name;
+        return ['defaultRoute' => Auth::user()->role->menu->permission->name];
     }
 }
