@@ -9,14 +9,14 @@ use LaravelEnso\Core\Contracts\ProvidesState;
 
 class Routes implements ProvidesState
 {
-    public function mutation(): string
+    public function store(): string
     {
-        return 'setRoutes';
+        return 'app';
     }
 
-    public function state(): mixed
+    public function state(): array
     {
-        return $this->routes();
+        return ['routes' => $this->routes()->toArray()];
     }
 
     protected function routes(): Collection
