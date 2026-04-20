@@ -12,7 +12,7 @@ class Destroy extends Controller
         $permission->delete();
 
         return [
-            'message' => __('The permission was successfully deleted'),
+            'message'  => __('The permission was successfully deleted'),
             'redirect' => 'system.permissions.index',
         ];
     }

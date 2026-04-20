@@ -15,7 +15,10 @@ use LaravelEnso\Tables\Traits\TableCache;
 
 class Permission extends Model
 {
-    use Abilities, HasRoles, HasFactory, TableCache;
+    use Abilities;
+    use HasRoles;
+    use HasFactory;
+    use TableCache;
 
     protected $guarded = ['id'];
 

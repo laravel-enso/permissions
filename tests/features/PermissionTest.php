@@ -8,12 +8,16 @@ use LaravelEnso\Permissions\Models\Permission;
 use LaravelEnso\Roles\Models\Role;
 use LaravelEnso\Tables\Traits\Tests\Datatable;
 use LaravelEnso\Users\Models\User;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class PermissionTest extends TestCase
 {
-    use CreateForm, Datatable, DestroyForm, EditForm, RefreshDatabase;
+    use CreateForm;
+    use Datatable;
+    use DestroyForm;
+    use EditForm;
+    use RefreshDatabase;
 
     private $permissionGroup = 'system.permissions';
     private $testModel;
@@ -43,7 +47,7 @@ class PermissionTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'redirect' => 'system.permissions.edit',
-                'param' => ['permission' => $permission->id],
+                'param'    => ['permission' => $permission->id],
             ])->assertJsonStructure(['message']);
     }
 

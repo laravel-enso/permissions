@@ -16,9 +16,9 @@ class Store extends Controller
         );
 
         return [
-            'message' => __('The permission was created!'),
+            'message'  => __('The permission was created!'),
             'redirect' => 'system.permissions.edit',
-            'param' => ['permission' => $permission->id],
+            'param'    => ['permission' => $permission->id],
         ];
     }
 }

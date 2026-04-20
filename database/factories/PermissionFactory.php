@@ -12,9 +12,9 @@ class PermissionFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->word,
+            'name'        => $this->faker->unique()->word,
             'description' => $this->faker->sentence,
-            'is_default' => $this->faker->boolean,
+            'is_default'  => $this->faker->boolean,
         ];
     }
 }

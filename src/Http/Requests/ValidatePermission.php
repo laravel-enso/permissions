@@ -18,10 +18,10 @@ class ValidatePermission extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', $this->nameUnique()],
+            'name'        => ['required', $this->nameUnique()],
             'description' => 'required',
-            'is_default' => 'required',
-            'roles' => 'array',
+            'is_default'  => 'required',
+            'roles'       => 'array',
         ];
     }
 
