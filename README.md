@@ -87,6 +87,10 @@ Required Enso packages:
 - [`laravel-enso/tables`](https://docs.laravel-enso.com/backend/tables.html) [↗](https://github.com/laravel-enso/tables)
 - [`laravel-enso/users`](https://docs.laravel-enso.com/backend/users.html) [↗](https://github.com/laravel-enso/users)
 
+Companion frontend package:
+
+- [`@enso-ui/permissions`](https://docs.laravel-enso.com/frontend/permissions.html) [↗](https://github.com/enso-ui/permissions)
+
 ## Contributions
 
 are welcome. Pull requests are great, but issues are good too.
