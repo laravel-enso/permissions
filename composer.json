@@ -1,6 +1,6 @@
 {
     "name": "laravel-enso/permissions",
-    "description": "Permissions dependency for Laravel Enso",
+    "description": "Permission management for Laravel Enso",
     "keywords": [
         "laravel-enso",
         "permission-manager",
