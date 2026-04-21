@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Route;
 use LaravelEnso\Forms\TestTraits\CreateForm;
 use LaravelEnso\Forms\TestTraits\DestroyForm;
@@ -115,15 +115,13 @@ class PermissionTest extends TestCase
     public function middleware_blocks_route_when_user_cannot_access_it()
     {
         $request = Request::create('/permission-test', 'GET');
-        $request->setRouteResolver(fn () => new class
-        {
+        $request->setRouteResolver(fn () => new class() {
             public function getName(): string
             {
                 return 'testing.permissions.denied';
             }
         });
-        $request->setUserResolver(fn () => new class
-        {
+        $request->setUserResolver(fn () => new class() {
             public function cannot(string $ability, string $route): bool
             {
                 return $ability === 'access-route' && $route === 'testing.permissions.denied';
@@ -139,15 +137,13 @@ class PermissionTest extends TestCase
     public function middleware_allows_route_when_user_can_access_it()
     {
         $request = Request::create('/permission-test', 'GET');
-        $request->setRouteResolver(fn () => new class
-        {
+        $request->setRouteResolver(fn () => new class() {
             public function getName(): string
             {
                 return 'testing.permissions.allowed';
             }
         });
-        $request->setUserResolver(fn () => new class
-        {
+        $request->setUserResolver(fn () => new class() {
             public function cannot(): bool
             {
                 return false;
@@ -171,12 +167,10 @@ class PermissionTest extends TestCase
     #[Test]
     public function determines_permission_type_from_route_method()
     {
-        Route::shouldReceive('getRoutes')->andReturn(new class
-        {
+        Route::shouldReceive('getRoutes')->andReturn(new class() {
             public function getByName(string $name): object
             {
-                return new class
-                {
+                return new class() {
                     public function methods(): array
                     {
                         return ['GET'];
