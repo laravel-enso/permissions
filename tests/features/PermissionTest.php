@@ -3,6 +3,7 @@
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use LaravelEnso\Forms\TestTraits\CreateForm;
 use LaravelEnso\Forms\TestTraits\DestroyForm;
@@ -153,6 +154,20 @@ class PermissionTest extends TestCase
         $response = (new VerifyRouteAccess())->handle($request, fn () => response('ok'));
 
         $this->assertSame('ok', $response->getContent());
+    }
+
+    #[Test]
+    public function access_route_gate_uses_the_authenticated_user_model(): void
+    {
+        $permission = Permission::factory()->create([
+            'name' => 'testing.permissions.gate',
+        ]);
+        $user = User::factory()->create();
+
+        $user->role->permissions()->sync([$permission->id]);
+
+        $this->assertTrue(Gate::forUser($user)->allows('access-route', $permission->name));
+        $this->assertFalse(Gate::forUser($user)->allows('access-route', 'testing.permissions.missing'));
     }
 
     #[Test]
