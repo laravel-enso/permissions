@@ -11,7 +11,7 @@ class Update extends Controller
     public function __invoke(ValidatePermission $request, Permission $permission)
     {
         $permission->updateWithRoles(
-            $request->validatedExcept('roles'),
+            $request->safe()->except('roles'),
             $request->get('roles')
         );
 

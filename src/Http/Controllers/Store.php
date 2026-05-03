@@ -11,7 +11,7 @@ class Store extends Controller
     public function __invoke(ValidatePermission $request, Permission $permission)
     {
         $permission = $permission->storeWithRoles(
-            $request->validatedExcept('roles'),
+            $request->safe()->except('roles'),
             $request->get('roles'),
         );
 

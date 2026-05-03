@@ -4,12 +4,9 @@ namespace LaravelEnso\Permissions\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use LaravelEnso\Helpers\Traits\FiltersRequest;
 
 class ValidatePermission extends FormRequest
 {
-    use FiltersRequest;
-
     public function authorize()
     {
         return true;
