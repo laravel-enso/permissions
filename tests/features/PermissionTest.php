@@ -10,6 +10,7 @@ use LaravelEnso\Forms\TestTraits\DestroyForm;
 use LaravelEnso\Forms\TestTraits\EditForm;
 use LaravelEnso\Menus\Models\Menu;
 use LaravelEnso\Permissions\Enums\Types;
+use LaravelEnso\Permissions\Enums\Verbs;
 use LaravelEnso\Permissions\Http\Middleware\VerifyRouteAccess;
 use LaravelEnso\Permissions\Models\Permission;
 use LaravelEnso\Roles\Models\Role;
@@ -199,6 +200,6 @@ class PermissionTest extends TestCase
         ]);
 
         $this->assertSame('GET', $permission->method());
-        $this->assertSame(Types::Read, $permission->type());
+        $this->assertSame(Verbs::get('GET'), $permission->type());
     }
 }
