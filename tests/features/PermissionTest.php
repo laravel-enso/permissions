@@ -104,11 +104,12 @@ class PermissionTest extends TestCase
     #[Test]
     public function get_option_list()
     {
+        $this->testModel->name = 'testing.permissions.options.search';
         $this->testModel->save();
 
         $this->get(route('system.permissions.options', [
-            'query' => $this->testModel->name,
-            'limit' => 10,
+            'query'    => $this->testModel->name,
+            'paginate' => 10,
         ], false))->assertStatus(200)
             ->assertJsonFragment(['name' => $this->testModel->name]);
     }
